@@ -7,7 +7,7 @@
 - ⚡ Fun fact: Segue is pronounced exactly how it isn't spelt. 
 - 🍕 Pizza is delicious
 - 🦘 All my Discord bots are named after marsupials.
-- 🐅 My faviourate marsupial is the Thylacine.
+- 🐅 My favourite marsupial is the Thylacine.
 - 🤖 Im literally padding this list out
 
 <!---
