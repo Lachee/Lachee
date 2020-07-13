@@ -18,6 +18,6 @@ oh you found my notes... you are nosy aint ya.
 Well while you are here, check out my twitter! https://twitter.com/Lachee_
 I share a lot of cool game stuff and art on it
 
-Highlight this in Discord API server and I will give you a pat.
+Highlight this in Discord API server and I will give you a pat or something. Im Lachee#9999.
 
 --->
