@@ -1,6 +1,6 @@
 <img align="left" src="https://github.com/Lachee/Lachee/blob/master/moominsip_square.gif?raw=true" width=256>
 
-# Im Lachee!
+# Heya, Im Lachee!
  
  💬 My name is pronounced la-ch-ee, but I dont mind how you say it
  
