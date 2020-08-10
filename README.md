@@ -1,4 +1,4 @@
-<img align="left" src="https://github.com/Lachee/Lachee/blob/master/moominsip_square.gif?raw=true" width=256>
+<img align="left" src="https://github.com/Lachee/Lachee/blob/master/moominsip_square.gif?raw=true" width=300>
 
 # Heya, Im Lachee!
  
@@ -11,6 +11,8 @@
  🚗 Check out my **game**, [Party Crashers](http://www.partycrashersgame.com/)
  
  🐅 My favourite marsupial is the Thylacine.
+ 
+ 🗣 My discord profile is [Lachee#9999](https://discord.com/users/130973321683533824)
 
 <!---
 oh you found my notes... you are nosy aint ya.
