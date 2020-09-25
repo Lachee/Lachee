@@ -1,4 +1,4 @@
-<img align="left" src="https://github.com/Lachee/Lachee/blob/master/moominsip_square.gif?raw=true" width=300>
+<img align="left" src="https://d.lu.je/avatar/lachee?size=2048" width=300>
 
 # Heya, Im Lachee!
  
