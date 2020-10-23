@@ -29,4 +29,4 @@ Highlight this in Discord API server and I will give you a pat or something. Im 
 **Hacktober Notice**
 
 I will _not_ be accepting "spelling and grammar" changes for any of my repositories during this month. 
-Its my opinion that Hacktober is here to encourage useful collaberation and contribution too projects. While spelling corrections are useful, I feel that they are not in the spirit of hacktoberfest and are done "just to get free stuff".
+Its my opinion that Hacktober is here to encourage useful collaboration and contribution too projects. While spelling corrections are useful, I feel that they are not in the spirit of hacktoberfest and are done "just to get free stuff".
