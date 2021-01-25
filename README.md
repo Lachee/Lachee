@@ -14,7 +14,7 @@
  
  🗣 My discord profile is [Lachee#9999](https://discord.com/users/130973321683533824)
  
-☕ Moomin Sip by [
+Moomin Sip by [
 WiittyUsername](https://www.youtube.com/watch?v=tozUcjXGe0w)
 
 <!---
