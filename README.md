@@ -14,9 +14,7 @@
  
  🗣 My discord profile is [Lachee#9999](https://discord.com/users/130973321683533824)
  
-Moomin Sip by [
-WiittyUsername](https://www.youtube.com/watch?v=tozUcjXGe0w)
-
+<!-- Moomin Sip by [WiittyUsername](https://www.youtube.com/watch?v=tozUcjXGe0w) -->
 おにこちゃん by [Mag Ho](https://twitter.com/Mag_ho/status/1356543668912496641)
 
 <!---
