@@ -1,0 +1,221 @@
+
+* { 
+    padding: 0;
+}
+
+.poppins { font-family: 'Poppins', sans-serif; }
+.syne { font-family: 'Syne Mono', monospace; }
+
+html, body {
+    padding: 0;
+    margin: 0;
+    font-family: 'Poppins', sans-serif; 
+
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    overflow: none;
+
+    $color-from:  rgb(238, 233, 174);
+    $color-to:  rgb(233, 148, 187);
+
+    background: $color-to;
+    background: linear-gradient(321deg, $color-from 0%, $color-to 100%);
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.column {
+    width: 50%;
+    float: left;
+    height: 100%;
+
+    &.column-right {
+        width: 40%;
+        float: right;
+        clip-path: polygon(25% 0%, 100% 0%, 100% 100%, 0% 100%);
+    }
+
+    // &.column-left { }
+}
+
+
+.graph-paper {
+    background: white;
+    background-size: 60px 60px;
+    background-image:
+        linear-gradient(to right, #e2e2e2  2px, transparent 2px),
+        linear-gradient(to bottom, #e2e2e2  2px, transparent 2px);
+}
+
+.popout {
+    box-shadow: 0px 0px black;
+    transition: box-shadow 0.25s ease-out, transform 0.25s ease-out;
+    .hover-box:hover > & {
+        box-shadow: 10px 10px black;
+        transform: translate(-10px, -10px);
+    }
+}
+
+.window {
+
+    $heading-height: 30px;
+
+    display: inline-block;
+    border: 2px solid black;
+    background: white;
+    width: 500px;
+    box-shadow: 8px 8px #00000070;
+
+    .window-content {
+        min-width: 200px;
+        min-height: 100px;
+        padding: 10px;
+    }
+    
+    .window-heading {
+        border-bottom: 2px solid black;
+        height: $heading-height;
+
+        .window-button {
+            width: $heading-height;
+            height: $heading-height;
+            float: right;
+            border-left: 2px solid black;
+            position: relative;
+
+                    
+
+            &.window-close::after {
+                content: "\d7";
+                font-family: 'Times New Roman';
+                position: absolute;
+                top: -14px;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                font-size: 50px;
+            }
+            
+            &.window-minimise::after, &.window-maximise::after {
+                content: '';
+                border-bottom: 2px solid black;
+                position: absolute;
+                top: 4px;
+                bottom: 4px;
+                right: 4px;
+                left: 4px;
+            }
+
+            &.window-maximise::after {
+                border: 2px solid black;
+            }
+        }
+    }
+}
+
+
+.main-content {
+    position: fixed;
+    top: 23%;
+    left: 23%;
+    transition: left 1s ease;
+
+    @media only screen and (max-width: 1400px) {
+		left: 3%;
+	}
+
+}
+
+#main-window {
+    top: 25%;
+    left: 25%;
+    position: absolute;
+}
+
+
+.link-content { margin-left: 30%; }
+.button {
+    display: block;
+    font-family: 'Syne Mono', monospace;
+    padding: 10px;
+    background: white;
+    border: 2px solid black;
+    width: 250px;
+    margin: 10px;
+    text-transform: capitalize;
+    text-transform: lowercase;
+    color: black;
+    font-size: 15pt;
+    text-decoration-style: wavy;
+    text-decoration-thickness: 1px;
+    text-decoration-skip-ink: none;
+
+    box-shadow: 0 0 white;
+}
+
+.button.social {
+    width: 25px;
+    height: 25px;
+    text-align: center;
+}
+
+.button.social i {
+    position: relative;
+    line-height: 26px;
+    font-size: 20pt;
+}
+
+.button.social.social-discord { color: #7289DA; }
+.button.social.social-twitch { color: #6441a5; }
+.button.social.social-github { color: black; }
+.button.social.social-twitter { color: #1DA1F2; }
+.button.social.social-reddit { color: #FF5700; }
+.button.social.social-github { color: steam; }
+
+/**
+ * Random Shapes
+*/
+.circle-dot-png, .square-dot-png, .triangle-dot-png  {
+    background: white;
+    background-size: 30px 30px;
+    background-image: linear-gradient(45deg, #e9e9e9 25%, transparent 25%), linear-gradient(-45deg, #e9e9e9 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #e9e9e9 75%), linear-gradient(-45deg, transparent 75%, #e9e9e9 75%);
+    background-position: 0 0, 0 15px, 15px -15px, -15px 0px;
+    width: 400px;
+    height: 400px;
+
+    position: absolute;
+    top: -200;
+    left: -200;
+    z-index: -1;
+    
+    border: 3px solid black;
+    border-radius: 100%;
+
+    display: none;
+}
+.square-dot-png { 
+    border-radius: 0;
+    background: rgb(131,58,180);
+    background: linear-gradient(314deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 52%, rgba(252,176,69,1) 100%);
+    top: -100;
+    left: 100;
+    width: 200px;
+    height: 200px;
+}
+.circle-dot-sun {
+    z-index: 1;
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    border-radius: 100%;
+    background: repeating-linear-gradient(320deg, transparent, transparent 12px, #f5ff0091 10px, #f5ff0091 20px );
+    -webkit-mask-image: -webkit-linear-gradient(bottom left, #ff000000 17%, black 75%);
+    bottom: -150;
+    right: -250;
+}
