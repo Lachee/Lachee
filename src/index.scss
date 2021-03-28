@@ -47,9 +47,12 @@ html, body {
              /* filter: blur(1px); <- This apparently fucks up the preview-image's width ????? */
 
             $static-alpha: 0.8;
+            $static-url: url('~images/static.gif');
 
             // We wish tos how the static response
-            background: linear-gradient(135deg, rgba(255, 255, 255, $static-alpha), rgba(255, 255, 255, $static-alpha)),  url('~images/static.gif');
+            background: 
+                linear-gradient(135deg, rgba(255, 255, 255, $static-alpha), rgba(255, 255, 255, $static-alpha)),  
+                $static-url;
             background-size: cover;
             background-attachment: fixed;
 
