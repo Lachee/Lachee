@@ -151,24 +151,34 @@ html, body {
     text-decoration: none;
 }
 
+/** Social Buttons */
 .button.social {
     width: 25px;
     height: 25px;
     text-align: center;
 }
-
 .button.social i {
     position: relative;
     line-height: 26px;
     font-size: 20pt;
 }
-
 .button.social.social-discord { color: #7289DA; }
 .button.social.social-twitch { color: #6441a5; }
 .button.social.social-github { color: black; }
 .button.social.social-twitter { color: #1DA1F2; }
 .button.social.social-reddit { color: #FF5700; }
 .button.social.social-github { color: steam; }
+
+#social-window {
+    .social-navigation, .special-box {
+        display: inline-block;
+    }
+
+    .special-box video {
+        position: relative;
+        top: 10px;
+    }
+}
 
 /**
  * Random Shapes
