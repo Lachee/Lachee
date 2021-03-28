@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const $rightColumn              = $('.column-right');
 
     $rightColumn.on('mouseleave', (e) => { $previewImage.removeClass('visible'); });
-    $('.hover-box[data-image-src], .hover-box[data-video-src]').on('mouseenter', async (e) => {
+    $('.hover-box[data-image-src], .hover-box[data-video-src]').on('mouseover', async (e) => {
         const $target = $(e.target);
 
         let imgSrc = $target.attr('data-image-src'); 
