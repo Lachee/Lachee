@@ -1,0 +1,66 @@
+
+.draggable {
+    position: absolute;
+    transition: transform 0.1s ease;
+    transform: translateY(-0px) skewX(0deg) translateY(0px);
+    .drag-handle {
+        cursor: grab;
+    }
+}
+
+.window {
+
+    $heading-height: 30px;
+
+    display: inline-block;
+    border: 2px solid black;
+    background: white;
+    width: 500px;
+    box-shadow: 8px 8px #00000070;
+
+    .window-content {
+        min-width: 200px;
+        min-height: 100px;
+        padding: 10px;
+    }
+    
+    .window-heading {
+        border-bottom: 2px solid black;
+        height: $heading-height;
+
+        .window-button {
+            width: $heading-height;
+            height: $heading-height;
+            float: right;
+            border-left: 2px solid black;
+            position: relative;
+
+                    
+
+            &.window-close::after {
+                content: "\d7";
+                font-family: 'Times New Roman';
+                position: absolute;
+                top: -14px;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                font-size: 50px;
+            }
+            
+            &.window-minimise::after, &.window-maximise::after {
+                content: '';
+                border-bottom: 2px solid black;
+                position: absolute;
+                top: 4px;
+                bottom: 4px;
+                right: 4px;
+                left: 4px;
+            }
+
+            &.window-maximise::after {
+                border: 2px solid black;
+            }
+        }
+    }
+}

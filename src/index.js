@@ -5,15 +5,11 @@ import '@fortawesome/fontawesome-pro/scss/regular.scss';
 import './index.scss';
 import $ from "cash-dom";
 
-import tippy from 'tippy.js';
-import 'tippy.js/dist/tippy.css'; // optional for styling
-import 'tippy.js/animations/scale.css';
+// import tippy from 'tippy.js';
+// import 'tippy.js/dist/tippy.css'; // optional for styling
+// import 'tippy.js/animations/scale.css';
 
-tippy.setDefaultProps({    
-    appendTo: 'parent',
-    inertia: true,
-    animation: 'scale',
-});
+import './window.js';
 
 async function wait(duration) {
     return new Promise((resolve, reject) => {
