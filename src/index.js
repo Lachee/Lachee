@@ -32,6 +32,9 @@ document.addEventListener('DOMContentLoaded', () => {
     /** Marks all the elements as hidden */
     function hideAll() {
         
+        //Hide all other content
+        console.log('Hiding All');
+
         // Clear existing timeouts
         if (fadeTimeout != null) {
             window.clearTimeout(fadeTimeout);
@@ -50,9 +53,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const elm = loadedImages[src];
         if (!elm) return false;
 
-        //Hide all other content
-        console.log('swapping', src);
-
         //Enforce Hide all the items. This will clear the previous timeout too
         hideAll();
 
@@ -60,6 +60,8 @@ document.addEventListener('DOMContentLoaded', () => {
         let duration =  preivewImageSwapDuration - (performance.now() - previewImageTimer);
         if (duration < 1) duration = 1; 
         
+        console.log('Showing ', src, 'in', duration, 'ms');
+
         //Fade it in after some time.
         fadeTimeout = setTimeout(() => {
             //Display the element
@@ -73,7 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     $rightColumn.on('mouseleave', (e) => { hideAll(); });
-    $('.hover-box[data-image-src], .hover-box[data-video-src]').on('mouseover', async (e) => {
+    $('.hover-box[data-image-src], .hover-box[data-video-src]').on('mouseenter', async (e) => {
         const $target = $(e.target);
 
         let imgSrc = $target.attr('data-image-src'); 
@@ -96,13 +98,14 @@ document.addEventListener('DOMContentLoaded', () => {
             // Create the element
             console.log('Creating Element',  imgSrc, videoSrc);
             const $element = isVideo ? $('<video loop autoplay muted>') : $('<img>');
-            $element.attr("src", src).addClass(isVideo ? 'preview-video' : 'preview-image');
+            $element.attr("src", src).addClass(isVideo ? 'preview-video' : 'preview-image').addClass('loading');
             $element.prependTo($rightColumn);
             element = loadedImages[src] = $element.get(0);
 
             // The element finally loaded, so we will trigger the show
-            $element.on('load', (e) => { 
-                console.log('loaded content', src, e.target); 
+            $element.on('load loadstart', (e) => { 
+                console.log('Element Loaded', src, e.target); 
+                $element.removeClass('loading');
                 show(src);
             }, { once: true });
 
@@ -115,5 +118,6 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // Target left, so lets hide the content
         $target.on('mouseleave', async (e) => {  hideAll(); }, { once: true });
+        e.preventDefault();
     });
 }); 
