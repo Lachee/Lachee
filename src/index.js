@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
         fadeTimeout = setTimeout(() => {
             //Display the element
             $(elm).removeClass('hidden');
-            document.requestAnimationFrame();
+            //document.requestAnimationFrame();
             setTimeout(() => {
                 console.log('Element Visible', elm, src);
                 $(elm).addClass('visible');
