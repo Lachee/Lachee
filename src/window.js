@@ -38,15 +38,15 @@ document.addEventListener('DOMContentLoaded', () => {
         ];
 
 
-        //Apply the position
-        draggedElement.style.left = de.position[0] + "px";
-        draggedElement.style.top = de.position[1] + "px";
-        
+        draggedElement.style.left = (de.positionStart[0] + diff[0]) + "px";
+        draggedElement.style.top =  (de.positionStart[1] + diff[1]) + "px";
+
         let skew    = de.velocity[0] * -10;
-        if (Math.abs(skew) > 0.7) {
+        //if (Math.abs(skew) > 0.7) {
             let hoffset = (draggedElement.offsetHeight / 2);
             draggedElement.style.transform = `translateY(-${hoffset}px) skewX(${skew}deg) translateY(${hoffset}px)`;
-        }
+        //}
+
 
         //Next frame
         window.requestAnimationFrame(onUpdate);
@@ -57,8 +57,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
         e = e || window.event;
         e.preventDefault();
+        window.requestAnimationFrame(onUpdate);
         
-        draggedElement.dragging.client = [ e.clientX, e.clientY ];
+        const de = draggedElement.dragging;
+        de.client = [ e.clientX, e.clientY ];
+        
+        //
+        ////Calculate the difference
+        //const diff = [
+        //    e.clientX - de.clientStart[0],
+        //    e.clientY - de.clientStart[1],
+        //];
+        //
+        ////Apply the position
+        //draggedElement.style.left = (de.positionStart[0] + diff[0]) + "px";
+        //draggedElement.style.top =  (de.positionStart[1] + diff[1]) + "px";
 
         // set the element's new position:
         //draggedElement.style.top = (draggedElement.offsetTop - draggedElement.dragging.difference[1]) + "px";
