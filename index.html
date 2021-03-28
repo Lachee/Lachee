@@ -2,14 +2,19 @@
 <html>
     <head>
         <title>Lachee</title>
+        
+        <base href="http://localhost:81/lachee/"  target="_blank">
 
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Poppins&family=Syne+Mono&display=swap" rel="stylesheet">
 
         <script src="dist/app.js"></script>
         <link href="dist/app.css" rel="stylesheet">
+        <link rel="preload" href="images/static.gif" as="image">
+
     </head>
     <body>
+        <img src="images/static.gif" style="display: none;" />
         <!-- 
             References:
             https://i.lu.je/2021/chrome_Ewr38enfwT.png 
@@ -18,26 +23,26 @@
 
         <div class="row">
             <div class="column column-right graph-paper">
-                <div class="link-content">            
-                    <a href="#games">home</a>          
-                    <a href="#games">about</a>              
-                    <a href="#games">twitter</a>
-                    <a href="#games">github</a>
-                    <a href="#games">email</a>
+                <img class="preview-image"      src="" />
+                <video class="preview-video"    src="https://i.lu.je/2020/9z85rF55LF.mp4" loop autoplay muted></video>
+                    
+                <div class="link-content link-projects">    
+                    <div class="title">What I've Done</div>     
+                    <div class="hover-box" data-image-src="images/partycrashers.gif"><a href="#games" class="button popout">Party Crashers</a></div>
+                    <div class="hover-box" data-video-src="https://i.lu.je/2021/RHKmFcrZfI.mp4"><a href="#games" class="button popout">Electronic Super Joy</a></div>
+                    <div class="hover-box" data-image-src="https://i.pinimg.com/originals/7f/7f/28/7f7f2882899755a705a2953b6fcfc263.gif"><a href="#games" class="button popout">Discord RPC CSharp</a></div>
+                    <div class="hover-box" data-video-src="https://i.lu.je/2021/YMkXnGQY8y.mp4"><a href="#games" class="button popout">XVE Bot Editor</a></div>
+                    <div class="hover-box" data-image-src="images/entirebmovie.gif"><a href="#games" class="button popout">Raylib Go Plus</a></div>
                 </div>
-                <div class="link-content link-pages">        
-                    <div class="hover-box"><a href="#games" class="button popout">game ports</a></div>
-                    <div class="hover-box"><a href="#games" class="button popout">software engineering</a></div>
-                    <div class="hover-box"><a href="#games" class="button popout">web design</a></div>
-                    <div class="hover-box"><a href="#games" class="button popout">open source</a></div>
+
+                <div class="link-content link-pages">     
+                    <div class="title">What I do</div>
+                    <div class="hover-box" data-image-src=''><a href="#games" class="button popout">game ports</a></div>
+                    <div class="hover-box" data-image-src=''><a href="#games" class="button popout">software engineering</a></div>
+                    <div class="hover-box" data-image-src=''><a href="#games" class="button popout">web design</a></div>
+                    <div class="hover-box" data-image-src=''><a href="#games" class="button popout">open source</a></div>
                 </div>
-                <div class="link-content link-projects">        
-                    <div class="hover-box"><a href="#games" class="button popout">Party Crashers</a></div>
-                    <div class="hover-box"><a href="#games" class="button popout">Electronic Super Joy</a></div>
-                    <div class="hover-box"><a href="#games" class="button popout">Discord RPC CSharp</a></div>
-                    <div class="hover-box"><a href="#games" class="button popout">XVE Bot Editor</a></div>
-                    <div class="hover-box"><a href="#games" class="button popout">Raylib Go Plus</a></div>
-                </div>
+                
             </div>
             <div class="column retro-gradient">
                 <div class="main-content">
