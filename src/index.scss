@@ -69,6 +69,7 @@ html, body {
             right: 0;
             z-index: -1;
             filter: opacity(0) saturate(1);
+            &.hidden { display: none; }
         }
         .preview-video { width:  unset; }
     }

@@ -25,12 +25,54 @@ async function wait(duration) {
 document.addEventListener('DOMContentLoaded', () => {
     const preivewImageSwapDuration  = 0.5 * 1000;
     let previewImageTimer           = 0;
-    const $previewImage             = $('.preview-image');
-    const $previewVideo             = $('.preview-video');
-    const loadedImages              = [];
     const $rightColumn              = $('.column-right');
+    const loadedImages              = { 'example': $rightColumn.get(0) };
+    let fadeTimeout                 = null;
 
-    $rightColumn.on('mouseleave', (e) => { $previewImage.removeClass('visible'); });
+    /** Marks all the elements as hidden */
+    function hideAll() {
+        
+        // Clear existing timeouts
+        if (fadeTimeout != null) {
+            window.clearTimeout(fadeTimeout);
+            fadeTimeout = null;
+        }
+
+        // Hide everything
+        for(const key in loadedImages) {
+            $(loadedImages[key]).removeClass('visible').addClass('hidden');
+        }
+    }
+
+    /** Shows a element, otherwise returns false. */
+    function show(src) {
+        // Ensure the element exists
+        const elm = loadedImages[src];
+        if (!elm) return false;
+
+        //Hide all other content
+        console.log('swapping', src);
+
+        //Enforce Hide all the items. This will clear the previous timeout too
+        hideAll();
+
+        //Calculate the duration its been and wait that long
+        const duration =  preivewImageSwapDuration - (performance.now() - previewImageTimer);
+        if (duration < 1) duration = 1; 
+        
+        //Fade it in after some time.
+        fadeTimeout = setTimeout(() => {
+            //Display the element
+            hideAll();
+            $(elm).addClass('visible').removeClass('hidden');
+            console.log('Element Visible', elm, src);
+            return elm;
+        }, duration);
+
+        return fadeTimeout;
+    }
+
+    $rightColumn.on('mouseleave', (e) => { hideAll(); });
     $('.hover-box[data-image-src], .hover-box[data-video-src]').on('mouseover', async (e) => {
         const $target = $(e.target);
 
@@ -40,59 +82,38 @@ document.addEventListener('DOMContentLoaded', () => {
         let videoSrc = $target.attr('data-video-src'); 
         if (!videoSrc) videoSrc = $target.closest('.hover-box').attr('data-video-src');
 
-        // clear the visuals
-        $previewImage.removeClass('visible');
-        $previewVideo.removeClass('visible');
-
-        // set the new image
-        console.log('setting', $target, imgSrc || videoSrc);
+        //Start the timer
         previewImageTimer = performance.now();
 
-        if (videoSrc == null) {
-            $previewImage.attr('src', imgSrc);
-        } else {
-            $previewVideo.attr('src', videoSrc);
-        }
+        const src       = imgSrc || videoSrc;
+        const isVideo   = videoSrc != null;
 
-        // Swap the visuals out with a delay
-        const swap = async () => { 
-            console.log('swapping', imgSrc || videoSrc);
-            const duration =  preivewImageSwapDuration - (performance.now() - previewImageTimer);
-            if (duration > 0) await wait(duration);
+        let element     = null;
+
+        //Hide all the items and show only the one we may have
+        if ((element = loadedImages[src]) == null) {
+
+            // Create the element
+            console.log('Creating Element',  imgSrc, videoSrc);
+            const $element = isVideo ? $('<video loop autoplay muted>') : $('<img>');
+            $element.attr("src", src).addClass(isVideo ? 'preview-video' : 'preview-image');
+            $element.prependTo($rightColumn);
+            element = loadedImages[src] = $element.get(0);
+
+            // The element finally loaded, so we will trigger the show
+            $element.on('load', (e) => { 
+                console.log('loaded content', src, e.target); 
+                show(src);
+            }, { once: true });
+
+        }  else {
             
-            if (videoSrc == null) {
-               $previewImage.addClass('visible');
-               console.log('made visible image', imgSrc);
-            } else {
-                $previewVideo.addClass('visible');
-                console.log('made visible video', videoSrc);
-            }
-        };
-
-        if (loadedImages.indexOf(videoSrc || imgSrc) != false) {
-            swap();
-        } else {
-            if (videoSrc == null) {
-                $previewImage.once('load', async (e) => { 
-                    console.log('loaded image', imgSrc);
-                    loadedImages.push(imgSrc);
-                    await swap();
-                });
-            } else {
-                $previewVideo.once('load', async (e) => {
-                    console.log('loaded video', videoSrc);
-                    loadedImages.push(videoSrc);
-                    await swap();
-                });
-            }
+            // We can trigger the show early
+            console.log('Shown', loadedImages);
+            show(src);
         }
-
         
-        $target.on('mouseleave', async (e) => { 
-            $previewImage.removeClass('visible');
-            $previewVideo.removeClass('visible');
-            $previewImage.attr('src', '');
-            $previewVideo.attr('src', '');
-        }, { once: true });
+        // Target left, so lets hide the content
+        $target.on('mouseleave', async (e) => {  hideAll(); }, { once: true });
     });
 }); 
