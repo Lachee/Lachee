@@ -57,7 +57,8 @@ document.addEventListener('DOMContentLoaded', () => {
         hideAll();
 
         //Calculate the duration its been and wait that long
-        let duration =  preivewImageSwapDuration - (performance.now() - previewImageTimer);
+        const removalDelay = 100;
+        let duration =  preivewImageSwapDuration - (performance.now() - previewImageTimer) - removalDelay;
         if (duration < 1) duration = 1; 
         
         console.log('Showing ', src, 'in', duration, 'ms');
@@ -65,17 +66,19 @@ document.addEventListener('DOMContentLoaded', () => {
         //Fade it in after some time.
         fadeTimeout = setTimeout(() => {
             //Display the element
-            hideAll();
-            $(elm).addClass('visible').removeClass('hidden');
-            console.log('Element Visible', elm, src);
-            return elm;
+            $(elm).removeClass('hidden');
+            document.requestAnimationFrame();
+            setTimeout(() => {
+                console.log('Element Visible', elm, src);
+                $(elm).addClass('visible');
+            }, removalDelay);
         }, duration);
 
         return fadeTimeout;
     }
 
     $rightColumn.on('mouseleave', (e) => { hideAll(); });
-    $('.hover-box[data-image-src], .hover-box[data-video-src]').on('mouseenter', async (e) => {
+    $('.hover-box[data-image-src], .hover-box[data-video-src]').on('mouseover', async (e) => {
         const $target = $(e.target);
 
         let imgSrc = $target.attr('data-image-src'); 
