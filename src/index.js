@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
         hideAll();
 
         //Calculate the duration its been and wait that long
-        const duration =  preivewImageSwapDuration - (performance.now() - previewImageTimer);
+        let duration =  preivewImageSwapDuration - (performance.now() - previewImageTimer);
         if (duration < 1) duration = 1; 
         
         //Fade it in after some time.
