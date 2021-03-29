@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let draggedElement = null;
     let lastTimestamp = 0;
     
+    /** Animate the drag element. Idea here is that the elements will have some 'velocity' and will still move after the fact. */
     function onUpdate(timestamp) {
         if (draggedElement == null) return;
         const de = draggedElement.dragging;
@@ -37,49 +38,32 @@ document.addEventListener('DOMContentLoaded', () => {
             (de.position[1] - de.lastPosition[1]) / delta,
         ];
 
-
+        //Move the element to the desired location
         draggedElement.style.left = (de.positionStart[0] + diff[0]) + "px";
         draggedElement.style.top =  (de.positionStart[1] + diff[1]) + "px";
 
-        let skew    = de.velocity[0] * -10;
-        //if (Math.abs(skew) > 0.7) {
-            let hoffset = (draggedElement.offsetHeight / 2);
-            draggedElement.style.transform = `translateY(-${hoffset}px) skewX(${skew}deg) translateY(${hoffset}px)`;
-        //}
-
+        //Visually skew the document so it looks like its dragging
+        const h         = draggedElement.offsetHeight;
+        const d         = (de.position[0] - de.lastPosition[0]);
+        const skew      = -((Math.PI / 2) - Math.acos(d / h));// * (180/Math.PI);
+        draggedElement.style.transform = `translateY(-${h/2}px) skewX(${skew}rad) translateY(${h/2}px)`;
 
         //Next frame
         window.requestAnimationFrame(onUpdate);
     }
 
+    /** Called when a drag happens */
     function onDragging(e) {
         if (draggedElement == null) return;
 
         e = e || window.event;
         e.preventDefault();
-        window.requestAnimationFrame(onUpdate);
         
         const de = draggedElement.dragging;
         de.client = [ e.clientX, e.clientY ];
-        
-        //
-        ////Calculate the difference
-        //const diff = [
-        //    e.clientX - de.clientStart[0],
-        //    e.clientY - de.clientStart[1],
-        //];
-        //
-        ////Apply the position
-        //draggedElement.style.left = (de.positionStart[0] + diff[0]) + "px";
-        //draggedElement.style.top =  (de.positionStart[1] + diff[1]) + "px";
-
-        // set the element's new position:
-        //draggedElement.style.top = (draggedElement.offsetTop - draggedElement.dragging.difference[1]) + "px";
-        //draggedElement.style.left = (draggedElement.offsetLeft - draggedElement.dragging.difference[0]) + "px";
-        //elmnt.style.transform = "skewX(" + pos1*180 + "deg)";
     };
 
-
+    /** Begins dragging the element. Position is the initial mouse position. */
     function beginDragging(element, position) {
         draggedElement = element;
 
@@ -96,6 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
         window.requestAnimationFrame(onUpdate);
     }
 
+    /** Ends dragging the element */
     function endDragging() {
         if (!draggedElement) return;
         $(draggedElement).removeClass('dragging');
@@ -103,11 +88,14 @@ document.addEventListener('DOMContentLoaded', () => {
         draggedElement = null;
     }
 
+    //On handle down, begin dragging the root element
     $('.draggable .drag-handle').on('mousedown', (e) => {
         const element = $(e.target).closest('.draggable').get(0);
         beginDragging(element, [ e.clientX, e.clientY ]);
     });
     
+    //Update the drag events globally. This way it isn't an issue if the mouse leaves the element,
+    // the window will still catch the events.
     $(window).on('mouseup', (e) => { endDragging(); });
     $(window).on('mousemove', (e) => { onDragging(e); });
 });
