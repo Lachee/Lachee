@@ -2,9 +2,13 @@
 .draggable {
     position: absolute;
     // transform: translateY(-0px) skewX(0deg) translateY(0px);
-    // transition: transform 0.1s ease; This sadly causes artifacts
+    transition: transform 0.1s ease; // This sadly causes artifacts
     .drag-handle {
         cursor: grab;
+    }
+
+    &.dragging, &.dragging .drag-handle{
+        cursor: grabbing;
     }
 }
 
