@@ -1,0 +1,33 @@
+.button {
+    display: block;
+    font-family: 'Syne Mono', monospace;
+    padding: 10px;
+    background: white;
+    border: 2px solid black;
+    width: 250px;
+    margin: 10px;
+    text-transform: capitalize;
+    text-transform: lowercase;
+    color: black;
+    font-size: 15pt;
+    //box-shadow: 0 0 white;
+    text-decoration: none;
+}
+
+/** Social Buttons */
+.button.social {
+    width: 25px;
+    height: 25px;
+    text-align: center;
+}
+.button.social i {
+    position: relative;
+    line-height: 26px;
+    font-size: 20pt;
+}
+.button.social.social-discord { color: #7289DA; }
+.button.social.social-twitch { color: #6441a5; }
+.button.social.social-github { color: black; }
+.button.social.social-twitter { color: #1DA1F2; }
+.button.social.social-reddit { color: #FF5700; }
+.button.social.social-github { color: steam; }

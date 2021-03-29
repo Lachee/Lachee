@@ -3,6 +3,8 @@
     padding: 0;
 }
 
+@import './button.scss';
+
 .poppins { font-family: 'Poppins', sans-serif; }
 .syne { font-family: 'Syne Mono', monospace; }
 
@@ -98,9 +100,12 @@ html, body {
 .popout {
     box-shadow: 0px 0px black;
     transition: box-shadow 0.25s ease-out, transform 0.25s ease-out;
-    .hover-box:hover > & {
+    .hover-box:hover:not(.dragging) > & {
         box-shadow: 10px 10px black;
         transform: translate(-10px, -10px);
+    }
+    .hover-box.dragging:hover > & {
+        box-shadow: none;
     }
 }
 
@@ -137,40 +142,6 @@ html, body {
         color: #7b9eff;
     }
 }
-
-.button {
-    display: block;
-    font-family: 'Syne Mono', monospace;
-    padding: 10px;
-    background: white;
-    border: 2px solid black;
-    width: 250px;
-    margin: 10px;
-    text-transform: capitalize;
-    text-transform: lowercase;
-    color: black;
-    font-size: 15pt;
-    box-shadow: 0 0 white;
-    text-decoration: none;
-}
-
-/** Social Buttons */
-.button.social {
-    width: 25px;
-    height: 25px;
-    text-align: center;
-}
-.button.social i {
-    position: relative;
-    line-height: 26px;
-    font-size: 20pt;
-}
-.button.social.social-discord { color: #7289DA; }
-.button.social.social-twitch { color: #6441a5; }
-.button.social.social-github { color: black; }
-.button.social.social-twitter { color: #1DA1F2; }
-.button.social.social-reddit { color: #FF5700; }
-.button.social.social-github { color: steam; }
 
 #social-window {
     .social-navigation, .special-box {

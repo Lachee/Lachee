@@ -39,14 +39,16 @@ document.addEventListener('DOMContentLoaded', () => {
         ];
 
         //Move the element to the desired location
-        draggedElement.style.left = (de.positionStart[0] + diff[0]) + "px";
-        draggedElement.style.top =  (de.positionStart[1] + diff[1]) + "px";
+        //draggedElement.style.left = (de.positionStart[0] + diff[0]) + "px";
+        //draggedElement.style.top =  (de.positionStart[1] + diff[1]) + "px";
 
         //Visually skew the document so it looks like its dragging
+        const [ x, y ]  = de.position;
         const h         = draggedElement.offsetHeight;
         const d         = (de.position[0] - de.lastPosition[0]);
         const skew      = -((Math.PI / 2) - Math.acos(d / h));// * (180/Math.PI);
-        draggedElement.style.transform = `translateY(-${h/2}px) skewX(${skew}rad) translateY(${h/2}px)`;
+        draggedElement.style.transform = `translate3d(${x}px,${y}px,0) translateY(-${h/2}px) skewX(${skew}rad) translateY(${h/2}px)`;
+        //draggedElement.style.transform = `translate3d(${x}px,${y}px,0)`;
 
         //Next frame
         window.requestAnimationFrame(onUpdate);
@@ -67,16 +69,32 @@ document.addEventListener('DOMContentLoaded', () => {
     function beginDragging(element, position) {
         draggedElement = element;
 
-        // Set the position
-        draggedElement.dragging = {
-            positionStart:  [ element.offsetLeft, element.offsetTop ],
-            position:       [ element.offsetLeft, element.offsetTop ],
-            clientStart:    position,
-            client:         position,
-        };
+        // Set initial object that stores the data
+        if (draggedElement.dragging == null){ 
+            console.log('settin');
+            draggedElement.dragging = {
+                position:       [ 0, 0 ],
+                clientStart:    position,
+                client:         position
+            };
+
+            //if (draggedElement.style.left)
+            //    draggedElement.dragging.position[0] = parseInt(draggedElement.style.left)/2;
+//
+            //if (draggedElement.style.top)
+            //    draggedElement.dragging.position[1] = parseInt(draggedElement.style.top)/2;
+        }
+
+        // Update mouse position
+        draggedElement.dragging.clientStart     = position;
+        draggedElement.dragging.client          = position;
+        draggedElement.dragging.positionStart   = draggedElement.dragging.position;
+
+        const [ x, y ] = draggedElement.dragging.position;
+        draggedElement.style.transform = `translate3d(${x}px,${y}px,0)`;
         
         // Listen to the events
-        $(draggedElement).addClass('dragging');
+        $(draggedElement).addClass('dragging');        
         window.requestAnimationFrame(onUpdate);
     }
 
@@ -84,7 +102,11 @@ document.addEventListener('DOMContentLoaded', () => {
     function endDragging() {
         if (!draggedElement) return;
         $(draggedElement).removeClass('dragging');
-        draggedElement.style.transform = null;
+        
+        //Move back to left top
+        const [ x, y ] = draggedElement.dragging.position;
+        draggedElement.style.transform = `translate3d(${x}px,${y}px,0)`;
+        //draggedElement.style.top = `${y}px`;
         draggedElement = null;
     }
 

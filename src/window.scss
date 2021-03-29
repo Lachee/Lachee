@@ -16,11 +16,11 @@
 
     $heading-height: 30px;
 
-    display: inline-block;
+    display: table;
     border: 2px solid black;
     background: white;
     width: 500px;
-    box-shadow: 8px 8px #00000070;
+    //box-shadow: 8px 8px #00000070;
 
     .window-content {
         min-width: 200px;
@@ -38,8 +38,6 @@
             float: right;
             border-left: 2px solid black;
             position: relative;
-
-                    
 
             &.window-close::after {
                 content: "\d7";
