@@ -38,17 +38,30 @@ document.addEventListener('DOMContentLoaded', () => {
             (de.position[1] - de.lastPosition[1]) / delta,
         ];
 
-        //Move the element to the desired location
-        //draggedElement.style.left = (de.positionStart[0] + diff[0]) + "px";
-        //draggedElement.style.top =  (de.positionStart[1] + diff[1]) + "px";
-
         //Visually skew the document so it looks like its dragging
         const [ x, y ]  = de.position;
-        const h         = draggedElement.offsetHeight;
-        const d         = (de.position[0] - de.lastPosition[0]);
-        const skew      = -((Math.PI / 2) - Math.acos(d / h));// * (180/Math.PI);
-        draggedElement.style.transform = `translate3d(${x}px,${y}px,0) translateY(-${h/2}px) skewX(${skew}rad) translateY(${h/2}px)`;
-        //draggedElement.style.transform = `translate3d(${x}px,${y}px,0)`;
+        draggedElement.style.transform = `translate3d(${x}px,${y}px,0)`;
+        
+        //Apply the skew
+        const skewElement = $(draggedElement).find('.skewable').get(0);
+        if (skewElement != null) {
+            //skewElement.style.transform = `translateY(-${h/2}px) skewX(${skew}rad) translateY(${h/2}px)`;
+            //skewElement.style.transform = `skew(${skew}rad, 0)`;
+             
+            const h         = draggedElement.offsetHeight*2;
+            const w         = 0;//draggedElement.offsetWidth/2;
+            const skew      = -((Math.PI / 2) - Math.acos((de.position[0] - de.lastPosition[0]) / h));// * (180/Math.PI);
+           
+            let transformation = `translateX(${w/2}px) translateY(${h/2}px) `;
+            transformation +=    `matrix3d( 1,  ${skew},       0,      0,
+                                            0,        1,      0,      0,
+                                            0,        0,      1,      0, 
+                                            0,        0,      0,      1)`;
+            transformation += `translateY(-${h/2}px) translateX(-${w/2}px)`;
+
+            console.log(transformation);
+            skewElement.style.transform = transformation;
+        }
 
         //Next frame
         window.requestAnimationFrame(onUpdate);
@@ -106,6 +119,7 @@ document.addEventListener('DOMContentLoaded', () => {
         //Move back to left top
         const [ x, y ] = draggedElement.dragging.position;
         draggedElement.style.transform = `translate3d(${x}px,${y}px,0)`;
+        $(draggedElement).find('.skewable').css('transform', null);
         //draggedElement.style.top = `${y}px`;
         draggedElement = null;
     }
