@@ -1,60 +1,69 @@
-
 <html>
-    <head>
-        <title>Lachee</title>
-        
 
-        <link rel="preconnect" href="https://fonts.gstatic.com">
-        <link href="https://fonts.googleapis.com/css2?family=Poppins&family=Syne+Mono&display=swap" rel="stylesheet">
+<head>
+    <title>Lachee</title>
 
-        <script src="dist/app.js"></script>
-        <link href="dist/app.css" rel="stylesheet">
-        <link rel="preload" href="images/static.gif" as="image">
 
-    </head>
-    <body>
-        <img src="images/static.gif" style="display: none;" />
-        <!-- 
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&family=Syne+Mono&display=swap" rel="stylesheet">
+
+    <script src="dist/app.js"></script>
+    <link href="dist/app.css" rel="stylesheet">
+    <link rel="preload" href="images/static.gif" as="image">
+
+</head>
+
+<body>
+    <img src="images/static.gif" style="display: none;" />
+    <!-- 
             References:
             https://i.lu.je/2021/chrome_Ewr38enfwT.png 
             https://www.youtube.com/watch?v=BcTiDd9ob9w
         -->
 
-        <div class="row">
-            <div class="column column-right graph-paper">
-                <!--
+    <div class="row">
+        <div class="column column-right graph-paper">
+            <!--
                 <img class="preview-image"      src="" />
                 <video class="preview-video"    src="https://i.lu.je/2020/9z85rF55LF.mp4" loop autoplay muted></video>
                 -->
 
- 
-                <div class="link-content link-projects">    
-                    <div class="title">What I've done</div>    
-                    <span id="link-projects-stub">   
-                        <div class="hover-box" data-image-src="images/partycrashers.gif"><a href="#games" class="button popout">Party Crashers</a></div>
-                        <div class="hover-box" data-video-src="https://i.lu.je/2021/RHKmFcrZfI.mp4"><a href="#games" class="button popout">Electronic Super Joy</a></div>
-                        <div class="hover-box" data-image-src="https://i.pinimg.com/originals/7f/7f/28/7f7f2882899755a705a2953b6fcfc263.gif"><a href="#games" class="button popout">Discord RPC CSharp</a></div>
-                        <div class="hover-box" data-video-src="https://i.lu.je/2021/YMkXnGQY8y.mp4"><a href="#games" class="button popout">XVE Bot Editor</a></div>
-                        <div class="hover-box" data-image-src="images/entirebmovie.gif"><a href="#games" class="button popout">Raylib Go Plus</a></div>    
-                    </span>
-                </div>
 
-                <div class="link-content link-pages">     
-                    <div class="title">What I do</div>
-                    <div class="hover-box" data-image-src=''><a href="#games" class="button popout">game ports</a></div>
-                    <div class="hover-box" data-image-src=''><a href="#games" class="button popout">software engineering</a></div>
-                    <div class="hover-box" data-image-src=''><a href="#games" class="button popout">web design</a></div>
-                    <div class="hover-box" data-image-src=''><a href="#games" class="button popout">open source</a></div>
-                </div>
-                
+            <div class="link-content link-projects">
+                <div class="title">What I've done</div>
+                <span id="link-projects-stub">
+                    <div class="hover-box" data-image-src="images/partycrashers.gif"><a href="#games"
+                            class="button popout">Party Crashers</a></div>
+                    <div class="hover-box" data-video-src="https://i.lu.je/2021/RHKmFcrZfI.mp4"><a href="#games"
+                            class="button popout">Electronic Super Joy</a></div>
+                    <div class="hover-box"
+                        data-image-src="https://i.pinimg.com/originals/7f/7f/28/7f7f2882899755a705a2953b6fcfc263.gif"><a
+                            href="#games" class="button popout">Discord RPC CSharp</a></div>
+                    <div class="hover-box" data-video-src="https://i.lu.je/2021/YMkXnGQY8y.mp4"><a href="#games"
+                            class="button popout">XVE Bot Editor</a></div>
+                    <div class="hover-box" data-image-src="images/entirebmovie.gif"><a href="#games"
+                            class="button popout">Raylib Go Plus</a></div>
+                </span>
             </div>
-            <div class="column retro-gradient">
-                <div class="main-content">
-                    <div class="circle-dot-png"></div>
-                    <div class="square-dot-png"></div>
-                    <div class="circle-dot-sun"></div>
 
-                    <div class="draggable not-hover-box" id="social-window">
+            <div class="link-content link-pages">
+                <div class="title">What I do</div>
+                <div class="hover-box" data-image-src=''><a href="#games" class="button popout">game ports</a></div>
+                <div class="hover-box" data-image-src=''><a href="#games" class="button popout">software engineering</a>
+                </div>
+                <div class="hover-box" data-image-src=''><a href="#games" class="button popout">web design</a></div>
+                <div class="hover-box" data-image-src=''><a href="#games" class="button popout">open source</a></div>
+            </div>
+
+        </div>
+        <div class="column retro-gradient">
+            <div class="main-content">
+                <div class="circle-dot-png"></div>
+                <div class="square-dot-png"></div>
+                <div class="circle-dot-sun"></div>
+
+                <div class="draggable not-hover-box" id="social-window">
+                    <div class="skewable">
                         <div class="window popout">
                             <div class="window-heading  drag-handle">
                                 <div class="window-button window-close"></div>
@@ -63,21 +72,57 @@
                             </div>
                             <div class="window-content">
                                 <div class="social-navigation">
-                                    <div class="hover-box"><a title="Github" href="https://github.com/lachee" target="_blank" class="button popout social social-github"><i class="fab fa-github-alt"></i></a></div>
-                                    <div class="hover-box"><a title="Twitter" href="https://twitter.com/Lachee_" target="_blank" class="button popout social social-twitter"><i class="fab fa-twitter"></i></a></div>
-                                    <div class="hover-box"><a title="Discord" href="https://discord.com/users/130973321683533824" target="_blank" class="button popout social social-discord"><i class="fab fa-discord"></i></a></div>
-                                    <div class="hover-box"><a title="Steam" href="https://steamcommunity.com/id/lachee/" target="_blank" class="button popout social social-steam"><i class="fab fa-steam-symbol"></i></a></div>
-                                    <div class="hover-box"><a title="Reddit" href="https://www.reddit.com/user/lachee" target="_blank" class="button popout social social-reddit"><i class="fab fa-reddit-alien"></i></a></div>
-                                    <div class="hover-box"><a title="Twitch" href="https://twitch.tv/lachee" target="_blank" class="button popout social social-twitch"><i class="fab fa-twitch"></i></a></div>
+                                    <div class="hover-box"><a title="Github" href="https://github.com/lachee"
+                                            target="_blank" class="button popout social social-github"><i
+                                                class="fab fa-github-alt"></i></a></div>
+                                    <div class="hover-box"><a title="Twitter" href="https://twitter.com/Lachee_"
+                                            target="_blank" class="button popout social social-twitter"><i
+                                                class="fab fa-twitter"></i></a></div>
+                                    <div class="hover-box"><a title="Discord"
+                                            href="https://discord.com/users/130973321683533824" target="_blank"
+                                            class="button popout social social-discord"><i
+                                                class="fab fa-discord"></i></a></div>
+                                    <div class="hover-box"><a title="Steam" href="https://steamcommunity.com/id/lachee/"
+                                            target="_blank" class="button popout social social-steam"><i
+                                                class="fab fa-steam-symbol"></i></a></div>
+                                    <div class="hover-box"><a title="Reddit" href="https://www.reddit.com/user/lachee"
+                                            target="_blank" class="button popout social social-reddit"><i
+                                                class="fab fa-reddit-alien"></i></a></div>
+                                    <div class="hover-box"><a title="Twitch" href="https://twitch.tv/lachee"
+                                            target="_blank" class="button popout social social-twitch"><i
+                                                class="fab fa-twitch"></i></a></div>
                                 </div>
                                 <div class="special-box">
-                                    <video style="background: gray;" src="https://i.lu.je/2021/cTo2pPaYqP.mp4" autoplay loop muted width="390px" height="340px"></video>
+                                    <video style="background: gray;" src="https://i.lu.je/2021/cTo2pPaYqP.mp4" autoplay
+                                        loop muted width="390px" height="340px"></video>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
 
-                    <div class="draggable" id="main-window" style="left: 211px; top: 111px">
+                <div class="draggable" id="main-window" style="left: 211px; top: 111px">
+                    <div class="skewable">
+                        <div class="window">
+                            <div class="window-heading drag-handle">
+                                <div class="window-button window-close"></div>
+                                <div class="window-button window-maximise"></div>
+                                <div class="window-button window-minimise"></div>
+                            </div>
+                            <div class="window-content">
+                                <p>Hello, I am Lachee! A Tasmanian who loves to dev and create games.</p>
+                                <p>
+                                    I develop Software and Games. I use Unity3D and the C# language extensively, with my
+                                    first full title called Party Crashers being release on all major consoles in 2018.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="draggable no-js" style="left: 211px; top: 111px">
                         <div class="skewable">
                             <div class="window">
                                 <div class="window-heading drag-handle">
@@ -86,30 +131,10 @@
                                     <div class="window-button window-minimise"></div>
                                 </div>
                                 <div class="window-content">
-                                    <p>Hello, I am Lachee! A Tasmanian who loves to dev and create games.</p>
-                                    <p>
-                                        I develop Software and Games. I use Unity3D and the C# language extensively, with my first full title called Party Crashers being release on all major consoles in 2018.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        
-
-                        <div class="draggable no-js"  style="left: 211px; top: 111px">
-                            <div class="skewable">
-                                <div class="window">
-                                    <div class="window-heading drag-handle">
-                                        <div class="window-button window-close"></div>
-                                        <div class="window-button window-maximise"></div>
-                                        <div class="window-button window-minimise"></div>
-                                    </div>
-                                    <div class="window-content">
-                                        <h2><i class="far fa-exclamation-triangle"></i> Windows Error</h2>
-                                        <p>Sorry, but this website is best viewed with JavaScript enabled. A lot of the items are dynamically created and there is a lot of interactivity</p>
-                                        <p>Before continuing, please enable scripts on this site</p>
-                                    </div>
+                                    <h2><i class="far fa-exclamation-triangle"></i> Windows Error</h2>
+                                    <p>Sorry, but this website is best viewed with JavaScript enabled. A lot of the
+                                        items are dynamically created and there is a lot of interactivity</p>
+                                    <p>Before continuing, please enable scripts on this site</p>
                                 </div>
                             </div>
                         </div>
@@ -117,12 +142,14 @@
                 </div>
             </div>
         </div>
-        <div class="statue" style="
+    </div>
+    <div class="statue" style="
         position: fixed;
         bottom: -81px;
         left: -100px;
     ">
-                <img src="images/smexy.png">
-        </div>
-    </body>
+        <img src="images/smexy.png">
+    </div>
+</body>
+
 </html>

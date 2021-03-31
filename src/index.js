@@ -9,6 +9,7 @@ import $ from "cash-dom";
 // import 'tippy.js/dist/tippy.css'; // optional for styling
 // import 'tippy.js/animations/scale.css';
 
+import './mobile.js';
 import './window.js';
 import './projects.js';
 
@@ -73,7 +74,24 @@ document.addEventListener('DOMContentLoaded', () => {
         return fadeTimeout;
     }
 
+    // Hide everything
     $rightColumn.on('mouseleave', (e) => { hideAll(); });
+
+    if (!window.isMobile()) {
+        $('.hover-box[data-image-src], .hover-box[data-video-src]').each((i, e) => {
+            const $target = $(e);
+
+            let imgSrc = $target.attr('data-image-src'); 
+            if (!imgSrc) imgSrc = $target.closest('.hover-box').attr('data-image-src');
+    
+            let videoSrc = $target.attr('data-video-src'); 
+            if (!videoSrc) videoSrc = $target.closest('.hover-box').attr('data-video-src');
+            
+            createVideoElement(imgSrc || videoSrc, videoSrc != null, false);
+        });
+    }
+
+    // Logic for the button's to show the video/gif
     $('.hover-box[data-image-src], .hover-box[data-video-src]').on('mouseover', async (e) => {
         const $target = $(e.target);
 
@@ -93,21 +111,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         //Hide all the items and show only the one we may have
         if ((element = loadedImages[src]) == null) {
-
             // Create the element
-            console.log('Creating Element',  imgSrc, videoSrc);
-            const $element = isVideo ? $('<video loop autoplay muted>') : $('<img>');
-            $element.attr("src", src).addClass(isVideo ? 'preview-video' : 'preview-image').addClass('loading');
-            $element.prependTo($rightColumn);
-            element = loadedImages[src] = $element.get(0);
-
-            // The element finally loaded, so we will trigger the show
-            $element.on('load loadstart', (e) => { 
-                //console.log('Element Loaded', src, e.target); 
-                $element.removeClass('loading');
-                show(src);
-            }, { once: true });
-
+            return createVideoElement(src, isVideo, true);
         }  else {
             
             // We can trigger the show early
@@ -119,4 +124,27 @@ document.addEventListener('DOMContentLoaded', () => {
         $target.on('mouseleave', async (e) => {  hideAll(); }, { once: true });
         e.preventDefault();
     });
+
+    /** CReate the video element if it doesn't exist */
+    function createVideoElement(src, isVideo, showAfterLoad = false) {
+        if (loadedImages[src] != null) 
+            return loadedImages[src];
+
+        console.log('Loading video',  src, isVideo, showAfterLoad);
+
+        // Create the element
+        const $element = isVideo ? $('<video loop autoplay muted>') : $('<img>');
+        $element.attr("src", src).addClass(isVideo ? 'preview-video' : 'preview-image').addClass('loading');
+        $element.prependTo($rightColumn);
+        
+        // The element finally loaded, so we will trigger the show
+        $element.on('load loadstart', (e) => { 
+            console.log('Loaded video', src, e.target, showAfterLoad); 
+            $element.removeClass('loading');
+            if (showAfterLoad) show(src);
+        }, { once: true });
+        
+        // Return the element
+        return loadedImages[src] = $element.get(0);
+    }
 }); 

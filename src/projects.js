@@ -7,6 +7,28 @@ const files = (ctx => {
     return keys.reduce((o, k, i) => { o[k] = values[i]; return o; }, {});
 })(require.context('./projects', true, /\.ya?ml$/));
 
+/** Creates the windows for the project because the button was click */
+function createWindow(project) {
+    //dupe = 
+}
+
+/** Creates and adds a button to the project panel for the given project */
+function createButton(project) {
+    const $hover = $(`<div>`);
+    $hover.addClass('hover-box');
+    if (project.background) {
+        const ext = project.background.substr(project.background.lastIndexOf('.'));
+        $hover.attr(ext == '.mp4' ? 'data-video-src' : 'data-image-src', project.background);
+    }
+
+    const $a = $('<a>');
+    $a.addClass('button').addClass('popout').text(project.name).attr('href', '#');
+    $a.prependTo($hover);
+    $a.on('click', () => { createWindow(project); });
+    $hover.appendTo('.link-projects');
+    return $hover;
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     $('#link-projects-stub').remove();
     
@@ -19,20 +41,6 @@ document.addEventListener('DOMContentLoaded', function() {
         const item = items[filename];
         item.html = marked(item.description || ''); 
         console.log(item.name, item);
-
-        //Create the button
-        const $hover = $(`<div>`);
-        $hover.addClass('hover-box');
-        if (item.background) {
-            const ext = item.background.substr(item.background.lastIndexOf('.'));
-            $hover.attr(ext == '.mp4' ? 'data-video-src' : 'data-image-src', item.background);
-        }
-        const $a = $('<a>');
-        $a.addClass('button').addClass('popout').text(item.name).attr('href', '#');
-        $a.prependTo($hover);
-        $hover.appendTo('.link-projects');
-
-        //Create the window
-        
+        createButton(item);
     }                
 });
