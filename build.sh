@@ -1,9 +1,13 @@
 #!/bin/bash
 watch=''
-while getopts ":w" opt; do
+mode='--mode development'
+while getopts ":wp" opt; do
   case $opt in
     w)
       watch='--watch'
+      ;;
+    p)
+      mode='--mode production'
       ;;
     \?)
       echo "Invalid option: -$OPTARG" >&2
@@ -11,7 +15,7 @@ while getopts ":w" opt; do
   esac
 done
 
-echo 'Building...';
+echo "Building $mode $watch...";
 rm -fR ./dist/
-npx webpack --config webpack.config.js $watch
+npx webpack --config webpack.config.js $mode $watch
 echo 'Done.';

@@ -1,10 +1,13 @@
 name: Discord RPC CSharp
 background: images/matrix.gif
-description: >
+description: |
   Fancy bot **TOOL**
+
+  Potato and dragons
+
 roles:
   - Author
-videos: 
+videos:
 images:
 links:
   - title: GitHub
