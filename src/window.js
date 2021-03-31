@@ -2,8 +2,8 @@ import { Draggable } from '@shopify/draggable';
 import $ from "cash-dom";
 import './window.scss';
 
-
 document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.no-js').forEach((element, key) => element.style.display = 'none');
 
     let draggedElement = null;
     let lastTimestamp = 0;

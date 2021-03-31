@@ -24,11 +24,7 @@ document.addEventListener('DOMContentLoaded', function() {
         $hover.addClass('hover-box');
         if (item.background) {
             const ext = item.background.substr(item.background.lastIndexOf('.'));
-            if (ext == '.mp4') {
-                $hover.attr('data-video-src', item.video || '');
-            } else {
-                $hover.attr('data-image-src', item.image || '');
-            }
+            $hover.attr(ext == '.mp4' ? 'data-video-src' : 'data-image-src', item.background);
         }
         const $a = $('<a>');
         $a.addClass('button').addClass('popout').text(item.name).attr('href', '#');
