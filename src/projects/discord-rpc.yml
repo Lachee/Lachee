@@ -1,0 +1,12 @@
+name: Discord RPC CSharp
+background: images/matrix.gif
+description: >
+  Fancy bot **TOOL**
+roles:
+  - Author
+videos: 
+images:
+links:
+  - title: GitHub
+    url: https://github.com/lachee/discord-rpc-csharp
+    icon: fab fa-github

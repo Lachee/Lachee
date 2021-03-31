@@ -1,0 +1,12 @@
+name: Raylib Go+
+background: images/entirebmovie.gif
+description: >
+  Fancy bot **TOOL**
+roles:
+  - Wrapper Author
+videos: 
+images:
+links:
+  - title: GitHub
+    url: https://github.com/lachee/raylib-goplus
+    icon: fab fa-github

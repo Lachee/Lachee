@@ -1,0 +1,20 @@
+name: Electronic Super Joy
+background: https://i.lu.je/2021/RHKmFcrZfI.mp4
+position: 10
+description: >
+  Electronic Super Joy
+roles:
+  - PS4 Port
+  - Switch Port
+videos: 
+images:
+links:
+  - title: Steam
+    url: https://example.com/
+    icon: fab fa-steam
+  - title: Playstation
+    url: https://example.com/
+    icon: fab fa-playstation
+  - title: Switch
+    url: https://example.com/
+    icon: fab fa-switch

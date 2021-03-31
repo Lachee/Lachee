@@ -1,0 +1,13 @@
+name: XVE Bot Editor
+background: https://i.lu.je/2021/YMkXnGQY8y.mp4
+position: 20
+description: >
+  Fancy bot **TOOL**
+roles:
+  - Author
+videos: 
+images:
+links:
+  - title: Website
+    url: https://xve.lachee.dev/
+    icon: fal fa-globe
