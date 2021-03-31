@@ -8,7 +8,8 @@ const files = (ctx => {
 })(require.context('./projects', true, /\.ya?ml$/));
 
 document.addEventListener('DOMContentLoaded', function() {
-
+    $('#link-projects-stub').remove();
+    
     // <div class="hover-box" data-image-src="images/partycrashers.gif"><a href="#games" class="button popout">Party Crashers</a></div>
     // <div class="hover-box" data-video-src="https://i.lu.je/2021/RHKmFcrZfI.mp4"><a href="#games" class="button popout">Electronic Super Joy</a></div>
     const items = Object.values(files).sort((a, b) => (a.position === undefined ? 100 : a.position) - (b.position === undefined ? 100 : b.position));
