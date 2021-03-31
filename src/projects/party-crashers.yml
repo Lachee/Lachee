@@ -1,0 +1,33 @@
+name: Party Crashers
+background: images/partycrashers.gif
+position: 0
+description: >
+  Party Crashers is a last-car-standing combat racer for one to four players! It
+  aims to provide the same fast-paced competitive couch-play as games like Micro
+  Machines, Mashed, and Wrecked, and also follows in the footsteps of Party
+  Golf, with crazy customisation options for everything our player.
+
+
+  I was the lead programmer in Party Crashers and was put in charge of many of
+  the core systems such as the pickups track effects and platform integration. I
+  added support for all platforms (Steam, PlayStation 4, Nintendo Switch) which
+  involved creating wrappers and implementing different APIs provided by the
+  platforms and handling a variety of controller configurations.
+roles:
+  - Lead Programmer
+  - Platform Integration
+videos:
+  - src: https://www.youtube.com/embed/syLvUI1jjOg
+    title: Party Crashers Trailer 
+images:
+  - src: https://steamcdn-a.akamaihd.net/steam/apps/657300/ss_b3d90f3e6383333d65feb5a5352d6403c49632cb.600x338.jpg
+links:
+  - title: Steam
+    url: https://store.steampowered.com/app/657300/Party_Crashers/
+    icon: fab fa-steam
+  - title: Playstation
+    url: https://store.playstation.com/en-au/product/EP1246-CUSA12964_00-6665666466636662
+    icon: fab fa-playstation
+  - title: Switch
+    url: https://www.nintendo.com/games/detail/party-crashers-switch/
+    icon: fab fa-switch

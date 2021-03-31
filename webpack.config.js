@@ -16,6 +16,11 @@ module.exports = {
   devtool: 'source-map',
   module: {
     rules: [
+      {
+        test: /\.ya?ml$/,
+        type: 'json', // Required by Webpack v4
+        use: { loader: 'yaml-loader' }
+      },
       { 
         test: /\.(png)|(jpe?g)|(gif)$/i, 
         use: [

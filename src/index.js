@@ -10,13 +10,13 @@ import $ from "cash-dom";
 // import 'tippy.js/animations/scale.css';
 
 import './window.js';
+import './projects.js';
 
 async function wait(duration) {
     return new Promise((resolve, reject) => {
         setTimeout(() => resolve(), duration);
     });
 }
-
 
 document.addEventListener('DOMContentLoaded', () => {
     const preivewImageSwapDuration  = 0.5 * 1000;
@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function hideAll() {
         
         //Hide all other content
-        console.log('Hiding All');
+        //console.log('Hiding All');
 
         // Clear existing timeouts
         if (fadeTimeout != null) {
@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
             $(elm).removeClass('hidden');
             //document.requestAnimationFrame();
             setTimeout(() => {
-                console.log('Element Visible', elm, src);
+                //console.log('Element Visible', elm, src);
                 $(elm).addClass('visible');
             }, removalDelay);
         }, duration);
@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // The element finally loaded, so we will trigger the show
             $element.on('load loadstart', (e) => { 
-                console.log('Element Loaded', src, e.target); 
+                //console.log('Element Loaded', src, e.target); 
                 $element.removeClass('loading');
                 show(src);
             }, { once: true });
@@ -111,7 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }  else {
             
             // We can trigger the show early
-            console.log('Shown', loadedImages);
+            //console.log('Shown', loadedImages);
             show(src);
         }
         
