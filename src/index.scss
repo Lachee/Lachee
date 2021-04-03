@@ -143,7 +143,11 @@ html, body {
     }
 }
 
-#social-window {
+#win-social {
+    .social-navigation {
+        float: left;
+    }
+
     .social-navigation, .special-box {
         display: inline-block;
     }
