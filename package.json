@@ -29,6 +29,7 @@
     "@babel/plugin-proposal-private-methods": "^7.13.0",
     "@babel/plugin-transform-runtime": "^7.13.10",
     "@babel/preset-env": "^7.13.12",
+    "@babel/preset-react": "^7.13.13",
     "@fortawesome/fontawesome-pro": "file:src/font-awesome/fortawesome-fontawesome-pro-5.15.1.tgz",
     "babel-loader": "^8.2.2",
     "css-loader": "^5.2.0",

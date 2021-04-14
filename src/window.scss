@@ -41,6 +41,7 @@
             float: right;
             border-left: 2px solid black;
             position: relative;
+            cursor: pointer;
 
             &.window-close::after {
                 content: "\d7";

@@ -1,5 +1,6 @@
 import marked from 'marked';
 import $ from "cash-dom";
+import { createWindow } from './window.js';
 
 const files = (ctx => {
     let keys = ctx.keys();
@@ -8,8 +9,9 @@ const files = (ctx => {
 })(require.context('./projects', true, /\.ya?ml$/));
 
 /** Creates the windows for the project because the button was click */
-function createWindow(project) {
-    //dupe = 
+function openWindow(project) {
+    const content = project.html;
+    const window = createWindow(content, project.id);
 }
 
 /** Creates and adds a button to the project panel for the given project */
@@ -24,7 +26,7 @@ function createButton(project) {
     const $a = $('<a>');
     $a.addClass('button').addClass('popout').text(project.name).attr('href', '#');
     $a.prependTo($hover);
-    $a.on('click', () => { createWindow(project); });
+    $a.on('click', () => { openWindow(project); });
     $hover.appendTo('.link-projects');
     return $hover;
 }

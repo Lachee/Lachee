@@ -2,16 +2,24 @@ import { Draggable } from '@shopify/draggable';
 import $ from "cash-dom";
 import './window.scss';
 
+let globalWindowIndex = 0;
+
 /** Makes the element draggable. The element must contain a .drag-handle */
 export function makeDraggable(element) {
+    console.log('make draggable', element);
     const $drag = $('<div class="draggable"><div class="skewable"></div></div>');
     $drag.appendTo(element.parentElement);
     $drag.find('.skewable').append(element);
-    $drag.css('top', element.style.top);
-    $drag.css('left', element.style.left);
-    element.style.top = null;
-    element.style.left = null;
+    $drag.attr('data-id', element.id || '');
 
+    if (element.style) {
+        $drag.css('top', element.style.top || 0);
+        $drag.css('left', element.style.left || 0);
+    
+        element.style.top = null;
+        element.style.left = null;    
+    }
+    
     $drag.find('.drag-handle').on('mousedown', (e) => {
         beginDragging(element.dragRoot, [ e.clientX, e.clientY ]);
     });
@@ -20,8 +28,58 @@ export function makeDraggable(element) {
 }
 
 /** Makes a new window */
-export function makeWindow(contents) {
+export function createWindow(content, id = null, style = null, closeable = true) {
+    function randomWID() {
+        return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
+    }
 
+    const container = document.querySelector('.retro-gradient .main-content');
+    const close = closeable ? '<div class="window-button window-close"></div>' : '';
+    const template = `
+<div class="window">
+    <div class="window-heading drag-handle">
+        ${close}
+        <div class="window-button window-maximise"></div>
+        <div class="window-button window-minimise"></div>
+    </div>
+    <div class="window-content"></div>
+</div>
+    `;
+    
+    const guid = randomWID();
+    const $window = $(template);
+    $window.attr('id', id);
+    $window.attr('data-wid', guid);
+    $window.attr('style', style);
+    $window.find('.window-content').append(content);
+    $(container).append($window);
+
+    //Find the elm
+    const window = $(`[data-wid="${guid}"]`).get(0);
+    makeDraggable(window); // Bugged
+    
+
+    //Add functionality
+    window.focus = function() {
+        window.dragRoot.style.zIndex = globalWindowIndex++;
+    }
+    window.close = function() { 
+        window.style.display = 'none';
+    }
+    window.open = function() {
+        window.style.display = null;
+    }
+
+    //Add events
+    $(window).on('mousedown', () => {
+        window.focus();
+    });
+    $(window).find('.window-close').on('click', () => {
+        window.close();
+    });
+    
+    window.focus();
+    return window;
 }
 
 // ========= Drag Update Handling
@@ -160,8 +218,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Make all the windows dragables
-    $('.window').each((i, e) => {
-        makeDraggable(e);
+    $('template.window').each((i, e) => {
+        console.log('window', e, e.content, e.id, e.style);
+        createWindow(e.content, e.id, e.style, false);
+       // makeDraggable(e);
     });
 
     //Update the drag events globally. This way it isn't an issue if the mouse leaves the element,
