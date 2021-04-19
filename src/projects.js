@@ -11,7 +11,17 @@ const files = (ctx => {
 /** Creates the windows for the project because the button was click */
 function openWindow(project) {
     const content = project.html;
-    const window = createWindow(content, project.id);
+    const windows = [
+        createWindow(content, project.id)
+    ];
+
+    for(const i in project.images) {
+        const image = project.images[i];
+        windows.push(createWindow(`<img src="${image.src}" >`));
+    }
+
+    windows[0].focus();
+    return windows;
 }
 
 /** Creates and adds a button to the project panel for the given project */
