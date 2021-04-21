@@ -15,7 +15,7 @@ function openWindow(project) {
     const latency = 250;
     let x = 0, y = 0;
 
-    const id = project.name.replace(' ', '_').toLowerCase();
+    const id = project.name.replaceAll(' ', '_').toLowerCase();
     const content = project.html;
     const windows = [
         createWindow(content, {
