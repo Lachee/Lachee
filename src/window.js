@@ -4,6 +4,130 @@ import './window.scss';
 
 let globalWindowIndex = 0;
 
+
+/** Makes a new window 
+ * options:
+ *  x, y        - position
+ *  style       - the style
+ *  id          - the id to give to the window
+ *  closeable   - If the window should have a close button
+ *  preOpen     - The window should start opened 
+ *  delay       - The delay in ms before the window opens. Set to -1 to keep it closed.
+*/
+export function createWindow(content, options = { }) {
+    function randomWID() {
+        return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
+    }
+
+    //Setup the defaults
+    options = Object.assign({
+        id:         randomWID(),    //ID of the window  
+        title:      '',             //Title to display in the heading
+        x:          false,          //Position of the window
+        y:          false,          //Position of the window
+        z:          false,          //Depth of the window
+        style:      '',             //Style of the window
+        closeable:  true,           //Is the window closable?
+        preOpen:    false,          //Was the window instantly opened?
+        delay:      10,             //Delay before opening the window
+        singleton:  true,           //Attempts to reuse the window
+    }, options);
+
+    //prepare the style
+    if (options.x != null && options.x !== false) options.style += `left: ${options.x}px;`; 
+    if (options.y != null && options.y !== false) options.style += `top: ${options.y}px;`; 
+
+    //Check if existing window exists
+    if (options.singleton) {
+        const existingWindow = document.querySelector(`.window#${options.id}`);
+        if (existingWindow && existingWindow.open && existingWindow.focus) {
+            existingWindow.open().focus();
+            return existingWindow;
+        }
+    }
+
+    //prepare the container
+    const container     = document.querySelector('.retro-gradient .main-content');
+    const closeClass   = options.preOpen ? '' : 'closed'; 
+    const closeBTN     = options.closeable || options.closeable === undefined ? 
+                            '<div class="window-button window-close" onclick="this.parentElement.parentElement.close()"></div>' : 
+                            '';
+
+    const template  = `
+<div class="window ${closeClass}" onmousedown="this.focus()">
+    <div class="window-heading drag-handle">
+        ${closeBTN}
+        <div class="window-button window-maximise" onclick="this.parentElement.parentElement.open()"></div>
+        <div class="window-button window-minimise" onclick="this.parentElement.parentElement.hide()"></div>
+    </div>
+    <div class="window-content"></div>
+</div>
+    `;
+    
+    //Create the element
+    const guid = randomWID();
+    const $window = $(template);
+    $window.attr('data-wid', guid);
+    if (options.id) $window.attr('id', options.id);
+    if (options.style) $window.attr('style', options.style);
+    $window.find('.window-content').append(content);
+    $(container).append($window);
+
+    //Get the element and make it draggable
+    const window = $(`[data-wid="${guid}"]`).get(0);
+    makeDraggable(window); // Bugged
+    
+    //Fix the depth
+    if (options.z) window.dragRoot.style.zIndex = options.z + globalWindowIndex;
+    
+    /** Brings a window to focus */
+    window.focus = function() {
+        window.dragRoot.style.zIndex = globalWindowIndex++;
+        return window;
+    }
+
+    /** Hides a window and destroys it */
+    window.close = function() { 
+        window.hide();
+        setTimeout(() => window.dragRoot.remove(), 1000);
+        return window;
+    }
+
+    /** Hides a window */
+    window.hide = function() {
+        window.classList.add('closed');
+        return window;
+    }
+
+    /** Opens a window */
+    window.open = function() {
+        window.classList.remove('closed');
+        return window;
+    }
+
+    //Add events
+    //$(window).on('mousedown', () => window.focus());
+    //$(window).find('.window-close').on('click', () => window.close());
+    //$(window).find('.window-minimise').on('click', () => window.hide());
+
+    //Focus the window
+    if (options.z === undefined)
+        window.focus();
+
+    if (options.preOpen) {
+        window.open();
+    } else {
+        const delay = options.delay ?? 10;
+        if (delay >= 0) {
+            setTimeout(() => {
+                window.open();
+            }, delay);
+        }
+    }
+    return window;
+}
+
+
 /** Makes the element draggable. The element must contain a .drag-handle */
 export function makeDraggable(element) {
     console.log('make draggable', element);
@@ -25,61 +149,6 @@ export function makeDraggable(element) {
     });
 
     return element.dragRoot = $drag.get(0);
-}
-
-/** Makes a new window */
-export function createWindow(content, id = null, style = null, closeable = true) {
-    function randomWID() {
-        return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
-    }
-
-    const container = document.querySelector('.retro-gradient .main-content');
-    const close = closeable ? '<div class="window-button window-close"></div>' : '';
-    const template = `
-<div class="window">
-    <div class="window-heading drag-handle">
-        ${close}
-        <div class="window-button window-maximise"></div>
-        <div class="window-button window-minimise"></div>
-    </div>
-    <div class="window-content"></div>
-</div>
-    `;
-    
-    const guid = randomWID();
-    const $window = $(template);
-    $window.attr('id', id);
-    $window.attr('data-wid', guid);
-    $window.attr('style', style);
-    $window.find('.window-content').append(content);
-    $(container).append($window);
-
-    //Find the elm
-    const window = $(`[data-wid="${guid}"]`).get(0);
-    makeDraggable(window); // Bugged
-    
-
-    //Add functionality
-    window.focus = function() {
-        window.dragRoot.style.zIndex = globalWindowIndex++;
-    }
-    window.close = function() { 
-        window.style.display = 'none';
-    }
-    window.open = function() {
-        window.style.display = null;
-    }
-
-    //Add events
-    $(window).on('mousedown', () => {
-        window.focus();
-    });
-    $(window).find('.window-close').on('click', () => {
-        window.close();
-    });
-    
-    window.focus();
-    return window;
 }
 
 // ========= Drag Update Handling
@@ -126,7 +195,7 @@ function onUpdate(timestamp) {
     const h         = (draggedElement.offsetHeight || draggedElement.clientHeight) * 2;
     const w         = 0;//draggedElement.offsetWidth/2;
     const skew      = -((Math.PI / 2) - Math.acos((de.position[0] - de.lastPosition[0]) / h));// * (180/Math.PI);
-    console.log(draggedElement.offsetHeight);
+    
     let skewTransformation = `translateX(${w/2}px) translateY(${h/2}px) `;
     skewTransformation +=    `matrix3d( 1,  ${skew},       0,      0,
                                     0,        1,      0,      0,
@@ -220,7 +289,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // Make all the windows dragables
     $('template.window').each((i, e) => {
         console.log('window', e, e.content, e.id, e.style);
-        createWindow(e.content, e.id, e.style, false);
+        createWindow(e.content, {
+            id: e.id,
+            style: e.style,
+            closeable: false,
+            preOpen: true,
+        });
        // makeDraggable(e);
     });
 

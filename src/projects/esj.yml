@@ -9,7 +9,9 @@ description: >
   During the port, it was also necessary to upgrade the project from Unity 4 to the latest Unity 2019. This involved patching a lot of legacy code from the very early days of unity and bring it to the modern engine. A lot of the UI elements were actually offset because of some change between one of the patches, causing all the legacy 3D text being shifted down lower than expected.
 roles:
   - Switch Port
-videos: null
+videos:
+  - youtube: TXLJO9f3uB4
+    title: Nintendo eShop - Electronic Super Joy Trailer
 images: null
 links:
   - title: Switch

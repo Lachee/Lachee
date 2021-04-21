@@ -25,6 +25,15 @@
     width: 500px;
     //box-shadow: 8px 8px #00000070;
 
+    //This transition helps when openeing the window.
+    transition: transform 0.2s, filter 0.2s;
+
+    //When closed, we want to lay it flat and black
+    &.closed {
+        transform: translate(-100px, 100px) scale3d(1.5, 0, 1);
+        filter: brightness(0);
+    }
+
     .window-content {
         min-width: 200px;
         min-height: 100px;

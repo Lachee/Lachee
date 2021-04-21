@@ -10,17 +10,63 @@ const files = (ctx => {
 
 /** Creates the windows for the project because the button was click */
 function openWindow(project) {
+
+    const movement = 100;
+    const latency = 250;
+    let x = 0, y = 0;
+
+    const id = project.name.replace(' ', '_').toLowerCase();
     const content = project.html;
     const windows = [
-        createWindow(content, project.id)
+        createWindow(content, {
+            id:         id,
+            x:          x,
+            y:          y,
+            singleton:  true,
+        })
     ];
 
-    for(const i in project.images) {
+    // Add the images
+    for (const i in project.images) {
+        x += movement; y += movement;
         const image = project.images[i];
-        windows.push(createWindow(`<img src="${image.src}" >`));
+        const window = createWindow(`<img src="${image.src}" >`, {
+            id:         `${id}-img-${i}`,
+            title:      image.title || '',
+            x:          x,
+            y:          y,
+            delay:      latency * windows.length,
+            singleton:  true,  
+        });
+        windows.push(window);
     }
 
-    windows[0].focus();
+    // Add the videos
+    for (const i in project.videos) {
+        x += movement; y += movement;
+
+        //Get the video and make sure it has a youtube id.
+        // IT can have a `src` instead, but we dont want to use those (yet)
+        const video = project.videos[i];
+        if (!video.youtube) continue;
+
+        const window = createWindow(`<iframe class='youtube video' width='560' height='315' src='https://www.youtube.com/embed/${video.youtube}' frameborder='0' allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe>`, {
+            id:         `${id}-vid-${i}`,
+            title:      video.title || '',
+            x:          x,
+            y:          y,
+            delay:      latency * windows.length,
+            singleton:  true,
+        });
+        windows.push(window);
+    }
+
+    //Fix the focus order
+    for (let i = windows.length - 1; i >= 0; i--) {
+        windows[i].focus();
+    }
+
+    //Return the windows
     return windows;
 }
 

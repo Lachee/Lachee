@@ -17,8 +17,8 @@ roles:
   - Lead Programmer
   - Platform Integration
 videos:
-  - src: https://www.youtube.com/embed/syLvUI1jjOg
-    title: Party Crashers Trailer 
+  - youtube: syLvUI1jjOg
+    title: Party Crashers Trailer
 images:
   - src: https://steamcdn-a.akamaihd.net/steam/apps/657300/ss_b3d90f3e6383333d65feb5a5352d6403c49632cb.600x338.jpg
 links:
