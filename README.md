@@ -6,7 +6,7 @@
  
  🏠 I am from Tasmania, Australia! Hello from down under
   
- ☕ I love [Coffee](https://ko-fi.com/lachee)
+ ☕ Caffine is pretty neat. You can support my projects with [Coffee](https://ko-fi.com/lachee)
   
  🚗 Check out my **game**, [Party Crashers](http://www.partycrashersgame.com/)
  
