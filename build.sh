@@ -1,4 +1,9 @@
 #!/bin/bash
+
+# Opts: 
+# -w watches the build
+# -p switches to production
+
 watch=''
 mode='--mode development'
 while getopts ":wp" opt; do
