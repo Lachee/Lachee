@@ -1,0 +1,6 @@
+@mixin font-poppins { font-family: 'Poppins', sans-serif; }
+@mixin font-syne { font-family: 'Syne Mono', monospace; } 
+@mixin font-knewave { font-family: 'Knewave', sans-serif; }
+.poppins {  @include font-poppins(); }
+.syne { @include font-syne();}
+.knewave { @include font-knewave(); }

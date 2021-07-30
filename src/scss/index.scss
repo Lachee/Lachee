@@ -3,13 +3,12 @@
     padding: 0;
 }
 
+@import './fonts.scss';
 @import './button.scss';
 @import './flags.scss';
 
 $profile-image-url: 'https://d.lu.je/avatar/lachee?size=2048' !default;
 
-.poppins { font-family: 'Poppins', sans-serif; }
-.syne { font-family: 'Syne Mono', monospace; }
 
 template { display: none !important; }
 html, body {
