@@ -21,6 +21,8 @@ jobs:
     runs-on: ubuntu-latest
     env:
       MODE: production
+      HIDE_SKILLS: true
+      HIDE_PLATFORMS: true
       
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -33,7 +35,7 @@ jobs:
       - name: Initialize
         run: |
           npm i
-          echo ${{ secrets.PORTFOLIO_ENV }} > .env
+        #  echo ${{ secrets.PORTFOLIO_ENV }} > .env
         
       # Build
       - name: Build
