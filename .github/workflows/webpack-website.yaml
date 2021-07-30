@@ -15,7 +15,8 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
+
+  # Build the website
   build:
     runs-on: ubuntu-latest
     env:
@@ -45,5 +46,20 @@ jobs:
         uses: actions/upload-artifact@v2.2.4
         with:
           name: lachee.dev
-          
-      
+          path: ./
+
+  # Deploy the website as a page
+  deploy:
+      runs-on: ubuntu-latest
+      needs: build
+      steps:
+        - name: Download Artifact
+          uses: actions/download-artifact@v2
+          with:
+            name: lachee.dev
+            path: ./
+        - name: Publish Pages
+          uses: peaceiris/actions-gh-pages@v3        
+          with:
+            github_token: ${{ secrets.GITHUB_TOKEN }}
+            publish_dir: ./
