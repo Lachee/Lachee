@@ -7392,7 +7392,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _shopify_draggable__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_shopify_draggable__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var cash_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! cash-dom */ "./node_modules/cash-dom/dist/cash.js");
 /* harmony import */ var cash_dom__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(cash_dom__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _window_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./window.scss */ "./src/window.scss");
+/* harmony import */ var _scss_window_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./scss/window.scss */ "./src/scss/window.scss");
 
 
 
@@ -7410,6 +7410,8 @@ var globalWindowIndex = 0;
 
 function createWindow(content) {
   var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+  console.log('create window: ', content, options);
+  console.trace();
 
   function randomWID() {
     return ((1 + Math.random()) * 0x10000 | 0).toString(16).substring(1);
@@ -7437,10 +7439,7 @@ function createWindow(content) {
     //Delay before opening the window
     singleton: true //Attempts to reuse the window
 
-  }, options); //prepare the style
-
-  if (options.x != null && options.x !== false) options.style += "left: ".concat(options.x, "px;");
-  if (options.y != null && options.y !== false) options.style += "top: ".concat(options.y, "px;"); //Check if existing window exists
+  }, options); //Check if existing window exists
 
   if (options.singleton) {
     var existingWindow = document.querySelector(".window#".concat(options.id));
@@ -7461,12 +7460,14 @@ function createWindow(content) {
   var $window = cash_dom__WEBPACK_IMPORTED_MODULE_2___default()(template);
   $window.attr('data-wid', guid);
   if (options.id) $window.attr('id', options.id);
-  if (options.style) $window.attr('style', options.style);
   $window.find('.window-content').append(content);
   cash_dom__WEBPACK_IMPORTED_MODULE_2___default()(container).append($window); //Get the element and make it draggable
 
   var window = cash_dom__WEBPACK_IMPORTED_MODULE_2___default()("[data-wid=\"".concat(guid, "\"]")).get(0);
-  makeDraggable(window); // Bugged
+  makeDraggable(window, {
+    initialX: options.x,
+    initialY: options.y
+  }); // Bugged
   //Fix the depth
 
   if (options.z) window.dragRoot.style.zIndex = options.z + globalWindowIndex;
@@ -7522,24 +7523,21 @@ function createWindow(content) {
     }
   }
 
+  console.log(window);
   return window;
 }
 /** Makes the element draggable. The element must contain a .drag-handle */
 
 function makeDraggable(element) {
+  var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
   console.log('make draggable', element);
   var $drag = cash_dom__WEBPACK_IMPORTED_MODULE_2___default()('<div class="draggable"><div class="skewable"></div></div>');
   $drag.appendTo(element.parentElement);
   $drag.find('.skewable').append(element);
-  $drag.attr('data-id', element.id || '');
+  $drag.attr('data-id', element.id || ''); // Initial Position
 
-  if (element.style) {
-    $drag.css('top', element.style.top || 0);
-    $drag.css('left', element.style.left || 0);
-    element.style.top = null;
-    element.style.left = null;
-  }
-
+  if (options.initialX !== false) $drag.css('left', options.initialX);
+  if (options.initialY !== false) $drag.css('top', options.initialY);
   $drag.find('.drag-handle').on('mousedown', function (e) {
     beginDragging(element.dragRoot, [e.clientX, e.clientY]);
   });
@@ -7668,12 +7666,16 @@ document.addEventListener('DOMContentLoaded', function () {
   }); // Make all the windows dragables
 
   cash_dom__WEBPACK_IMPORTED_MODULE_2___default()('template.window').each(function (i, e) {
+    var _parseInt, _parseInt2;
+
     console.log('window', e, e.content, e.id, e.style);
     createWindow(e.content, {
       id: e.id,
       style: e.style,
       closeable: false,
-      preOpen: true
+      preOpen: true,
+      x: (_parseInt = parseInt(e.getAttribute('x'), 10)) !== null && _parseInt !== void 0 ? _parseInt : undefined,
+      y: (_parseInt2 = parseInt(e.getAttribute('y'), 10)) !== null && _parseInt2 !== void 0 ? _parseInt2 : undefined
     }); // makeDraggable(e);
   }); //Update the drag events globally. This way it isn't an issue if the mouse leaves the element,
   // the window will still catch the events.
@@ -11895,10 +11897,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./src/index.scss":
-/*!************************!*\
-  !*** ./src/index.scss ***!
-  \************************/
+/***/ "./src/scss/index.scss":
+/*!*****************************!*\
+  !*** ./src/scss/index.scss ***!
+  \*****************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -11908,10 +11910,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./src/window.scss":
-/*!*************************!*\
-  !*** ./src/window.scss ***!
-  \*************************/
+/***/ "./src/scss/window.scss":
+/*!******************************!*\
+  !*** ./src/scss/window.scss ***!
+  \******************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -12864,7 +12866,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _fortawesome_fontawesome_pro_scss_fontawesome_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @fortawesome/fontawesome-pro/scss/fontawesome.scss */ "./node_modules/@fortawesome/fontawesome-pro/scss/fontawesome.scss");
 /* harmony import */ var _fortawesome_fontawesome_pro_scss_brands_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @fortawesome/fontawesome-pro/scss/brands.scss */ "./node_modules/@fortawesome/fontawesome-pro/scss/brands.scss");
 /* harmony import */ var _fortawesome_fontawesome_pro_scss_regular_scss__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @fortawesome/fontawesome-pro/scss/regular.scss */ "./node_modules/@fortawesome/fontawesome-pro/scss/regular.scss");
-/* harmony import */ var _index_scss__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./index.scss */ "./src/index.scss");
+/* harmony import */ var _scss_index_scss__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./scss/index.scss */ "./src/scss/index.scss");
 /* harmony import */ var cash_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! cash-dom */ "./node_modules/cash-dom/dist/cash.js");
 /* harmony import */ var cash_dom__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(cash_dom__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var _mobile_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./mobile.js */ "./src/mobile.js");

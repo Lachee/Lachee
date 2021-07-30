@@ -7196,6 +7196,70 @@ readers do not read off random characters that represent icons */
 .button.social.social-github {
   color: steam; }
 
+.flags {
+  position: absolute;
+  top: 1rem;
+  right: -1rem;
+  width: 4rem; }
+  .flags .flag {
+    display: block;
+    max-width: 100%;
+    height: 1rem;
+    background: #ff4d6c;
+    padding: 10px;
+    margin-bottom: 0.5rem;
+    border-radius: 5px;
+    line-height: 11pt;
+    font-size: 12pt;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+    color: #6f09f5;
+    text-shadow: -1px 0px 0px #6f09f5, -2px 1px 0px #73f7ed,  -3px 2px 0px #8eff47,  -4px 3px 0px #fff747,  -5px 4px 0px #ff7a47; }
+    .flags .flag.sm {
+      font-size: 10pt; }
+    .flags .flag.system, .flags .flag.skill {
+      background: none;
+      margin-right: -3rem; }
+    .flags .flag.skill {
+      display: none; }
+    .flags .flag.system {
+      display: none; }
+    .flags .flag.lgbt {
+      background: linear-gradient(180deg, #FE0000 16.66%, #FD8C00 16.66%, 33.32%, #FFE500 33.32%, 49.98%, #119F0B 49.98%, 66.64%, #0644B3 66.64%, 83.3%, #C22EDC 83.3%); }
+    .flags .flag.asexual {
+      background: linear-gradient(180deg, #181818 25%, #A3A3A3 25%, 50%, #FFFFFF 50%, 75%, #800080 75%); }
+    .flags .flag.bisexual {
+      background: linear-gradient(180deg, #D60270 40%, #9B4F96 40%, 60%, #0038A8 60%); }
+    .flags .flag.aromantic {
+      background: linear-gradient(180deg, #39A33E 20%, #A2CF72 20%, 40%, #FFFFFF 40%, 60%, #A3A3A3 60%, 80%, #181818 80%); }
+    .flags .flag.nonbinary {
+      background: linear-gradient(180deg, #FFF430 25%, #FFFFFF 25%, 50%, #9C59D1 50%, 75%, #181818 75%); }
+    .flags .flag.transgender {
+      background: linear-gradient(180deg, #5BCEFA 20%, #F5A9B8 20%, 40%, #FFFFFF 40%, 60%, #F5A9B8 60%, 80%, #5BCEFA 80%); }
+    .flags .flag.genderqueer {
+      background: linear-gradient(180deg, #B57EDC 33.33%, #FFFFFF 33.33%, 66.66%, #4A8123 66.66%); }
+    .flags .flag.genderfluid {
+      background: linear-gradient(180deg, #FF77A3 20%, #FFFFFF 20%, 40%, #BE18D6 40%, 60%, #181818 60%, 80%, #333EBD 80%); }
+    .flags .flag.pansexual {
+      background: linear-gradient(180deg, #FF218C 33.33%, #FFD800 33.33%, 66.66%, #21B1FF 66.66%); }
+    .flags .flag.philly {
+      background: linear-gradient(180deg, #181818 12.5%, #784F17 12.5%, 25%, #FE0000 25%, 37.5%, #FD8C00 37.5%, 50%, #FFE500 50%, 62.5%, #119F0B 62.5%, 75%, #0644B3 75%, 87.5%, #C22EDC 87.5%); }
+    .flags .flag.polysexual {
+      background: linear-gradient(180deg, #F61CB9 33.33%, #07D569 33.33%, 66.66%, #1C92F6 66.66%); }
+    .flags .flag.neutrois {
+      background: linear-gradient(180deg, #FFFFFF 33.33%, #1F9F00 33.33%, 66.66%, #181818 66.66%); }
+    .flags .flag.demigirl {
+      background: linear-gradient(180deg, #7F7F7F 14.285%, #C3C3C3 14.285%, 28.57%, #FEAEC9 28.57%, 42.855%, #FFFFFF 42.855%, 57.14%, #FEAEC9 57.14%, 71.425%, #C3C3C3 71.425%, 85.71%, #7F7F7F 85.71%); }
+    .flags .flag.agender {
+      background: linear-gradient(180deg, #181818 14.285%, #C3C3C3 14.285%, 28.57%, #FFFFFF 28.57%, 42.855%, #B8F483 42.855%, 57.14%, #FFFFFF 57.14%, 71.425%, #C3C3C3 71.425%, 85.71%, #181818 85.71%); }
+    .flags .flag.demiboy {
+      background: linear-gradient(180deg, #7F7F7F 14.285%, #C3C3C3 14.285%, 28.57%, #9AD9EB 28.57%, 42.855%, #FFFFFF 42.855%, 57.14%, #9AD9EB 57.14%, 71.425%, #C3C3C3 71.425%, 85.71%, #7F7F7F 85.71%); }
+    .flags .flag.androgyne {
+      background: linear-gradient(9180deg, #FE007F 33.33%, #9832FF 33.33%, 66.66%, #00B8E7 66.66%); }
+    .flags .flag.lesbian {
+      background: linear-gradient(180deg, #A60061 14.285%, #B95393 14.285%, 28.57%, #D260A7 28.57%, 42.855%, #EDEDEB 42.855%, 57.14%, #E5ABD0 57.14%, 71.425%, #C74D52 71.425%, 85.71%, #8C1D00 85.71%); }
+
 .poppins {
   font-family: 'Poppins', sans-serif; }
 
@@ -7278,15 +7342,20 @@ html, body {
   .hover-box.dragging:hover > .popout {
     box-shadow: none; }
 
+/*
+// Content is now just a wrapper
 .main-content {
-  position: fixed;
-  top: 23%;
-  left: 23%;
-  transition: left 1s ease; }
-  @media only screen and (max-width: 1400px) {
-    .main-content {
-      left: 3%; } }
+    position: fixed;
+    top: 23%;
+    left: 23%;
+    transition: left 1s ease;
 
+    @media only screen and (max-width: 1400px) {
+		left: 3%;
+	}
+
+}
+*/
 #main-window {
   top: 25%;
   left: 25%;
@@ -7314,7 +7383,7 @@ html, body {
 #win-social .special-box {
   width: 390px;
   height: 340px;
-  transform: rotate(358deg);
+  transform: rotate3d(0, 0, 1, 358deg);
   /** This class displays the profile image instead of the video */ }
   #win-social .special-box video {
     position: relative;
