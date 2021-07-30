@@ -1,0 +1,50 @@
+{
+  "name": "lachee-portfolio",
+  "version": "1.0.0",
+  "description": "Custom website for Lachee",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --mode production",
+    "dev": "webpack --mode development --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lachee/Lachee.git"
+  },
+  "author": "Lachee",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/Lachee/Lachee/issues"
+  },
+  "homepage": "https://github.com/Lachee/Lachee#readme",
+  "dependencies": {
+    "@shopify/draggable": "^1.0.0-beta.8",
+    "cash-dom": "^8.1.0",
+    "marked": "^2.0.1",
+    "tippy.js": "^6.3.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.13.13",
+    "@babel/plugin-proposal-class-properties": "^7.13.0",
+    "@babel/plugin-proposal-private-methods": "^7.13.0",
+    "@babel/plugin-transform-runtime": "^7.13.10",
+    "@babel/preset-env": "^7.13.12",
+    "@babel/preset-react": "^7.13.13",
+    "@fortawesome/fontawesome-pro": "file:src/font-awesome/fortawesome-fontawesome-pro-5.15.1.tgz",
+    "babel-loader": "^8.2.2",
+    "css-loader": "^5.2.0",
+    "file-loader": "^6.2.0",
+    "ignore-loader": "^0.1.2",
+    "mini-css-extract-plugin": "^1.4.0",
+    "node-sass": "^5.0.0",
+    "resolve-url-loader": "^3.1.2",
+    "sass-loader": "^11.0.1",
+    "script-loader": "^0.7.2",
+    "style-loader": "^2.0.0",
+    "url-loader": "^4.1.1",
+    "webpack": "^5.28.0",
+    "webpack-cli": "^4.6.0",
+    "yaml-loader": "^0.6.0"
+  }
+}
