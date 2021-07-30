@@ -36,17 +36,20 @@ jobs:
       # Build
       - name: Build
         run: ./build.sh
-      - name: Clean
-        run: |
-          rm -rf node_modules
-          rm -rf src
-              
+
       # Package
-      - name: Upload Site        
+      - name: Pre-Package
+        run: |
+          mkdir build
+          mv images build/images
+          mv dist build/dist
+          mv index.html build/index.html
+              
+      - name: Upload Site
         uses: actions/upload-artifact@v2.2.4
         with:
           name: lachee.dev
-          path: ./
+          path: ./build/
 
   # Deploy the website as a page
   deploy:
