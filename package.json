@@ -34,6 +34,7 @@
     "@fortawesome/fontawesome-pro": "file:src/font-awesome/fortawesome-fontawesome-pro-5.15.1.tgz",
     "babel-loader": "^8.2.2",
     "css-loader": "^5.2.0",
+    "dotenv": "^10.0.0",
     "file-loader": "^6.2.0",
     "ignore-loader": "^0.1.2",
     "mini-css-extract-plugin": "^1.4.0",

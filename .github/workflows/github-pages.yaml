@@ -31,7 +31,9 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v1
       - name: Initialize
-        run: npm i
+        run: |
+          npm i
+          echo ${{ secrets.PORTFOLIO_ENV }} > .env
         
       # Build
       - name: Build
