@@ -15,7 +15,7 @@
  🗣 My discord profile is [Lachee#9999](https://discord.com/users/130973321683533824)
  
 <!-- Moomin Sip by [WiittyUsername](https://www.youtube.com/watch?v=tozUcjXGe0w) -->
-avatar by [Mag Ho](https://twitter.com/Mag_ho/status/1356543668912496641)
+<!-- avatar by [Mag Ho](https://twitter.com/Mag_ho/status/1356543668912496641) -->
 
 <!---
 oh you found my notes... you are nosy aint ya.
