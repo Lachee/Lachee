@@ -2,7 +2,7 @@
 import '@fortawesome/fontawesome-pro/scss/fontawesome.scss';
 import '@fortawesome/fontawesome-pro/scss/brands.scss';
 import '@fortawesome/fontawesome-pro/scss/regular.scss';
-import './index.scss';
+import './scss/index.scss';
 import $ from "cash-dom";
 import './mobile.js';
 

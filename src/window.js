@@ -1,6 +1,6 @@
 import { Draggable } from '@shopify/draggable';
 import $ from "cash-dom";
-import './window.scss';
+import './scss/window.scss';
 
 let globalWindowIndex = 0;
 
@@ -15,6 +15,9 @@ let globalWindowIndex = 0;
  *  delay       - The delay in ms before the window opens. Set to -1 to keep it closed.
 */
 export function createWindow(content, options = { }) {
+    console.log('create window: ', content, options);
+    console.trace();
+
     function randomWID() {
         return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
     }
@@ -33,10 +36,7 @@ export function createWindow(content, options = { }) {
         singleton:  true,           //Attempts to reuse the window
     }, options);
 
-    //prepare the style
-    if (options.x != null && options.x !== false) options.style += `left: ${options.x}px;`; 
-    if (options.y != null && options.y !== false) options.style += `top: ${options.y}px;`; 
-
+   
     //Check if existing window exists
     if (options.singleton) {
         const existingWindow = document.querySelector(`.window#${options.id}`);
@@ -69,13 +69,12 @@ export function createWindow(content, options = { }) {
     const $window = $(template);
     $window.attr('data-wid', guid);
     if (options.id) $window.attr('id', options.id);
-    if (options.style) $window.attr('style', options.style);
     $window.find('.window-content').append(content);
     $(container).append($window);
 
     //Get the element and make it draggable
     const window = $(`[data-wid="${guid}"]`).get(0);
-    makeDraggable(window); // Bugged
+    makeDraggable(window, { initialX: options.x, initialY: options.y }); // Bugged
     
     //Fix the depth
     if (options.z) window.dragRoot.style.zIndex = options.z + globalWindowIndex;
@@ -124,25 +123,25 @@ export function createWindow(content, options = { }) {
             }, delay);
         }
     }
+
+    console.log(window);
     return window;
 }
 
 
 /** Makes the element draggable. The element must contain a .drag-handle */
-export function makeDraggable(element) {
+export function makeDraggable(element, options = {}) {
     console.log('make draggable', element);
     const $drag = $('<div class="draggable"><div class="skewable"></div></div>');
     $drag.appendTo(element.parentElement);
     $drag.find('.skewable').append(element);
     $drag.attr('data-id', element.id || '');
 
-    if (element.style) {
-        $drag.css('top', element.style.top || 0);
-        $drag.css('left', element.style.left || 0);
-    
-        element.style.top = null;
-        element.style.left = null;    
-    }
+    // Initial Position
+    if (options.initialX !== false)
+        $drag.css('left', options.initialX);
+    if (options.initialY !== false)
+        $drag.css('top', options.initialY);
     
     $drag.find('.drag-handle').on('mousedown', (e) => {
         beginDragging(element.dragRoot, [ e.clientX, e.clientY ]);
@@ -294,6 +293,9 @@ document.addEventListener('DOMContentLoaded', () => {
             style: e.style,
             closeable: false,
             preOpen: true,
+            x: parseInt(e.getAttribute('x'), 10) ?? undefined,
+            y: parseInt(e.getAttribute('y'), 10) ?? undefined,
+            
         });
        // makeDraggable(e);
     });
