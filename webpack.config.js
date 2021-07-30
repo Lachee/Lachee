@@ -58,28 +58,41 @@ module.exports = (env) => {
           use: [
             MiniCssExtractPlugin.loader,
             { loader: 'css-loader' },
-            { 
-              loader: 'sass-loader', 
-              options: { 
+            {
+              loader: 'sass-loader',
+              options: {
                 sourceMap: !env.production,
                 additionalData: (content, loaderContext) => {
-                  
+
+
                   // Define the variables
                   let variables = {};
-                  
+
                   // Add some variables
                   const PROFILE_IMAGE = env.PROFILE_IMAGE || process.env.PROFILE_IMAGE;
-                  if (PROFILE_IMAGE) 
+                  if (PROFILE_IMAGE)
                     variables['profile-image-url'] = `'${PROFILE_IMAGE}'`;
-                  
+
+                  const HIDE_PRIDE = env.HIDE_PRIDE || process.env.HIDE_PRIDE;
+                  if (HIDE_PRIDE)
+                    variables['hide-pride'] = 'true';
+
+                  const HIDE_SKILLS = env.HIDE_SKILLS || process.env.HIDE_SKILLS;
+                  if (HIDE_SKILLS)
+                    variables['hide-skills'] = 'true';
+
+                  const HIDE_PLATFORMS = env.HIDE_PLATFORMS || process.env.HIDE_PLATFORMS;
+                  if (HIDE_PLATFORMS)
+                    variables['hide-platforms'] = 'true';
+
                   // Build the new content
-                  for(const key in variables) 
+                  for (const key in variables)
                     content = `$${key}: ${variables[key]};\n${content}`;
-                  
+
                   // Return
                   return content;
                 }
-              } 
+              }
             },
           ]
         },

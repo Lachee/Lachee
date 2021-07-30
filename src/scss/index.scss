@@ -4,6 +4,7 @@
 }
 
 @import './button.scss';
+@import './flags.scss';
 
 $profile-image-url: 'https://d.lu.je/avatar/lachee?size=2048' !default;
 
@@ -114,7 +115,8 @@ html, body {
     }
 }
 
-
+/*
+// Content is now just a wrapper
 .main-content {
     position: fixed;
     top: 23%;
@@ -126,6 +128,7 @@ html, body {
 	}
 
 }
+*/
 
 #main-window {
     top: 25%;
@@ -161,8 +164,9 @@ html, body {
         
         width: 390px;
         height: 340px;
-        transform: rotate(358deg);  // A little bit of flair
-
+        //transform: rotate(358deg);  // << This method has bad aliasing
+        transform: rotate3d(0, 0, 1, 358deg);
+        
         video {
             position: relative;
             top: 10px;

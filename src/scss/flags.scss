@@ -1,0 +1,67 @@
+@import './pride.scss';
+
+$hide-pride: false !default;
+$hide-skills: false !default;
+$hide-platforms: false !default;
+
+.flags {
+    $container-width: 4rem;
+
+    position: absolute;
+    top: 1rem;
+    right: -1rem;
+    width: $container-width;
+
+    .flag {
+        display: block;
+        max-width: 100%;
+        height: 1rem;
+
+        background: #ff4d6c;
+        
+        padding: 10px;
+        margin-bottom: 0.5rem;
+        border-radius: 5px;
+
+        line-height: 11pt;
+        font-size: 12pt;
+        font-weight: bold;
+        text-align: center;
+        text-transform: uppercase;
+        &.sm { font-size: 10pt; }
+
+        color: #6f09f5;
+        text-shadow:    -1px 0px 0px #6f09f5,
+                        -2px 1px 0px #73f7ed, 
+                        -3px 2px 0px #8eff47, 
+                        -4px 3px 0px #fff747, 
+                        -5px 4px 0px #ff7a47;
+
+                        
+        &.system, &.skill {
+            background: none;
+            margin-right: -3rem;
+        }
+
+        // Hide specific parts of the site
+        @if $hide-pride {
+            &.pride {
+                display: none;
+            }
+        }
+        @if $hide-skills {
+            &.skill {
+                display: none;
+            }
+        }
+        @if $hide-platforms {
+            &.system {
+                display: none;
+            }
+        }
+
+
+        @include pride-background;
+    }
+    
+}
