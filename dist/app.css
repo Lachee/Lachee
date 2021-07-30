@@ -7153,6 +7153,15 @@ readers do not read off random characters that represent icons */
 * {
   padding: 0; }
 
+.poppins {
+  font-family: 'Poppins', sans-serif; }
+
+.syne {
+  font-family: 'Syne Mono', monospace; }
+
+.knewave {
+  font-family: 'Knewave', sans-serif; }
+
 .button {
   display: block;
   font-family: 'Syne Mono', monospace;
@@ -7196,12 +7205,22 @@ readers do not read off random characters that represent icons */
 .button.social.social-github {
   color: steam; }
 
+.poppins {
+  font-family: 'Poppins', sans-serif; }
+
+.syne {
+  font-family: 'Syne Mono', monospace; }
+
+.knewave {
+  font-family: 'Knewave', sans-serif; }
+
 .flags {
   position: absolute;
   top: 1rem;
   right: -1rem;
   width: 4rem; }
   .flags .flag {
+    font-family: 'Knewave', sans-serif;
     display: block;
     max-width: 100%;
     height: 1rem;
@@ -7211,7 +7230,6 @@ readers do not read off random characters that represent icons */
     border-radius: 5px;
     line-height: 11pt;
     font-size: 12pt;
-    font-weight: bold;
     text-align: center;
     text-transform: uppercase;
     color: #6f09f5;
@@ -7259,12 +7277,6 @@ readers do not read off random characters that represent icons */
       background: linear-gradient(9180deg, #FE007F 33.33%, #9832FF 33.33%, 66.66%, #00B8E7 66.66%); }
     .flags .flag.lesbian {
       background: linear-gradient(180deg, #A60061 14.285%, #B95393 14.285%, 28.57%, #D260A7 28.57%, 42.855%, #EDEDEB 42.855%, 57.14%, #E5ABD0 57.14%, 71.425%, #C74D52 71.425%, 85.71%, #8C1D00 85.71%); }
-
-.poppins {
-  font-family: 'Poppins', sans-serif; }
-
-.syne {
-  font-family: 'Syne Mono', monospace; }
 
 template {
   display: none !important; }
