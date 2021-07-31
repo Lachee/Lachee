@@ -1,0 +1,19 @@
+
+# Example configuration
+deploys:
+  # Name of the job (for logging purposes)
+  - name: website
+
+    # List of branches this job runs on
+    branches:
+      - master
+
+    # Enviroment variables used in the building process
+    env:
+      MODE:           production
+      HIDE_PRIDE:     true
+      HIDE_SKILLS:    false
+      HIDE_PLATFORMS: false
+
+    # Runs NPM build
+    type: npm
