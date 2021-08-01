@@ -1,12 +1,12 @@
 
 # Example configuration
 deploys:
+
   # Name of the job (for logging purposes)
   - name: website
 
     # List of branches this job runs on
-    branches:
-      - master
+    branches: [ master ]
 
     # Enviroment variables used in the building process
     env:
@@ -15,5 +15,18 @@ deploys:
       HIDE_SKILLS:    false
       HIDE_PLATFORMS: false
 
-    # Runs NPM build
-    type: npm
+    # pre and post commands
+    pre:
+    post:
+
+    # The deployer and its settings
+    # use: script
+    # with:
+    #   script: ./build.sh
+    #   shell: bash
+   
+    #use: ./build.sh
+    
+    use: npm
+    # with:
+    #   script: build
