@@ -23,7 +23,7 @@
     border: 2px solid black;
     background: white;
     width: 500px;
-    //box-shadow: 8px 8px #00000070;
+    box-shadow: 8px 8px #00000070;
 
     //This transition helps when openeing the window.
     transition: transform 0.2s, filter 0.2s;
@@ -38,6 +38,8 @@
         min-width: 200px;
         min-height: 100px;
         padding: 10px;
+        display: flex;
+        flex-flow: wrap;
     }
     
     .window-heading {

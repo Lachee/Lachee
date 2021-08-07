@@ -159,29 +159,34 @@ html, body {
     .social-navigation, .special-box {
         display: inline-block;
     }
-    .special-box {
-        
-        width: 390px;
-        height: 340px;
-        //transform: rotate(358deg);  // << This method has bad aliasing
-        transform: rotate3d(0, 0, 1, 358deg);
-        
-        video {
-            position: relative;
-            top: 10px;
-        }
 
-        /** This class displays the profile image instead of the video */
-        &.profile-image {
-            // Set the background
-            background-image: url($profile-image-url);
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
+    .social-image {
+        display: flex;
+        align-items: center;
+        .special-box {
+            
+            width: 390px;
+            height: 340px;
+            //transform: rotate(358deg);  // << This method has bad aliasing
+            transform: rotate3d(0, 0, 1, 358deg);
+            
+            video {
+                position: relative;
+                top: 10px;
+            }
+
+            /** This class displays the profile image instead of the video */
+            &.profile-image {
+                // Set the background
+                background-image: url($profile-image-url);
+                background-size: contain;
+                background-repeat: no-repeat;
+                background-position: center;
 
 
-            // Hide the video
-            video { display: none; }
+                // Hide the video
+                video { display: none; }
+            }
         }
     }
 }
