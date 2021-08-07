@@ -102,6 +102,9 @@ module.exports = (env) => {
         },
       ]
     },
+    optimization: {
+      minimize: env.production,
+    },
     plugins: [
       new webpack.WatchIgnorePlugin({ paths: [/node_modules/, /images/] }),
       new MiniCssExtractPlugin({
