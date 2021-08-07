@@ -7150,6 +7150,79 @@ readers do not read off random characters that represent icons */
   font-family: 'Font Awesome 5 Pro';
   font-weight: 400; }
 
+.tippy-box[data-animation=fade][data-state=hidden] {
+  opacity: 0; }
+
+[data-tippy-root] {
+  max-width: calc(100vw - 10px); }
+
+.tippy-box {
+  position: relative;
+  background-color: #333;
+  color: #fff;
+  border-radius: 4px;
+  font-size: 14px;
+  line-height: 1.4;
+  outline: 0;
+  transition-property: transform,visibility,opacity; }
+
+.tippy-box[data-placement^=top] > .tippy-arrow {
+  bottom: 0; }
+
+.tippy-box[data-placement^=top] > .tippy-arrow:before {
+  bottom: -7px;
+  left: 0;
+  border-width: 8px 8px 0;
+  border-top-color: initial;
+  transform-origin: center top; }
+
+.tippy-box[data-placement^=bottom] > .tippy-arrow {
+  top: 0; }
+
+.tippy-box[data-placement^=bottom] > .tippy-arrow:before {
+  top: -7px;
+  left: 0;
+  border-width: 0 8px 8px;
+  border-bottom-color: initial;
+  transform-origin: center bottom; }
+
+.tippy-box[data-placement^=left] > .tippy-arrow {
+  right: 0; }
+
+.tippy-box[data-placement^=left] > .tippy-arrow:before {
+  border-width: 8px 0 8px 8px;
+  border-left-color: initial;
+  right: -7px;
+  transform-origin: center left; }
+
+.tippy-box[data-placement^=right] > .tippy-arrow {
+  left: 0; }
+
+.tippy-box[data-placement^=right] > .tippy-arrow:before {
+  left: -7px;
+  border-width: 8px 8px 8px 0;
+  border-right-color: initial;
+  transform-origin: center right; }
+
+.tippy-box[data-inertia][data-state=visible] {
+  transition-timing-function: cubic-bezier(0.54, 1.5, 0.38, 1.11); }
+
+.tippy-arrow {
+  width: 16px;
+  height: 16px;
+  color: #333; }
+
+.tippy-arrow:before {
+  content: "";
+  position: absolute;
+  border-color: transparent;
+  border-style: solid; }
+
+.tippy-content {
+  position: relative;
+  padding: 5px 9px;
+  z-index: 1; }
+
 * {
   padding: 0; }
 
@@ -7189,6 +7262,9 @@ readers do not read off random characters that represent icons */
 
 .button.social.social-discord {
   color: #7289DA; }
+
+.button.social.social-itch {
+  color: #fa5c5c; }
 
 .button.social.social-twitch {
   color: #6441a5; }
@@ -7392,21 +7468,24 @@ html, body {
 #win-social .social-navigation, #win-social .special-box {
   display: inline-block; }
 
-#win-social .special-box {
-  width: 390px;
-  height: 340px;
-  transform: rotate3d(0, 0, 1, 358deg);
-  /** This class displays the profile image instead of the video */ }
-  #win-social .special-box video {
-    position: relative;
-    top: 10px; }
-  #win-social .special-box.profile-image {
-    background-image: url("https://d.lu.je/avatar/embed/lachee?size=1024");
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center; }
-    #win-social .special-box.profile-image video {
-      display: none; }
+#win-social .social-image {
+  display: flex;
+  align-items: center; }
+  #win-social .social-image .special-box {
+    width: 390px;
+    height: 340px;
+    transform: rotate3d(0, 0, 1, 358deg);
+    /** This class displays the profile image instead of the video */ }
+    #win-social .social-image .special-box video {
+      position: relative;
+      top: 10px; }
+    #win-social .social-image .special-box.profile-image {
+      background-image: url("https://d.lu.je/avatar/embed/lachee?size=1024");
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center; }
+      #win-social .social-image .special-box.profile-image video {
+        display: none; }
 
 /**
  * Random Shapes
@@ -7462,6 +7541,7 @@ html, body {
   border: 2px solid black;
   background: white;
   width: 500px;
+  box-shadow: 8px 8px #00000070;
   transition: transform 0.2s, filter 0.2s; }
   .window.closed {
     transform: translate(-100px, 100px) scale3d(1.5, 0, 1);
@@ -7469,7 +7549,9 @@ html, body {
   .window .window-content {
     min-width: 200px;
     min-height: 100px;
-    padding: 10px; }
+    padding: 10px;
+    display: flex;
+    flex-flow: wrap; }
   .window .window-heading {
     border-bottom: 2px solid black;
     height: 30px; }
