@@ -6,7 +6,7 @@ deploys:
   - name: website
 
     # List of branches this job runs on
-    branches: [ master ]
+    branches: [ website ]
 
     # Enviroment variables used in the building process
     env:
