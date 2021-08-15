@@ -10311,7 +10311,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _fortawesome_fontawesome_pro_scss_fontawesome_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @fortawesome/fontawesome-pro/scss/fontawesome.scss */ "./node_modules/@fortawesome/fontawesome-pro/scss/fontawesome.scss");
 /* harmony import */ var _fortawesome_fontawesome_pro_scss_brands_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @fortawesome/fontawesome-pro/scss/brands.scss */ "./node_modules/@fortawesome/fontawesome-pro/scss/brands.scss");
 /* harmony import */ var _fortawesome_fontawesome_pro_scss_regular_scss__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @fortawesome/fontawesome-pro/scss/regular.scss */ "./node_modules/@fortawesome/fontawesome-pro/scss/regular.scss");
-/* harmony import */ var tippy_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! tippy.js */ "./node_modules/tippy.js/dist/tippy.esm.js");
+/* harmony import */ var tippy_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! tippy.js */ "./node_modules/tippy.js/dist/tippy.esm.js");
 /* harmony import */ var tippy_js_dist_tippy_css__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! tippy.js/dist/tippy.css */ "./node_modules/tippy.js/dist/tippy.css");
 /* harmony import */ var _scss_index_scss__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./scss/index.scss */ "./src/scss/index.scss");
 /* harmony import */ var cash_dom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! cash-dom */ "./node_modules/cash-dom/dist/cash.js");
@@ -10320,6 +10320,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _mobile_js__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_mobile_js__WEBPACK_IMPORTED_MODULE_8__);
 /* harmony import */ var _window_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./window.js */ "./src/window.js");
 /* harmony import */ var _projects_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./projects.js */ "./src/projects.js");
+/* harmony import */ var _videofeed__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./videofeed */ "./src/videofeed.js");
 
 
 
@@ -10337,17 +10338,18 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 function wait(_x) {
   return _wait.apply(this, arguments);
 }
 
 function _wait() {
-  _wait = (0,_babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__.default)( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().mark(function _callee3(duration) {
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().wrap(function _callee3$(_context3) {
+  _wait = (0,_babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__.default)( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().mark(function _callee(duration) {
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().wrap(function _callee$(_context) {
       while (1) {
-        switch (_context3.prev = _context3.next) {
+        switch (_context.prev = _context.next) {
           case 0:
-            return _context3.abrupt("return", new Promise(function (resolve, reject) {
+            return _context.abrupt("return", new Promise(function (resolve, reject) {
               setTimeout(function () {
                 return resolve();
               }, duration);
@@ -10355,10 +10357,10 @@ function _wait() {
 
           case 1:
           case "end":
-            return _context3.stop();
+            return _context.stop();
         }
       }
-    }, _callee3);
+    }, _callee);
   }));
   return _wait.apply(this, arguments);
 }
@@ -10372,179 +10374,47 @@ function createTooltip() {
     elm.setAttribute('aria', title);
     elm.removeAttribute('title');
   });
-  (0,tippy_js__WEBPACK_IMPORTED_MODULE_11__.default)('[data-tippy-content]', {});
+  (0,tippy_js__WEBPACK_IMPORTED_MODULE_12__.default)('[data-tippy-content]', {});
 }
 document.addEventListener('DOMContentLoaded', function () {
-  var preivewImageSwapDuration = 0.5 * 1000;
-  var previewImageTimer = 0;
-  var $rightColumn = cash_dom__WEBPACK_IMPORTED_MODULE_7___default()('.column-right');
-  var loadedImages = {
-    'example': $rightColumn.get(0)
-  };
-  var fadeTimeout = null;
-  var currentSrc = null;
-  /** Marks all the elements as hidden */
-
-  function hideAll() {
-    //Hide all other content
-    //console.log('Hiding All');
-    currentSrc = null; // Clear existing timeouts
-
-    if (fadeTimeout != null) {
-      window.clearTimeout(fadeTimeout);
-      fadeTimeout = null;
-    } // Hide everything
-
-
-    for (var key in loadedImages) {
-      cash_dom__WEBPACK_IMPORTED_MODULE_7___default()(loadedImages[key]).removeClass('visible').addClass('hidden');
-    }
-  }
-  /** Shows a element, otherwise returns false. */
-
-
-  function show(src) {
-    // Ensure the element exists
-    var elm = loadedImages[src];
-    if (!elm) return false; //Make sure we are not going to the same src
-
-    if (currentSrc == src) return false; //Enforce Hide all the items. This will clear the previous timeout too
-
-    hideAll(); //Calculate the duration its been and wait that long
-
-    var removalDelay = 100;
-    var duration = preivewImageSwapDuration - (performance.now() - previewImageTimer) - removalDelay;
-    if (duration < 1) duration = 1;
-    console.log('Showing ', src, 'in', duration, 'ms');
-    currentSrc = src; //Fade it in after some time.
-
-    fadeTimeout = setTimeout(function () {
-      //Display the element
-      cash_dom__WEBPACK_IMPORTED_MODULE_7___default()(elm).removeClass('hidden'); //document.requestAnimationFrame();
-
-      setTimeout(function () {
-        //console.log('Element Visible', elm, src);
-        cash_dom__WEBPACK_IMPORTED_MODULE_7___default()(elm).addClass('visible');
-      }, removalDelay);
-    }, duration);
-    return fadeTimeout;
-  } // Hide everything
-
-
-  $rightColumn.on('mouseleave', function (e) {
-    hideAll();
+  document.querySelectorAll('.no-js').forEach(function (element, key) {
+    return element.style.display = 'none';
   });
-
-  if (!window.isMobile()) {
-    cash_dom__WEBPACK_IMPORTED_MODULE_7___default()('.hover-box[data-image-src], .hover-box[data-video-src]').each(function (i, e) {
-      var $target = cash_dom__WEBPACK_IMPORTED_MODULE_7___default()(e);
-      var imgSrc = $target.attr('data-image-src');
-      if (!imgSrc) imgSrc = $target.closest('.hover-box').attr('data-image-src');
-      var videoSrc = $target.attr('data-video-src');
-      if (!videoSrc) videoSrc = $target.closest('.hover-box').attr('data-video-src');
-      var additionalClasses = $target.attr('data-add-class');
-      createVideoElement(imgSrc || videoSrc, videoSrc != null, false, additionalClasses);
-    });
-  } // Logic for the button's to show the video/gif
-
-
-  cash_dom__WEBPACK_IMPORTED_MODULE_7___default()('.hover-box[data-image-src], .hover-box[data-video-src]').on('mouseover', /*#__PURE__*/function () {
-    var _ref = (0,_babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__.default)( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().mark(function _callee2(e) {
-      var $target, imgSrc, videoSrc, additionalClasses, src, isVideo, element;
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().wrap(function _callee2$(_context2) {
-        while (1) {
-          switch (_context2.prev = _context2.next) {
-            case 0:
-              //Find the hover box
-              $target = cash_dom__WEBPACK_IMPORTED_MODULE_7___default()(e.target);
-              if (!$target.hasClass('.hover-box')) $target = $target.closest('.hover-box'); //Get the sources
-
-              imgSrc = $target.attr('data-image-src');
-              videoSrc = $target.attr('data-video-src');
-              additionalClasses = $target.attr('data-add-class'); //Start the timer
-
-              previewImageTimer = performance.now();
-              src = imgSrc || videoSrc;
-              isVideo = videoSrc != null;
-              element = null; //Hide all the items and show only the one we may have
-
-              if (!((element = loadedImages[src]) == null)) {
-                _context2.next = 13;
-                break;
-              }
-
-              return _context2.abrupt("return", createVideoElement(src, isVideo, true, additionalClasses));
-
-            case 13:
-              // We can trigger the show early
-              //console.log('Shown', loadedImages);
-              show(src);
-
-            case 14:
-              // Target left, so lets hide the content
-              $target.on('mouseleave', /*#__PURE__*/function () {
-                var _ref2 = (0,_babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__.default)( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().mark(function _callee(e) {
-                  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().wrap(function _callee$(_context) {
-                    while (1) {
-                      switch (_context.prev = _context.next) {
-                        case 0:
-                          hideAll();
-
-                        case 1:
-                        case "end":
-                          return _context.stop();
-                      }
-                    }
-                  }, _callee);
-                }));
-
-                return function (_x3) {
-                  return _ref2.apply(this, arguments);
-                };
-              }(), {
-                once: true
-              });
-              e.preventDefault();
-
-            case 16:
-            case "end":
-              return _context2.stop();
-          }
-        }
-      }, _callee2);
-    }));
-
-    return function (_x2) {
-      return _ref.apply(this, arguments);
-    };
-  }());
-  /** CReate the video element if it doesn't exist */
-
-  function createVideoElement(src, isVideo) {
-    var showAfterLoad = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-    var additionalClasses = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : [];
-    if (loadedImages[src] != null) return loadedImages[src];
-    console.log('Loading video', src, isVideo, showAfterLoad);
-    console.trace(); // Create the element
-
-    var $element = isVideo ? cash_dom__WEBPACK_IMPORTED_MODULE_7___default()('<video loop autoplay muted>') : cash_dom__WEBPACK_IMPORTED_MODULE_7___default()('<img>');
-    $element.attr("src", src).addClass(isVideo ? 'preview-video' : 'preview-image').addClass('loading');
-    $element.prependTo($rightColumn);
-    $element.addClass(additionalClasses); // The element finally loaded, so we will trigger the show
-
-    $element.on('load loadstart', function (e) {
-      console.log('Loaded video', src, e.target, showAfterLoad);
-      $element.removeClass('loading');
-      if (showAfterLoad) show(src);
-    }, {
-      once: true
-    }); // Return the element
-
-    return loadedImages[src] = $element.get(0);
-  }
-
+  (0,_projects_js__WEBPACK_IMPORTED_MODULE_10__.createProjectWindows)();
+  createAboutWindows();
+  (0,_videofeed__WEBPACK_IMPORTED_MODULE_11__.createVideoFeed)();
   createTooltip('[title]');
+  navigateHash();
 });
+window.addEventListener('hashchange', function () {
+  navigateHash();
+}, false);
+
+function navigateHash() {
+  // Find the window that we should open
+  var hash = decodeURI(window.location.hash).replace('#', '');
+
+  if (!(0,_projects_js__WEBPACK_IMPORTED_MODULE_10__.openProjectWindowFromName)(hash)) {// TODO: Find about windows
+  }
+}
+
+function createAboutWindows() {
+  // Make all the windows dragables
+  cash_dom__WEBPACK_IMPORTED_MODULE_7___default()('template.window').each(function (i, e) {
+    var _parseInt, _parseInt2;
+
+    console.log('window', e, e.content, e.id, e.style);
+    (0,_window_js__WEBPACK_IMPORTED_MODULE_9__.createWindow)(e.content, {
+      id: e.id,
+      style: e.style,
+      closeable: true,
+      preOpen: true,
+      title: e.title || undefined,
+      x: (_parseInt = parseInt(e.getAttribute('x'), 10)) !== null && _parseInt !== void 0 ? _parseInt : undefined,
+      y: (_parseInt2 = parseInt(e.getAttribute('y'), 10)) !== null && _parseInt2 !== void 0 ? _parseInt2 : undefined
+    });
+  });
+}
 
 /***/ }),
 
@@ -10574,6 +10444,12 @@ window.isMobile = function () {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "closeProjectWindows": () => (/* binding */ closeProjectWindows),
+/* harmony export */   "openProjectWindow": () => (/* binding */ openProjectWindow),
+/* harmony export */   "openProjectWindowFromName": () => (/* binding */ openProjectWindowFromName),
+/* harmony export */   "createProjectWindows": () => (/* binding */ createProjectWindows)
+/* harmony export */ });
 /* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ "./node_modules/@babel/runtime/helpers/esm/slicedToArray.js");
 /* harmony import */ var marked__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! marked */ "./node_modules/marked/lib/marked.js");
 /* harmony import */ var marked__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(marked__WEBPACK_IMPORTED_MODULE_1__);
@@ -10604,15 +10480,22 @@ var files = function (ctx) {
 }(__webpack_require__("./src/projects sync recursive \\.ya?ml$")); // List of actively opened windows
 
 
+var projects = {};
 var openedWindows = [];
 var WINDOW_LAYOUT = {
   main: [136, 10],
   images: [650, 85],
   videos: [650, 480]
 };
+/** Generates an ID from the project name */
+
+function getProjectId(name) {
+  return name.replaceAll(/[^A-Za-z0-9]/gmi, '-').toLowerCase();
+}
 /** Closes all existing windows */
 
-function closeWindows() {
+
+function closeProjectWindows() {
   var _iterator = _createForOfIteratorHelper(openedWindows),
       _step;
 
@@ -10631,8 +10514,9 @@ function closeWindows() {
 }
 /** Creates the windows for the project because the button was click */
 
+function openProjectWindow(project) {
+  closeProjectWindows();
 
-function openWindow(project) {
   function createLink(link) {
     console.log(link);
     var icon = link.icon || 'fab fa-' + link.type;
@@ -10651,7 +10535,7 @@ function openWindow(project) {
       x = _WINDOW_LAYOUT$main[0],
       y = _WINDOW_LAYOUT$main[1];
 
-  var id = project.name.replaceAll(/[^A-Za-z]/gmi, '_').toLowerCase();
+  var id = getProjectId(project.name);
   var content = project.html;
   var links = project.links.map(function (e, i) {
     return createLink(e);
@@ -10720,10 +10604,22 @@ function openWindow(project) {
 
 
   (0,_index_js__WEBPACK_IMPORTED_MODULE_4__.createTooltip)('[title]');
-  return windows;
+  return openedWindows = windows;
+}
+function openProjectWindowFromName(name) {
+  var _projects$id;
+
+  var id = getProjectId(name);
+  var project = (_projects$id = projects[id]) !== null && _projects$id !== void 0 ? _projects$id : null;
+
+  if (project == null) {
+    //console.warn('Failed to open a project window', name, id);
+    return false;
+  }
+
+  return openProjectWindow(project);
 }
 /** Creates and adds a button to the project panel for the given project */
-
 
 function createButton(project) {
   var $hover = cash_dom__WEBPACK_IMPORTED_MODULE_2___default()("<div>");
@@ -10736,32 +10632,230 @@ function createButton(project) {
   }
 
   var $a = cash_dom__WEBPACK_IMPORTED_MODULE_2___default()('<a>');
-  $a.addClass('button').addClass('popout').text(project.name).attr('href', '#');
-  $a.prependTo($hover);
-  $a.on('click', function () {
-    closeWindows();
-    openedWindows = openWindow(project);
-  });
+  $a.addClass('button').addClass('popout').text(project.name).attr('href', '#' + getProjectId(project.name));
+  $a.prependTo($hover); // $a.on('click', () => { 
+  //     closeProjectWindows();
+  //     openedWindows = openProjectWindow(project); 
+  // });
+
   $hover.appendTo('.link-projects');
   return $hover;
 }
 
-document.addEventListener('DOMContentLoaded', function () {
+function createProjectWindows() {
   cash_dom__WEBPACK_IMPORTED_MODULE_2___default()('#link-projects-stub').remove(); // <div class="hover-box" data-image-src="images/partycrashers.gif"><a href="#games" class="button popout">Party Crashers</a></div>
   // <div class="hover-box" data-video-src="https://i.lu.je/2021/RHKmFcrZfI.mp4"><a href="#games" class="button popout">Electronic Super Joy</a></div>
 
   var items = Object.values(files).sort(function (a, b) {
     return (a.position === undefined ? 100 : a.position) - (b.position === undefined ? 100 : b.position);
   });
+  projects = {};
 
   for (var filename in items) {
     //Preprocess teh data
-    var item = items[filename];
-    item.html = marked__WEBPACK_IMPORTED_MODULE_1___default()(item.description || '');
-    console.log(item.name, item);
+    var item = items[filename]; // Get the item
+
+    item.html = marked__WEBPACK_IMPORTED_MODULE_1___default()(item.description || ''); // Run the HTML through the markup
+
+    projects[getProjectId(item.name)] = item; // Add to the list of items
+
+    console.log(item.name, item); // Log and create the button
+
     createButton(item);
   }
-});
+}
+
+/***/ }),
+
+/***/ "./src/videofeed.js":
+/*!**************************!*\
+  !*** ./src/videofeed.js ***!
+  \**************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "createVideoFeed": () => (/* binding */ createVideoFeed)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ "./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var cash_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! cash-dom */ "./node_modules/cash-dom/dist/cash.js");
+/* harmony import */ var cash_dom__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(cash_dom__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _mobile_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./mobile.js */ "./src/mobile.js");
+/* harmony import */ var _mobile_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_mobile_js__WEBPACK_IMPORTED_MODULE_3__);
+
+
+
+
+function createVideoFeed() {
+  var preivewImageSwapDuration = 0.5 * 1000;
+  var previewImageTimer = 0;
+  var $rightColumn = cash_dom__WEBPACK_IMPORTED_MODULE_2___default()('.column-right');
+  var loadedImages = {
+    'example': $rightColumn.get(0)
+  };
+  var fadeTimeout = null;
+  var currentSrc = null;
+  /** Marks all the elements as hidden */
+
+  function hideVideoFeeds() {
+    //Hide all other content
+    //console.log('Hiding All');
+    currentSrc = null; // Clear existing timeouts
+
+    if (fadeTimeout != null) {
+      window.clearTimeout(fadeTimeout);
+      fadeTimeout = null;
+    } // Hide everything
+
+
+    for (var key in loadedImages) {
+      cash_dom__WEBPACK_IMPORTED_MODULE_2___default()(loadedImages[key]).removeClass('visible').addClass('hidden');
+    }
+  }
+  /** Shows an element visuals */
+
+
+  function showVideoFeed(src) {
+    // Ensure the element exists
+    var elm = loadedImages[src];
+    if (!elm) return false; //Make sure we are not going to the same src
+
+    if (currentSrc == src) return false; //Enforce Hide all the items. This will clear the previous timeout too
+
+    hideVideoFeeds(); //Calculate the duration its been and wait that long
+
+    var removalDelay = 100;
+    var duration = preivewImageSwapDuration - (performance.now() - previewImageTimer) - removalDelay;
+    if (duration < 1) duration = 1;
+    console.log('Showing ', src, 'in', duration, 'ms');
+    currentSrc = src; //Fade it in after some time.
+
+    fadeTimeout = setTimeout(function () {
+      //Display the element
+      cash_dom__WEBPACK_IMPORTED_MODULE_2___default()(elm).removeClass('hidden'); //document.requestAnimationFrame();
+
+      setTimeout(function () {
+        //console.log('Element Visible', elm, src);
+        cash_dom__WEBPACK_IMPORTED_MODULE_2___default()(elm).addClass('visible');
+      }, removalDelay);
+    }, duration);
+    return fadeTimeout;
+  } // Logic for the button's to show the video/gif
+
+
+  cash_dom__WEBPACK_IMPORTED_MODULE_2___default()('.hover-box[data-image-src], .hover-box[data-video-src]').on('mouseover', /*#__PURE__*/function () {
+    var _ref = (0,_babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__.default)( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().mark(function _callee2(e) {
+      var $target, imgSrc, videoSrc, additionalClasses, src, isVideo, element;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              //Find the hover box
+              $target = cash_dom__WEBPACK_IMPORTED_MODULE_2___default()(e.target);
+              if (!$target.hasClass('.hover-box')) $target = $target.closest('.hover-box'); //Get the sources
+
+              imgSrc = $target.attr('data-image-src');
+              videoSrc = $target.attr('data-video-src');
+              additionalClasses = $target.attr('data-add-class'); //Start the timer
+
+              previewImageTimer = performance.now();
+              src = imgSrc || videoSrc;
+              isVideo = videoSrc != null;
+              element = null; //Hide all the items and show only the one we may have
+
+              if (!((element = loadedImages[src]) == null)) {
+                _context2.next = 13;
+                break;
+              }
+
+              return _context2.abrupt("return", createVideoFeedElement(src, isVideo, true, additionalClasses));
+
+            case 13:
+              // We can trigger the show early
+              //console.log('Shown', loadedImages);
+              showVideoFeed(src);
+
+            case 14:
+              // Target left, so lets hide the content
+              $target.on('mouseleave', /*#__PURE__*/function () {
+                var _ref2 = (0,_babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__.default)( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().mark(function _callee(e) {
+                  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().wrap(function _callee$(_context) {
+                    while (1) {
+                      switch (_context.prev = _context.next) {
+                        case 0:
+                          hideVideoFeeds();
+
+                        case 1:
+                        case "end":
+                          return _context.stop();
+                      }
+                    }
+                  }, _callee);
+                }));
+
+                return function (_x2) {
+                  return _ref2.apply(this, arguments);
+                };
+              }(), {
+                once: true
+              });
+              e.preventDefault();
+
+            case 16:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2);
+    }));
+
+    return function (_x) {
+      return _ref.apply(this, arguments);
+    };
+  }());
+  $rightColumn.on('mouseleave', function (e) {
+    hideVideoFeeds();
+  });
+
+  if (!window.isMobile()) {
+    cash_dom__WEBPACK_IMPORTED_MODULE_2___default()('.hover-box[data-image-src], .hover-box[data-video-src]').each(function (i, e) {
+      var $target = cash_dom__WEBPACK_IMPORTED_MODULE_2___default()(e);
+      var imgSrc = $target.attr('data-image-src');
+      if (!imgSrc) imgSrc = $target.closest('.hover-box').attr('data-image-src');
+      var videoSrc = $target.attr('data-video-src');
+      if (!videoSrc) videoSrc = $target.closest('.hover-box').attr('data-video-src');
+      var additionalClasses = $target.attr('data-add-class');
+      createVideoFeedElement(imgSrc || videoSrc, videoSrc != null, false, additionalClasses);
+    });
+  }
+  /** Create the video element if it doesn't exist */
+
+
+  function createVideoFeedElement(src, isVideo) {
+    var showAfterLoad = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+    var additionalClasses = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : [];
+    if (loadedImages[src] != null) return loadedImages[src]; //console.log('Loading video',  src, isVideo, showAfterLoad);
+    // Create the element
+
+    var $element = isVideo ? cash_dom__WEBPACK_IMPORTED_MODULE_2___default()('<video loop autoplay muted>') : cash_dom__WEBPACK_IMPORTED_MODULE_2___default()('<img>');
+    $element.attr("src", src).addClass(isVideo ? 'preview-video' : 'preview-image').addClass('loading');
+    $element.prependTo($rightColumn);
+    $element.addClass(additionalClasses); // The element finally loaded, so we will trigger the show
+
+    $element.on('load loadstart', function (e) {
+      console.log('Loaded video', src, e.target, showAfterLoad);
+      $element.removeClass('loading');
+      if (showAfterLoad) showVideoFeed(src);
+    }, {
+      once: true
+    }); // Return the element
+
+    return loadedImages[src] = $element.get(0);
+  }
+}
 
 /***/ }),
 
@@ -10801,7 +10895,6 @@ var globalWindowIndex = 0;
 function createWindow(content) {
   var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
   console.log('create window: ', content, options);
-  console.trace();
 
   function randomWID() {
     return ((1 + Math.random()) * 0x10000 | 0).toString(16).substring(1);
@@ -11059,27 +11152,10 @@ function endDragging() {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-  document.querySelectorAll('.no-js').forEach(function (element, key) {
-    return element.style.display = 'none';
-  }); // Make existing draggables as drag-able
-
+  // Make existing draggables as drag-able
   cash_dom__WEBPACK_IMPORTED_MODULE_2___default()('.draggable .drag-handle').on('mousedown', function (e) {
     var element = cash_dom__WEBPACK_IMPORTED_MODULE_2___default()(e.target).closest('.draggable').get(0);
     beginDragging(element, [e.clientX, e.clientY]);
-  }); // Make all the windows dragables
-
-  cash_dom__WEBPACK_IMPORTED_MODULE_2___default()('template.window').each(function (i, e) {
-    var _parseInt, _parseInt2;
-
-    console.log('window', e, e.content, e.id, e.style);
-    createWindow(e.content, {
-      id: e.id,
-      style: e.style,
-      closeable: false,
-      preOpen: true,
-      x: (_parseInt = parseInt(e.getAttribute('x'), 10)) !== null && _parseInt !== void 0 ? _parseInt : undefined,
-      y: (_parseInt2 = parseInt(e.getAttribute('y'), 10)) !== null && _parseInt2 !== void 0 ? _parseInt2 : undefined
-    }); // makeDraggable(e);
   }); //Update the drag events globally. This way it isn't an issue if the mouse leaves the element,
   // the window will still catch the events.
 
