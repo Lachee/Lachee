@@ -1,3 +1,6 @@
+
+@import './popout.scss';
+
 .button {
     display: block;
     font-family: 'Syne Mono', monospace;
@@ -25,10 +28,57 @@
     line-height: 26px;
     font-size: 20pt;
 }
-.button.social.social-discord { color: #7289DA; }
-.button.social.social-itch { color: #fa5c5c; }
-.button.social.social-twitch { color: #6441a5; }
-.button.social.social-github { color: black; }
-.button.social.social-twitter { color: #1DA1F2; }
-.button.social.social-reddit { color: #FF5700; }
-.button.social.social-github { color: steam; }
+
+$brand-colors: ( 
+    "itch": #fa5c5c,
+    "reddit": #FF5700,
+    "nintendo": #E4000F,
+    "discord": #7289DA,
+    "twitch": #6441a5,
+    "twitter": #1DA1F2,
+    "playstation": #006FCD,
+    "github": black,
+    "steam": black,
+);
+
+$brand-icons: (
+    "itch": "itch-io",
+    "reddit": "reddit-alien",
+    "nintendo": "nintendo-switch",
+    "discord": "discord",
+    "twitch": "twitch",
+    "twitter": "twitter",
+    "playstation": "playstation",
+    "github": "github-alt",
+    "steam": "steam-symbol",
+);
+
+@each $name, $class in $brand-icons {
+    $color: map-get($brand-colors, $name);
+
+    // Setup the color for the social buttons
+    .social-#{$name},
+    .social-#{$class} {
+        color: $color;
+
+        // Override the box-shadow
+        &.popout {
+           @include popout(#{$color});
+        }
+
+        // Override the border
+        &.button {
+            border-color: $color;
+        }
+    }
+
+    // Setup the color for the icons themselves
+    .fa-#{$class}
+    {
+        color: $color;
+    }
+}
+
+.fab.fa-playstation {
+    left: -0.1em;
+}

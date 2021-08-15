@@ -15,9 +15,9 @@ roles:
 videos: null
 images: null
 links:
-  - title: Playstation
+  - title: PlayStation Store
     url: https://store.playstation.com/en-us/product/UP3590-CUSA19403_00-0000000000000000
-    icon: fab fa-playstation
-  - title: Switch
+    type: playstation
+  - title: Switch Store
     url: https://www.nintendo.com/games/detail/electronic-super-joy-2-switch/
-    icon: fab fa-switch
+    type: nintendo-switch

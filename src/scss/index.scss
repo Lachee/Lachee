@@ -3,9 +3,11 @@
     padding: 0;
 }
 
+@import './fontawesome.scss';
 @import './fonts.scss';
 @import './button.scss';
 @import './flags.scss';
+@import './popout.scss';
 
 $profile-image-url: 'https://d.lu.je/avatar/embed/lachee?size=1024' !default;
 
@@ -62,7 +64,7 @@ html, body {
             background-attachment: fixed;
 
             // We only want the peview-image to be visible while we are extended.
-            .preview-image.visible { opacity: 1; }
+            .preview-image.visible { opacity: .9; }
             .preview-video.visible { opacity: .9; }
         }
 
@@ -102,18 +104,6 @@ html, body {
         
 }
 
-.popout {
-    box-shadow: 0px 0px black;
-    transition: box-shadow 0.25s ease-out, transform 0.25s ease-out;
-    .hover-box:hover:not(.dragging) > & {
-        box-shadow: 10px 10px black;
-        transform: translate(-10px, -10px);
-    }
-    .hover-box.dragging:hover > & {
-        box-shadow: none;
-    }
-}
-
 /*
 // Content is now just a wrapper
 .main-content {
@@ -138,7 +128,7 @@ html, body {
 
 .link-content { 
     margin-left: 30%; 
-    margin-top: 10vh;
+    margin-top: 2vh;
     .title {
         margin-top: 10pt;
         font-size: 14pt;
@@ -231,4 +221,14 @@ html, body {
     -webkit-mask-image: -webkit-linear-gradient(bottom left, #ff000000 17%, black 75%);
     bottom: -150;
     right: -250;
+}
+
+/** Clickering Glow */
+.glow {
+    animation: flicker 10s ease infinite;
+    @keyframes flicker {
+        0% { filter: blur(1px) brightness(2) }
+        50% { filter: blur(1px) brightness(4) }
+        100% { filter: blur(1px) brightness(2) }
+    }
 }

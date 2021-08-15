@@ -1,0 +1,36 @@
+@mixin popout($color: black, $distance: 10px, $duration: 0.15s) {
+    $transition-name: unique-id();
+
+    box-shadow: 0px 0px $color; 
+    transform: translate(0px, 0px); 
+    .hover-box:hover > & {
+        box-shadow: $distance $distance $color; 
+        transform: translate(-$distance, -$distance); 
+
+        @if $duration > 0 {
+            animation: $duration ease;
+            animation-name: $transition-name;
+        }
+    }
+    
+    @if $duration > 0 {
+        //animation: $duration ease;
+        //animation-name: $transition-name;
+        //animation-direction: alternate;
+
+        @keyframes #{$transition-name} {
+            from { 
+                box-shadow: 0px 0px $color; 
+                transform: translate(0px, 0px); 
+            }
+            to { 
+                box-shadow: $distance $distance $color; 
+                transform: translate(-$distance, -$distance); 
+            }
+        }
+    }
+}
+
+.popout {
+    @include popout();
+}

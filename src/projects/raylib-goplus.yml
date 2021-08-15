@@ -7,6 +7,6 @@ roles:
 videos: 
 images:
 links:
-  - title: GitHub
+  - title: GitHub Repository
     url: https://github.com/lachee/raylib-goplus
-    icon: fab fa-github
+    type: github

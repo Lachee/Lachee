@@ -22,12 +22,12 @@ videos:
 images:
   - src: https://steamcdn-a.akamaihd.net/steam/apps/657300/ss_b3d90f3e6383333d65feb5a5352d6403c49632cb.600x338.jpg
 links:
-  - title: Steam
+  - title: Steam Store
     url: https://store.steampowered.com/app/657300/Party_Crashers/
-    icon: fab fa-steam
-  - title: Playstation
+    type: steam
+  - title: PlayStation Store
     url: https://store.playstation.com/en-au/product/EP1246-CUSA12964_00-6665666466636662
-    icon: fab fa-playstation
-  - title: Switch
+    type: playstation
+  - title: Switch Store
     url: https://www.nintendo.com/games/detail/party-crashers-switch/
-    icon: fab fa-switch
+    type: nintendo-switch

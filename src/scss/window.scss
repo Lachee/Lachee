@@ -40,12 +40,21 @@
         padding: 10px;
         display: flex;
         flex-flow: wrap;
+        &.window-column {
+            flex-flow:column;
+        }
     }
     
     .window-heading {
         border-bottom: 2px solid black;
         height: $heading-height;
 
+        .window-title {
+            float: left;
+            margin-left: 7px;
+            padding: 2px;
+        }
+        
         .window-button {
             width: $heading-height;
             height: $heading-height;

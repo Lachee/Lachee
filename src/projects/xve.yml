@@ -8,6 +8,6 @@ roles:
 videos: 
 images:
 links:
-  - title: Website
+  - title: Demo Version
     url: https://xve.lachee.dev/
-    icon: fal fa-globe
+    icon: far fa-globe

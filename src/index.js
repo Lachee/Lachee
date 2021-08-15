@@ -22,6 +22,16 @@ async function wait(duration) {
         setTimeout(() => resolve(), duration);
     });
 }
+export function createTooltip(selector = '[title][^data-tippy-content]') {
+    // Setup the tooltips
+    $(selector).each((i, elm) => {
+        const title = elm.getAttribute('title');
+        elm.setAttribute('data-tippy-content', title);
+        elm.setAttribute('aria', title);
+        elm.removeAttribute('title');
+    });
+    tippy('[data-tippy-content]', {  });
+}
 
 document.addEventListener('DOMContentLoaded', () => {
     const preivewImageSwapDuration  = 0.5 * 1000;
@@ -96,7 +106,8 @@ document.addEventListener('DOMContentLoaded', () => {
             let videoSrc = $target.attr('data-video-src'); 
             if (!videoSrc) videoSrc = $target.closest('.hover-box').attr('data-video-src');
             
-            createVideoElement(imgSrc || videoSrc, videoSrc != null, false);
+            let additionalClasses = $target.attr('data-add-class'); 
+            createVideoElement(imgSrc || videoSrc, videoSrc != null, false, additionalClasses);
         });
     }
 
@@ -108,8 +119,9 @@ document.addEventListener('DOMContentLoaded', () => {
             $target = $target.closest('.hover-box');
         
         //Get the sources
-        const imgSrc = $target.attr('data-image-src'); 
-        const videoSrc = $target.attr('data-video-src'); 
+        const imgSrc            = $target.attr('data-image-src'); 
+        const videoSrc          = $target.attr('data-video-src'); 
+        const additionalClasses = $target.attr('data-add-class'); 
         
         //Start the timer
         previewImageTimer = performance.now();
@@ -122,7 +134,7 @@ document.addEventListener('DOMContentLoaded', () => {
         //Hide all the items and show only the one we may have
         if ((element = loadedImages[src]) == null) {
             // Create the element
-            return createVideoElement(src, isVideo, true);
+            return createVideoElement(src, isVideo, true, additionalClasses);
         }  else {
             
             // We can trigger the show early
@@ -136,16 +148,18 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     /** CReate the video element if it doesn't exist */
-    function createVideoElement(src, isVideo, showAfterLoad = false) {
+    function createVideoElement(src, isVideo, showAfterLoad = false, additionalClasses = []) {
         if (loadedImages[src] != null) 
             return loadedImages[src];
 
         console.log('Loading video',  src, isVideo, showAfterLoad);
+        console.trace();
 
         // Create the element
         const $element = isVideo ? $('<video loop autoplay muted>') : $('<img>');
         $element.attr("src", src).addClass(isVideo ? 'preview-video' : 'preview-image').addClass('loading');
         $element.prependTo($rightColumn);
+        $element.addClass(additionalClasses);
         
         // The element finally loaded, so we will trigger the show
         $element.on('load loadstart', (e) => { 
@@ -158,14 +172,5 @@ document.addEventListener('DOMContentLoaded', () => {
         return loadedImages[src] = $element.get(0);
     }
 
-    // Setup the tooltips
-    $('[title]').each((i, elm) => {
-        const title = elm.getAttribute('title');
-        elm.setAttribute('data-tippy-content', title);
-        elm.setAttribute('aria', title);
-        elm.removeAttribute('title');
-    });
-    tippy('[data-tippy-content]', {
-        //content: (reference) => reference.getAttribute('title'),
-    });
+    createTooltip('[title]');
 }); 

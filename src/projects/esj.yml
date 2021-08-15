@@ -14,6 +14,6 @@ videos:
     title: Nintendo eShop - Electronic Super Joy Trailer
 images: null
 links:
-  - title: Switch
+  - title: Switch Store
     url: https://www.nintendo.com/games/detail/electronic-super-joy-switch/
-    icon: fab fa-switch
+    type: nintendo-switch

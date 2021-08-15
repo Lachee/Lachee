@@ -48,19 +48,25 @@ export function createWindow(content, options = { }) {
 
     //prepare the container
     const container     = document.querySelector('.retro-gradient .main-content');
+    const addClass      = options.contentClass || '';
     const closeClass   = options.preOpen ? '' : 'closed'; 
     const closeBTN     = options.closeable || options.closeable === undefined ? 
                             '<div class="window-button window-close" onclick="this.parentElement.parentElement.close()"></div>' : 
                             '';
 
+    const titleDIV      = options.title ? 
+                            `<div class="window-title">${options.title}</div>` :
+                            '';
+
     const template  = `
 <div class="window ${closeClass}" onmousedown="this.focus()">
     <div class="window-heading drag-handle">
+        ${titleDIV}
         ${closeBTN}
         <div class="window-button window-maximise" onclick="this.parentElement.parentElement.open()"></div>
         <div class="window-button window-minimise" onclick="this.parentElement.parentElement.hide()"></div>
     </div>
-    <div class="window-content"></div>
+    <div class="window-content  ${addClass}"></div>
 </div>
     `;
     
@@ -87,19 +93,30 @@ export function createWindow(content, options = { }) {
 
     /** Hides a window and destroys it */
     window.close = function() { 
-        window.hide();
-        setTimeout(() => window.dragRoot.remove(), 1000);
+        if (!window.windowHidden)
+            window.hide();
+        
+        if (!window.windowClosed)
+            setTimeout(() => window.dragRoot.remove(), 1000);
+
+        window.windowClosed = true;
         return window;
     }
 
     /** Hides a window */
     window.hide = function() {
+        window.windowHidden = true;
         window.classList.add('closed');
         return window;
     }
 
     /** Opens a window */
     window.open = function() {
+        if (window.windowClosed) {
+            console.warn('cannot possibly open a window that is closed');
+            return null;
+        }
+        
         window.classList.remove('closed');
         return window;
     }
@@ -242,12 +259,6 @@ function beginDragging(element, position) {
             clientStart:    position,
             client:         position
         };
-
-        //if (draggedElement.style.left)
-        //    draggedElement.dragging.position[0] = parseInt(draggedElement.style.left)/2;
-//
-        //if (draggedElement.style.top)
-        //    draggedElement.dragging.position[1] = parseInt(draggedElement.style.top)/2;
     }
 
     // Update mouse position
@@ -266,14 +277,21 @@ function beginDragging(element, position) {
 /** Ends dragging the element */
 function endDragging() {
     if (!draggedElement) return;
-    $(draggedElement).removeClass('dragging');
-    
-    //Move back to left top
-    const [ x, y ] = draggedElement.dragging.position;
-    draggedElement.style.transform = `translate3d(${x}px,${y}px,0)`;
-    $(draggedElement).find('.skewable').css('transform', null);
-    //draggedElement.style.top = `${y}px`;
-    draggedElement = null;
+    try {
+        $(draggedElement).removeClass('dragging');
+        
+        //Move back to left top
+        const [ x, y ] = draggedElement.dragging.position;
+        draggedElement.style.transform = `translate3d(${x}px,${y}px,0)`;
+        $(draggedElement).find('.skewable').css('transform', null);
+        //Debug values
+        const realX = (parseInt(draggedElement.style.left) || 0) + x;
+        const realY = (parseInt(draggedElement.style.top) || 0) + y;
+        draggedElement.dragging.realPosition = [ realX, realY ];
+        draggedElement.setAttribute("_debug-pos", `${realX},${realY}`);
+    } finally {
+        draggedElement = null;
+    }
 }
 
 document.addEventListener('DOMContentLoaded', () => {

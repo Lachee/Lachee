@@ -1,0 +1,14 @@
+name: The Eternal Castle
+background: images/tec.webp
+background-class: glow
+position: 20
+description: >
+  Fancy bot **TOOL**
+roles:
+  - PS4 Port
+videos: 
+images:
+links:
+  - title: PlayStation Store
+    url: https://store.playstation.com/en-us/product/UP3590-CUSA20639_00-0000000000000000/
+    type: playstation
