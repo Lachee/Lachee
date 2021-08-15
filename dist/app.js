@@ -10294,6 +10294,260 @@ exports.Plugins = Plugins;
 
 /***/ }),
 
+/***/ "./src/index.js":
+/*!**********************!*\
+  !*** ./src/index.js ***!
+  \**********************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "createTooltip": () => (/* binding */ createTooltip)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ "./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _fortawesome_fontawesome_pro_scss_fontawesome_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @fortawesome/fontawesome-pro/scss/fontawesome.scss */ "./node_modules/@fortawesome/fontawesome-pro/scss/fontawesome.scss");
+/* harmony import */ var _fortawesome_fontawesome_pro_scss_brands_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @fortawesome/fontawesome-pro/scss/brands.scss */ "./node_modules/@fortawesome/fontawesome-pro/scss/brands.scss");
+/* harmony import */ var _fortawesome_fontawesome_pro_scss_regular_scss__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @fortawesome/fontawesome-pro/scss/regular.scss */ "./node_modules/@fortawesome/fontawesome-pro/scss/regular.scss");
+/* harmony import */ var tippy_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! tippy.js */ "./node_modules/tippy.js/dist/tippy.esm.js");
+/* harmony import */ var tippy_js_dist_tippy_css__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! tippy.js/dist/tippy.css */ "./node_modules/tippy.js/dist/tippy.css");
+/* harmony import */ var _scss_index_scss__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./scss/index.scss */ "./src/scss/index.scss");
+/* harmony import */ var cash_dom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! cash-dom */ "./node_modules/cash-dom/dist/cash.js");
+/* harmony import */ var cash_dom__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(cash_dom__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _mobile_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./mobile.js */ "./src/mobile.js");
+/* harmony import */ var _mobile_js__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_mobile_js__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _window_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./window.js */ "./src/window.js");
+/* harmony import */ var _projects_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./projects.js */ "./src/projects.js");
+
+
+
+
+
+
+ // optional for styling
+
+
+
+ // import tippy from 'tippy.js';
+// import 'tippy.js/dist/tippy.css'; // optional for styling
+// import 'tippy.js/animations/scale.css';
+
+
+
+
+function wait(_x) {
+  return _wait.apply(this, arguments);
+}
+
+function _wait() {
+  _wait = (0,_babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__.default)( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().mark(function _callee3(duration) {
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().wrap(function _callee3$(_context3) {
+      while (1) {
+        switch (_context3.prev = _context3.next) {
+          case 0:
+            return _context3.abrupt("return", new Promise(function (resolve, reject) {
+              setTimeout(function () {
+                return resolve();
+              }, duration);
+            }));
+
+          case 1:
+          case "end":
+            return _context3.stop();
+        }
+      }
+    }, _callee3);
+  }));
+  return _wait.apply(this, arguments);
+}
+
+function createTooltip() {
+  var selector = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '[title][^data-tippy-content]';
+  // Setup the tooltips
+  cash_dom__WEBPACK_IMPORTED_MODULE_7___default()(selector).each(function (i, elm) {
+    var title = elm.getAttribute('title');
+    elm.setAttribute('data-tippy-content', title);
+    elm.setAttribute('aria', title);
+    elm.removeAttribute('title');
+  });
+  (0,tippy_js__WEBPACK_IMPORTED_MODULE_11__.default)('[data-tippy-content]', {});
+}
+document.addEventListener('DOMContentLoaded', function () {
+  var preivewImageSwapDuration = 0.5 * 1000;
+  var previewImageTimer = 0;
+  var $rightColumn = cash_dom__WEBPACK_IMPORTED_MODULE_7___default()('.column-right');
+  var loadedImages = {
+    'example': $rightColumn.get(0)
+  };
+  var fadeTimeout = null;
+  var currentSrc = null;
+  /** Marks all the elements as hidden */
+
+  function hideAll() {
+    //Hide all other content
+    //console.log('Hiding All');
+    currentSrc = null; // Clear existing timeouts
+
+    if (fadeTimeout != null) {
+      window.clearTimeout(fadeTimeout);
+      fadeTimeout = null;
+    } // Hide everything
+
+
+    for (var key in loadedImages) {
+      cash_dom__WEBPACK_IMPORTED_MODULE_7___default()(loadedImages[key]).removeClass('visible').addClass('hidden');
+    }
+  }
+  /** Shows a element, otherwise returns false. */
+
+
+  function show(src) {
+    // Ensure the element exists
+    var elm = loadedImages[src];
+    if (!elm) return false; //Make sure we are not going to the same src
+
+    if (currentSrc == src) return false; //Enforce Hide all the items. This will clear the previous timeout too
+
+    hideAll(); //Calculate the duration its been and wait that long
+
+    var removalDelay = 100;
+    var duration = preivewImageSwapDuration - (performance.now() - previewImageTimer) - removalDelay;
+    if (duration < 1) duration = 1;
+    console.log('Showing ', src, 'in', duration, 'ms');
+    currentSrc = src; //Fade it in after some time.
+
+    fadeTimeout = setTimeout(function () {
+      //Display the element
+      cash_dom__WEBPACK_IMPORTED_MODULE_7___default()(elm).removeClass('hidden'); //document.requestAnimationFrame();
+
+      setTimeout(function () {
+        //console.log('Element Visible', elm, src);
+        cash_dom__WEBPACK_IMPORTED_MODULE_7___default()(elm).addClass('visible');
+      }, removalDelay);
+    }, duration);
+    return fadeTimeout;
+  } // Hide everything
+
+
+  $rightColumn.on('mouseleave', function (e) {
+    hideAll();
+  });
+
+  if (!window.isMobile()) {
+    cash_dom__WEBPACK_IMPORTED_MODULE_7___default()('.hover-box[data-image-src], .hover-box[data-video-src]').each(function (i, e) {
+      var $target = cash_dom__WEBPACK_IMPORTED_MODULE_7___default()(e);
+      var imgSrc = $target.attr('data-image-src');
+      if (!imgSrc) imgSrc = $target.closest('.hover-box').attr('data-image-src');
+      var videoSrc = $target.attr('data-video-src');
+      if (!videoSrc) videoSrc = $target.closest('.hover-box').attr('data-video-src');
+      var additionalClasses = $target.attr('data-add-class');
+      createVideoElement(imgSrc || videoSrc, videoSrc != null, false, additionalClasses);
+    });
+  } // Logic for the button's to show the video/gif
+
+
+  cash_dom__WEBPACK_IMPORTED_MODULE_7___default()('.hover-box[data-image-src], .hover-box[data-video-src]').on('mouseover', /*#__PURE__*/function () {
+    var _ref = (0,_babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__.default)( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().mark(function _callee2(e) {
+      var $target, imgSrc, videoSrc, additionalClasses, src, isVideo, element;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              //Find the hover box
+              $target = cash_dom__WEBPACK_IMPORTED_MODULE_7___default()(e.target);
+              if (!$target.hasClass('.hover-box')) $target = $target.closest('.hover-box'); //Get the sources
+
+              imgSrc = $target.attr('data-image-src');
+              videoSrc = $target.attr('data-video-src');
+              additionalClasses = $target.attr('data-add-class'); //Start the timer
+
+              previewImageTimer = performance.now();
+              src = imgSrc || videoSrc;
+              isVideo = videoSrc != null;
+              element = null; //Hide all the items and show only the one we may have
+
+              if (!((element = loadedImages[src]) == null)) {
+                _context2.next = 13;
+                break;
+              }
+
+              return _context2.abrupt("return", createVideoElement(src, isVideo, true, additionalClasses));
+
+            case 13:
+              // We can trigger the show early
+              //console.log('Shown', loadedImages);
+              show(src);
+
+            case 14:
+              // Target left, so lets hide the content
+              $target.on('mouseleave', /*#__PURE__*/function () {
+                var _ref2 = (0,_babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__.default)( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().mark(function _callee(e) {
+                  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().wrap(function _callee$(_context) {
+                    while (1) {
+                      switch (_context.prev = _context.next) {
+                        case 0:
+                          hideAll();
+
+                        case 1:
+                        case "end":
+                          return _context.stop();
+                      }
+                    }
+                  }, _callee);
+                }));
+
+                return function (_x3) {
+                  return _ref2.apply(this, arguments);
+                };
+              }(), {
+                once: true
+              });
+              e.preventDefault();
+
+            case 16:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2);
+    }));
+
+    return function (_x2) {
+      return _ref.apply(this, arguments);
+    };
+  }());
+  /** CReate the video element if it doesn't exist */
+
+  function createVideoElement(src, isVideo) {
+    var showAfterLoad = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+    var additionalClasses = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : [];
+    if (loadedImages[src] != null) return loadedImages[src];
+    console.log('Loading video', src, isVideo, showAfterLoad);
+    console.trace(); // Create the element
+
+    var $element = isVideo ? cash_dom__WEBPACK_IMPORTED_MODULE_7___default()('<video loop autoplay muted>') : cash_dom__WEBPACK_IMPORTED_MODULE_7___default()('<img>');
+    $element.attr("src", src).addClass(isVideo ? 'preview-video' : 'preview-image').addClass('loading');
+    $element.prependTo($rightColumn);
+    $element.addClass(additionalClasses); // The element finally loaded, so we will trigger the show
+
+    $element.on('load loadstart', function (e) {
+      console.log('Loaded video', src, e.target, showAfterLoad);
+      $element.removeClass('loading');
+      if (showAfterLoad) show(src);
+    }, {
+      once: true
+    }); // Return the element
+
+    return loadedImages[src] = $element.get(0);
+  }
+
+  createTooltip('[title]');
+});
+
+/***/ }),
+
 /***/ "./src/mobile.js":
 /*!***********************!*\
   !*** ./src/mobile.js ***!
@@ -10320,14 +10574,25 @@ window.isMobile = function () {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var marked__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! marked */ "./node_modules/marked/lib/marked.js");
-/* harmony import */ var marked__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(marked__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var cash_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! cash-dom */ "./node_modules/cash-dom/dist/cash.js");
-/* harmony import */ var cash_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(cash_dom__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _window_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./window.js */ "./src/window.js");
+/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ "./node_modules/@babel/runtime/helpers/esm/slicedToArray.js");
+/* harmony import */ var marked__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! marked */ "./node_modules/marked/lib/marked.js");
+/* harmony import */ var marked__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(marked__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var cash_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! cash-dom */ "./node_modules/cash-dom/dist/cash.js");
+/* harmony import */ var cash_dom__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(cash_dom__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _window_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./window.js */ "./src/window.js");
+/* harmony import */ var _index_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./index.js */ "./src/index.js");
+
+
+function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
 
 
+
+ // List of projects
 
 var files = function (ctx) {
   var keys = ctx.keys();
@@ -10336,92 +10601,153 @@ var files = function (ctx) {
     o[k] = values[i];
     return o;
   }, {});
-}(__webpack_require__("./src/projects sync recursive \\.ya?ml$"));
+}(__webpack_require__("./src/projects sync recursive \\.ya?ml$")); // List of actively opened windows
+
+
+var openedWindows = [];
+var WINDOW_LAYOUT = {
+  main: [136, 10],
+  images: [650, 85],
+  videos: [650, 480]
+};
+/** Closes all existing windows */
+
+function closeWindows() {
+  var _iterator = _createForOfIteratorHelper(openedWindows),
+      _step;
+
+  try {
+    for (_iterator.s(); !(_step = _iterator.n()).done;) {
+      var window = _step.value;
+      window.close();
+    }
+  } catch (err) {
+    _iterator.e(err);
+  } finally {
+    _iterator.f();
+  }
+
+  openedWindows = [];
+}
 /** Creates the windows for the project because the button was click */
 
 
 function openWindow(project) {
+  function createLink(link) {
+    console.log(link);
+    var icon = link.icon || 'fab fa-' + link.type;
+    var type = link.type || link.title.toLowerCase();
+    return "\n<div class=\"hover-box\">\n    <a class=\"button popout social-".concat(type, "\" href=\"").concat(link.url, "\" target=\"_blank\" title=\"Visit ").concat(link.title, "\">\n        <i class=\"").concat(icon, "\"></i>\n        ").concat(link.title, "\n    </a>\n</div>\n");
+  }
+
+  function createRole(role) {
+    return "<span class=\"role\">".concat(role, "</span>");
+  }
+
   var movement = 100;
   var latency = 250;
-  var x = 0,
-      y = 0;
-  var id = project.name.replaceAll(' ', '_').toLowerCase();
+
+  var _WINDOW_LAYOUT$main = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__.default)(WINDOW_LAYOUT.main, 2),
+      x = _WINDOW_LAYOUT$main[0],
+      y = _WINDOW_LAYOUT$main[1];
+
+  var id = project.name.replaceAll(/[^A-Za-z]/gmi, '_').toLowerCase();
   var content = project.html;
-  var windows = [(0,_window_js__WEBPACK_IMPORTED_MODULE_2__.createWindow)(content, {
+  var links = project.links.map(function (e, i) {
+    return createLink(e);
+  }).join('');
+  var roles = project.roles.map(function (e, i) {
+    return createRole(e);
+  }).join('');
+  var template = "<div class=\"roles\">".concat(roles, "</div><div class=\"content\">").concat(content, "</div><div class=\"footer links\">").concat(links, "</div>");
+  var windows = [(0,_window_js__WEBPACK_IMPORTED_MODULE_3__.createWindow)(template, {
     id: id,
+    title: project.name,
     x: x,
     y: y,
-    singleton: true
+    singleton: false,
+    contentClass: 'window-column'
   })]; // Add the images
 
+  var _WINDOW_LAYOUT$images = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__.default)(WINDOW_LAYOUT.images, 2);
+
+  x = _WINDOW_LAYOUT$images[0];
+  y = _WINDOW_LAYOUT$images[1];
+
   for (var i in project.images) {
-    x += movement;
-    y += movement;
     var image = project.images[i];
-    var window = (0,_window_js__WEBPACK_IMPORTED_MODULE_2__.createWindow)("<img src=\"".concat(image.src, "\" >"), {
+    var window = (0,_window_js__WEBPACK_IMPORTED_MODULE_3__.createWindow)("<img width=\"480px\" src=\"".concat(image.src, "\" >"), {
       id: "".concat(id, "-img-").concat(i),
       title: image.title || '',
       x: x,
       y: y,
       delay: latency * windows.length,
-      singleton: true
+      singleton: false
     });
     windows.push(window);
+    x += movement;
+    y += movement;
   } // Add the videos
 
 
-  for (var _i in project.videos) {
-    x += movement;
-    y += movement; //Get the video and make sure it has a youtube id.
+  var _WINDOW_LAYOUT$videos = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__.default)(WINDOW_LAYOUT.videos, 2);
+
+  x = _WINDOW_LAYOUT$videos[0];
+  y = _WINDOW_LAYOUT$videos[1];
+
+  for (var i in project.videos) {
+    //Get the video and make sure it has a youtube id.
     // IT can have a `src` instead, but we dont want to use those (yet)
-
-    var video = project.videos[_i];
+    var video = project.videos[i];
     if (!video.youtube) continue;
-
-    var _window = (0,_window_js__WEBPACK_IMPORTED_MODULE_2__.createWindow)("<iframe class='youtube video' width='560' height='315' src='https://www.youtube.com/embed/".concat(video.youtube, "' frameborder='0' allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe>"), {
-      id: "".concat(id, "-vid-").concat(_i),
+    var window = (0,_window_js__WEBPACK_IMPORTED_MODULE_3__.createWindow)("<iframe class='youtube video' width='560' height='315' src='https://www.youtube.com/embed/".concat(video.youtube, "' frameborder='0' allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe>"), {
+      id: "".concat(id, "-vid-").concat(i),
       title: video.title || '',
       x: x,
       y: y,
       delay: latency * windows.length,
-      singleton: true
+      singleton: false
     });
-
-    windows.push(_window);
+    windows.push(window);
+    x += movement;
+    y += movement;
   } //Fix the focus order
 
 
-  for (var _i2 = windows.length - 1; _i2 >= 0; _i2--) {
-    windows[_i2].focus();
+  for (var _i = windows.length - 1; _i >= 0; _i--) {
+    windows[_i].focus();
   } //Return the windows
 
 
+  (0,_index_js__WEBPACK_IMPORTED_MODULE_4__.createTooltip)('[title]');
   return windows;
 }
 /** Creates and adds a button to the project panel for the given project */
 
 
 function createButton(project) {
-  var $hover = cash_dom__WEBPACK_IMPORTED_MODULE_1___default()("<div>");
+  var $hover = cash_dom__WEBPACK_IMPORTED_MODULE_2___default()("<div>");
   $hover.addClass('hover-box');
 
   if (project.background) {
     var ext = project.background.substr(project.background.lastIndexOf('.'));
     $hover.attr(ext == '.mp4' ? 'data-video-src' : 'data-image-src', project.background);
+    $hover.attr('data-add-class', project['background-class']);
   }
 
-  var $a = cash_dom__WEBPACK_IMPORTED_MODULE_1___default()('<a>');
+  var $a = cash_dom__WEBPACK_IMPORTED_MODULE_2___default()('<a>');
   $a.addClass('button').addClass('popout').text(project.name).attr('href', '#');
   $a.prependTo($hover);
   $a.on('click', function () {
-    openWindow(project);
+    closeWindows();
+    openedWindows = openWindow(project);
   });
   $hover.appendTo('.link-projects');
   return $hover;
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-  cash_dom__WEBPACK_IMPORTED_MODULE_1___default()('#link-projects-stub').remove(); // <div class="hover-box" data-image-src="images/partycrashers.gif"><a href="#games" class="button popout">Party Crashers</a></div>
+  cash_dom__WEBPACK_IMPORTED_MODULE_2___default()('#link-projects-stub').remove(); // <div class="hover-box" data-image-src="images/partycrashers.gif"><a href="#games" class="button popout">Party Crashers</a></div>
   // <div class="hover-box" data-video-src="https://i.lu.je/2021/RHKmFcrZfI.mp4"><a href="#games" class="button popout">Electronic Super Joy</a></div>
 
   var items = Object.values(files).sort(function (a, b) {
@@ -10431,7 +10757,7 @@ document.addEventListener('DOMContentLoaded', function () {
   for (var filename in items) {
     //Preprocess teh data
     var item = items[filename];
-    item.html = marked__WEBPACK_IMPORTED_MODULE_0___default()(item.description || '');
+    item.html = marked__WEBPACK_IMPORTED_MODULE_1___default()(item.description || '');
     console.log(item.name, item);
     createButton(item);
   }
@@ -10516,9 +10842,11 @@ function createWindow(content) {
 
 
   var container = document.querySelector('.retro-gradient .main-content');
+  var addClass = options.contentClass || '';
   var closeClass = options.preOpen ? '' : 'closed';
   var closeBTN = options.closeable || options.closeable === undefined ? '<div class="window-button window-close" onclick="this.parentElement.parentElement.close()"></div>' : '';
-  var template = "\n<div class=\"window ".concat(closeClass, "\" onmousedown=\"this.focus()\">\n    <div class=\"window-heading drag-handle\">\n        ").concat(closeBTN, "\n        <div class=\"window-button window-maximise\" onclick=\"this.parentElement.parentElement.open()\"></div>\n        <div class=\"window-button window-minimise\" onclick=\"this.parentElement.parentElement.hide()\"></div>\n    </div>\n    <div class=\"window-content\"></div>\n</div>\n    "); //Create the element
+  var titleDIV = options.title ? "<div class=\"window-title\">".concat(options.title, "</div>") : '';
+  var template = "\n<div class=\"window ".concat(closeClass, "\" onmousedown=\"this.focus()\">\n    <div class=\"window-heading drag-handle\">\n        ").concat(titleDIV, "\n        ").concat(closeBTN, "\n        <div class=\"window-button window-maximise\" onclick=\"this.parentElement.parentElement.open()\"></div>\n        <div class=\"window-button window-minimise\" onclick=\"this.parentElement.parentElement.hide()\"></div>\n    </div>\n    <div class=\"window-content  ").concat(addClass, "\"></div>\n</div>\n    "); //Create the element
 
   var guid = randomWID();
   var $window = cash_dom__WEBPACK_IMPORTED_MODULE_2___default()(template);
@@ -10545,16 +10873,18 @@ function createWindow(content) {
 
 
   window.close = function () {
-    window.hide();
-    setTimeout(function () {
+    if (!window.windowHidden) window.hide();
+    if (!window.windowClosed) setTimeout(function () {
       return window.dragRoot.remove();
     }, 1000);
+    window.windowClosed = true;
     return window;
   };
   /** Hides a window */
 
 
   window.hide = function () {
+    window.windowHidden = true;
     window.classList.add('closed');
     return window;
   };
@@ -10562,6 +10892,11 @@ function createWindow(content) {
 
 
   window.open = function () {
+    if (window.windowClosed) {
+      console.warn('cannot possibly open a window that is closed');
+      return null;
+    }
+
     window.classList.remove('closed');
     return window;
   }; //Add events
@@ -10681,11 +11016,7 @@ function beginDragging(element, position) {
       position: [0, 0],
       clientStart: position,
       client: position
-    }; //if (draggedElement.style.left)
-    //    draggedElement.dragging.position[0] = parseInt(draggedElement.style.left)/2;
-    //
-    //if (draggedElement.style.top)
-    //    draggedElement.dragging.position[1] = parseInt(draggedElement.style.top)/2;
+    };
   } // Update mouse position
 
 
@@ -10707,16 +11038,24 @@ function beginDragging(element, position) {
 
 function endDragging() {
   if (!draggedElement) return;
-  cash_dom__WEBPACK_IMPORTED_MODULE_2___default()(draggedElement).removeClass('dragging'); //Move back to left top
 
-  var _draggedElement$dragg2 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__.default)(draggedElement.dragging.position, 2),
-      x = _draggedElement$dragg2[0],
-      y = _draggedElement$dragg2[1];
+  try {
+    cash_dom__WEBPACK_IMPORTED_MODULE_2___default()(draggedElement).removeClass('dragging'); //Move back to left top
 
-  draggedElement.style.transform = "translate3d(".concat(x, "px,").concat(y, "px,0)");
-  cash_dom__WEBPACK_IMPORTED_MODULE_2___default()(draggedElement).find('.skewable').css('transform', null); //draggedElement.style.top = `${y}px`;
+    var _draggedElement$dragg2 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__.default)(draggedElement.dragging.position, 2),
+        x = _draggedElement$dragg2[0],
+        y = _draggedElement$dragg2[1];
 
-  draggedElement = null;
+    draggedElement.style.transform = "translate3d(".concat(x, "px,").concat(y, "px,0)");
+    cash_dom__WEBPACK_IMPORTED_MODULE_2___default()(draggedElement).find('.skewable').css('transform', null); //Debug values
+
+    var realX = (parseInt(draggedElement.style.left) || 0) + x;
+    var realY = (parseInt(draggedElement.style.top) || 0) + y;
+    draggedElement.dragging.realPosition = [realX, realY];
+    draggedElement.setAttribute("_debug-pos", "".concat(realX, ",").concat(realY));
+  } finally {
+    draggedElement = null;
+  }
 }
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -18223,7 +18562,7 @@ tippy.setDefaultProps({
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse('{"name":"Discord RPC CSharp","background":"images/matrix.gif","description":"Fancy bot **TOOL**\\n\\nPotato and dragons\\n","roles":["Author"],"videos":null,"images":null,"links":[{"title":"GitHub","url":"https://github.com/lachee/discord-rpc-csharp","icon":"fab fa-github"}]}');
+module.exports = JSON.parse('{"name":"Discord RPC CSharp","background":"images/matrix.gif","description":"Fancy bot **TOOL**\\n\\nPotato and dragons\\n","roles":["Author"],"videos":null,"images":null,"links":[{"title":"GitHub Repository","url":"https://github.com/lachee/discord-rpc-csharp","type":"github"}]}');
 
 /***/ }),
 
@@ -18234,7 +18573,7 @@ module.exports = JSON.parse('{"name":"Discord RPC CSharp","background":"images/m
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse('{"name":"Electronic Super Joy","background":"images/v_esj.mp4","position":10,"description":"Electronic Super Joy (ESJ) is a brutally hard platformer set in a world of   pulse-pounding electronic music. Run, jump, smash & fly your way through 45+ weird & different levels, with low-gravity, world rotation, giant monsters & swarming missiles.\\nI was tasked with creating a Nintendo Switch port of this game. I had to integrate the Nintendo SDKs and rewrite the backend of the game to allow to for saving and loading onto the console. The leaderboard feature also had to be recreated, using Nintendo\'s supplied Ranking API to send and retrieve leaderboard and ranking information.\\nDuring the port, it was also necessary to upgrade the project from Unity 4 to the latest Unity 2019. This involved patching a lot of legacy code from the very early days of unity and bring it to the modern engine. A lot of the UI elements were actually offset because of some change between one of the patches, causing all the legacy 3D text being shifted down lower than expected.\\n","roles":["Switch Port"],"videos":[{"youtube":"TXLJO9f3uB4","title":"Nintendo eShop - Electronic Super Joy Trailer"}],"images":null,"links":[{"title":"Switch","url":"https://www.nintendo.com/games/detail/electronic-super-joy-switch/","icon":"fab fa-switch"}]}');
+module.exports = JSON.parse('{"name":"Electronic Super Joy","background":"images/v_esj.mp4","position":10,"description":"Electronic Super Joy (ESJ) is a brutally hard platformer set in a world of   pulse-pounding electronic music. Run, jump, smash & fly your way through 45+ weird & different levels, with low-gravity, world rotation, giant monsters & swarming missiles.\\nI was tasked with creating a Nintendo Switch port of this game. I had to integrate the Nintendo SDKs and rewrite the backend of the game to allow to for saving and loading onto the console. The leaderboard feature also had to be recreated, using Nintendo\'s supplied Ranking API to send and retrieve leaderboard and ranking information.\\nDuring the port, it was also necessary to upgrade the project from Unity 4 to the latest Unity 2019. This involved patching a lot of legacy code from the very early days of unity and bring it to the modern engine. A lot of the UI elements were actually offset because of some change between one of the patches, causing all the legacy 3D text being shifted down lower than expected.\\n","roles":["Switch Port"],"videos":[{"youtube":"TXLJO9f3uB4","title":"Nintendo eShop - Electronic Super Joy Trailer"}],"images":null,"links":[{"title":"Switch Store","url":"https://www.nintendo.com/games/detail/electronic-super-joy-switch/","type":"nintendo-switch"}]}');
 
 /***/ }),
 
@@ -18245,7 +18584,7 @@ module.exports = JSON.parse('{"name":"Electronic Super Joy","background":"images
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse('{"name":"Electronic Super Joy 2","background":"images/v_esj2.mp4","position":10,"description":"Electronic Super Joy 2 is a brutally hard platformer, set in a world of brain-smashing electronic music. Run, jump, smash, & slice your way through 55+ weird & different levels, with giant monsters, swarming missiles & secret areas.\\nI was in charge of porting this game to both the Nintendo Switch and the PlayStation 4.\\n**todo: write more** - include how i did DLC - include the scoreboards\\n","roles":["Switch Port","PS4 Port"],"videos":null,"images":null,"links":[{"title":"Playstation","url":"https://store.playstation.com/en-us/product/UP3590-CUSA19403_00-0000000000000000","icon":"fab fa-playstation"},{"title":"Switch","url":"https://www.nintendo.com/games/detail/electronic-super-joy-2-switch/","icon":"fab fa-switch"}]}');
+module.exports = JSON.parse('{"name":"Electronic Super Joy 2","background":"images/v_esj2.mp4","position":10,"description":"Electronic Super Joy 2 is a brutally hard platformer, set in a world of brain-smashing electronic music. Run, jump, smash, & slice your way through 55+ weird & different levels, with giant monsters, swarming missiles & secret areas.\\nI was in charge of porting this game to both the Nintendo Switch and the PlayStation 4.\\n**todo: write more** - include how i did DLC - include the scoreboards\\n","roles":["Switch Port","PS4 Port"],"videos":null,"images":null,"links":[{"title":"PlayStation Store","url":"https://store.playstation.com/en-us/product/UP3590-CUSA19403_00-0000000000000000","type":"playstation"},{"title":"Switch Store","url":"https://www.nintendo.com/games/detail/electronic-super-joy-2-switch/","type":"nintendo-switch"}]}');
 
 /***/ }),
 
@@ -18256,7 +18595,7 @@ module.exports = JSON.parse('{"name":"Electronic Super Joy 2","background":"imag
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse('{"name":"Party Crashers","background":"images/partycrashers.gif","position":0,"description":"Party Crashers is a last-car-standing combat racer for one to four players! It aims to provide the same fast-paced competitive couch-play as games like Micro Machines, Mashed, and Wrecked, and also follows in the footsteps of Party Golf, with crazy customisation options for everything our player.\\n\\nI was the lead programmer in Party Crashers and was put in charge of many of the core systems such as the pickups track effects and platform integration. I added support for all platforms (Steam, PlayStation 4, Nintendo Switch) which involved creating wrappers and implementing different APIs provided by the platforms and handling a variety of controller configurations.\\n","roles":["Lead Programmer","Platform Integration"],"videos":[{"youtube":"syLvUI1jjOg","title":"Party Crashers Trailer"}],"images":[{"src":"https://steamcdn-a.akamaihd.net/steam/apps/657300/ss_b3d90f3e6383333d65feb5a5352d6403c49632cb.600x338.jpg"}],"links":[{"title":"Steam","url":"https://store.steampowered.com/app/657300/Party_Crashers/","icon":"fab fa-steam"},{"title":"Playstation","url":"https://store.playstation.com/en-au/product/EP1246-CUSA12964_00-6665666466636662","icon":"fab fa-playstation"},{"title":"Switch","url":"https://www.nintendo.com/games/detail/party-crashers-switch/","icon":"fab fa-switch"}]}');
+module.exports = JSON.parse('{"name":"Party Crashers","background":"images/partycrashers.gif","position":0,"description":"Party Crashers is a last-car-standing combat racer for one to four players! It aims to provide the same fast-paced competitive couch-play as games like Micro Machines, Mashed, and Wrecked, and also follows in the footsteps of Party Golf, with crazy customisation options for everything our player.\\n\\nI was the lead programmer in Party Crashers and was put in charge of many of the core systems such as the pickups track effects and platform integration. I added support for all platforms (Steam, PlayStation 4, Nintendo Switch) which involved creating wrappers and implementing different APIs provided by the platforms and handling a variety of controller configurations.\\n","roles":["Lead Programmer","Platform Integration"],"videos":[{"youtube":"syLvUI1jjOg","title":"Party Crashers Trailer"}],"images":[{"src":"https://steamcdn-a.akamaihd.net/steam/apps/657300/ss_b3d90f3e6383333d65feb5a5352d6403c49632cb.600x338.jpg"}],"links":[{"title":"Steam Store","url":"https://store.steampowered.com/app/657300/Party_Crashers/","type":"steam"},{"title":"PlayStation Store","url":"https://store.playstation.com/en-au/product/EP1246-CUSA12964_00-6665666466636662","type":"playstation"},{"title":"Switch Store","url":"https://www.nintendo.com/games/detail/party-crashers-switch/","type":"nintendo-switch"}]}');
 
 /***/ }),
 
@@ -18267,7 +18606,18 @@ module.exports = JSON.parse('{"name":"Party Crashers","background":"images/party
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse('{"name":"Raylib Go+","background":"images/entirebmovie.gif","description":"Fancy bot **TOOL**\\n","roles":["Wrapper Author"],"videos":null,"images":null,"links":[{"title":"GitHub","url":"https://github.com/lachee/raylib-goplus","icon":"fab fa-github"}]}');
+module.exports = JSON.parse('{"name":"Raylib Go+","background":"images/entirebmovie.gif","description":"Fancy bot **TOOL**\\n","roles":["Wrapper Author"],"videos":null,"images":null,"links":[{"title":"GitHub Repository","url":"https://github.com/lachee/raylib-goplus","type":"github"}]}');
+
+/***/ }),
+
+/***/ "./src/projects/tec.yml":
+/*!******************************!*\
+  !*** ./src/projects/tec.yml ***!
+  \******************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = JSON.parse('{"name":"The Eternal Castle","background":"images/tec.webp","background-class":"glow","position":20,"description":"Fancy bot **TOOL**\\n","roles":["PS4 Port"],"videos":null,"images":null,"links":[{"title":"PlayStation Store","url":"https://store.playstation.com/en-us/product/UP3590-CUSA20639_00-0000000000000000/","type":"playstation"}]}');
 
 /***/ }),
 
@@ -18278,7 +18628,7 @@ module.exports = JSON.parse('{"name":"Raylib Go+","background":"images/entirebmo
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse('{"name":"XVE Bot Editor","background":"images/v_xve.mp4","position":20,"description":"Fancy bot **TOOL**\\n","roles":["Author"],"videos":null,"images":null,"links":[{"title":"Website","url":"https://xve.lachee.dev/","icon":"fal fa-globe"}]}');
+module.exports = JSON.parse('{"name":"XVE Bot Editor","background":"images/v_xve.mp4","position":20,"description":"Fancy bot **TOOL**\\n","roles":["Author"],"videos":null,"images":null,"links":[{"title":"Demo Version","url":"https://xve.lachee.dev/","icon":"far fa-globe"}]}');
 
 /***/ }),
 
@@ -18294,6 +18644,7 @@ var map = {
 	"./esj2.yml": "./src/projects/esj2.yml",
 	"./party-crashers.yml": "./src/projects/party-crashers.yml",
 	"./raylib-goplus.yml": "./src/projects/raylib-goplus.yml",
+	"./tec.yml": "./src/projects/tec.yml",
 	"./xve.yml": "./src/projects/xve.yml"
 };
 
@@ -18387,248 +18738,12 @@ webpackContext.id = "./src/projects sync recursive \\.ya?ml$";
 /******/ 	})();
 /******/ 	
 /************************************************************************/
-var __webpack_exports__ = {};
-// This entry need to be wrapped in an IIFE because it need to be in strict mode.
-(() => {
-"use strict";
-/*!**********************!*\
-  !*** ./src/index.js ***!
-  \**********************/
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ "./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _fortawesome_fontawesome_pro_scss_fontawesome_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @fortawesome/fontawesome-pro/scss/fontawesome.scss */ "./node_modules/@fortawesome/fontawesome-pro/scss/fontawesome.scss");
-/* harmony import */ var _fortawesome_fontawesome_pro_scss_brands_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @fortawesome/fontawesome-pro/scss/brands.scss */ "./node_modules/@fortawesome/fontawesome-pro/scss/brands.scss");
-/* harmony import */ var _fortawesome_fontawesome_pro_scss_regular_scss__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @fortawesome/fontawesome-pro/scss/regular.scss */ "./node_modules/@fortawesome/fontawesome-pro/scss/regular.scss");
-/* harmony import */ var tippy_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! tippy.js */ "./node_modules/tippy.js/dist/tippy.esm.js");
-/* harmony import */ var tippy_js_dist_tippy_css__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! tippy.js/dist/tippy.css */ "./node_modules/tippy.js/dist/tippy.css");
-/* harmony import */ var _scss_index_scss__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./scss/index.scss */ "./src/scss/index.scss");
-/* harmony import */ var cash_dom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! cash-dom */ "./node_modules/cash-dom/dist/cash.js");
-/* harmony import */ var cash_dom__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(cash_dom__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _mobile_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./mobile.js */ "./src/mobile.js");
-/* harmony import */ var _mobile_js__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_mobile_js__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var _window_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./window.js */ "./src/window.js");
-/* harmony import */ var _projects_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./projects.js */ "./src/projects.js");
-
-
-
-
-
-
- // optional for styling
-
-
-
- // import tippy from 'tippy.js';
-// import 'tippy.js/dist/tippy.css'; // optional for styling
-// import 'tippy.js/animations/scale.css';
-
-
-
-
-function wait(_x) {
-  return _wait.apply(this, arguments);
-}
-
-function _wait() {
-  _wait = (0,_babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__.default)( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().mark(function _callee3(duration) {
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().wrap(function _callee3$(_context3) {
-      while (1) {
-        switch (_context3.prev = _context3.next) {
-          case 0:
-            return _context3.abrupt("return", new Promise(function (resolve, reject) {
-              setTimeout(function () {
-                return resolve();
-              }, duration);
-            }));
-
-          case 1:
-          case "end":
-            return _context3.stop();
-        }
-      }
-    }, _callee3);
-  }));
-  return _wait.apply(this, arguments);
-}
-
-document.addEventListener('DOMContentLoaded', function () {
-  var preivewImageSwapDuration = 0.5 * 1000;
-  var previewImageTimer = 0;
-  var $rightColumn = cash_dom__WEBPACK_IMPORTED_MODULE_7___default()('.column-right');
-  var loadedImages = {
-    'example': $rightColumn.get(0)
-  };
-  var fadeTimeout = null;
-  var currentSrc = null;
-  /** Marks all the elements as hidden */
-
-  function hideAll() {
-    //Hide all other content
-    //console.log('Hiding All');
-    currentSrc = null; // Clear existing timeouts
-
-    if (fadeTimeout != null) {
-      window.clearTimeout(fadeTimeout);
-      fadeTimeout = null;
-    } // Hide everything
-
-
-    for (var key in loadedImages) {
-      cash_dom__WEBPACK_IMPORTED_MODULE_7___default()(loadedImages[key]).removeClass('visible').addClass('hidden');
-    }
-  }
-  /** Shows a element, otherwise returns false. */
-
-
-  function show(src) {
-    // Ensure the element exists
-    var elm = loadedImages[src];
-    if (!elm) return false; //Make sure we are not going to the same src
-
-    if (currentSrc == src) return false; //Enforce Hide all the items. This will clear the previous timeout too
-
-    hideAll(); //Calculate the duration its been and wait that long
-
-    var removalDelay = 100;
-    var duration = preivewImageSwapDuration - (performance.now() - previewImageTimer) - removalDelay;
-    if (duration < 1) duration = 1;
-    console.log('Showing ', src, 'in', duration, 'ms');
-    currentSrc = src; //Fade it in after some time.
-
-    fadeTimeout = setTimeout(function () {
-      //Display the element
-      cash_dom__WEBPACK_IMPORTED_MODULE_7___default()(elm).removeClass('hidden'); //document.requestAnimationFrame();
-
-      setTimeout(function () {
-        //console.log('Element Visible', elm, src);
-        cash_dom__WEBPACK_IMPORTED_MODULE_7___default()(elm).addClass('visible');
-      }, removalDelay);
-    }, duration);
-    return fadeTimeout;
-  } // Hide everything
-
-
-  $rightColumn.on('mouseleave', function (e) {
-    hideAll();
-  });
-
-  if (!window.isMobile()) {
-    cash_dom__WEBPACK_IMPORTED_MODULE_7___default()('.hover-box[data-image-src], .hover-box[data-video-src]').each(function (i, e) {
-      var $target = cash_dom__WEBPACK_IMPORTED_MODULE_7___default()(e);
-      var imgSrc = $target.attr('data-image-src');
-      if (!imgSrc) imgSrc = $target.closest('.hover-box').attr('data-image-src');
-      var videoSrc = $target.attr('data-video-src');
-      if (!videoSrc) videoSrc = $target.closest('.hover-box').attr('data-video-src');
-      createVideoElement(imgSrc || videoSrc, videoSrc != null, false);
-    });
-  } // Logic for the button's to show the video/gif
-
-
-  cash_dom__WEBPACK_IMPORTED_MODULE_7___default()('.hover-box[data-image-src], .hover-box[data-video-src]').on('mouseover', /*#__PURE__*/function () {
-    var _ref = (0,_babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__.default)( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().mark(function _callee2(e) {
-      var $target, imgSrc, videoSrc, src, isVideo, element;
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().wrap(function _callee2$(_context2) {
-        while (1) {
-          switch (_context2.prev = _context2.next) {
-            case 0:
-              //Find the hover box
-              $target = cash_dom__WEBPACK_IMPORTED_MODULE_7___default()(e.target);
-              if (!$target.hasClass('.hover-box')) $target = $target.closest('.hover-box'); //Get the sources
-
-              imgSrc = $target.attr('data-image-src');
-              videoSrc = $target.attr('data-video-src'); //Start the timer
-
-              previewImageTimer = performance.now();
-              src = imgSrc || videoSrc;
-              isVideo = videoSrc != null;
-              element = null; //Hide all the items and show only the one we may have
-
-              if (!((element = loadedImages[src]) == null)) {
-                _context2.next = 12;
-                break;
-              }
-
-              return _context2.abrupt("return", createVideoElement(src, isVideo, true));
-
-            case 12:
-              // We can trigger the show early
-              //console.log('Shown', loadedImages);
-              show(src);
-
-            case 13:
-              // Target left, so lets hide the content
-              $target.on('mouseleave', /*#__PURE__*/function () {
-                var _ref2 = (0,_babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__.default)( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().mark(function _callee(e) {
-                  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().wrap(function _callee$(_context) {
-                    while (1) {
-                      switch (_context.prev = _context.next) {
-                        case 0:
-                          hideAll();
-
-                        case 1:
-                        case "end":
-                          return _context.stop();
-                      }
-                    }
-                  }, _callee);
-                }));
-
-                return function (_x3) {
-                  return _ref2.apply(this, arguments);
-                };
-              }(), {
-                once: true
-              });
-              e.preventDefault();
-
-            case 15:
-            case "end":
-              return _context2.stop();
-          }
-        }
-      }, _callee2);
-    }));
-
-    return function (_x2) {
-      return _ref.apply(this, arguments);
-    };
-  }());
-  /** CReate the video element if it doesn't exist */
-
-  function createVideoElement(src, isVideo) {
-    var showAfterLoad = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-    if (loadedImages[src] != null) return loadedImages[src];
-    console.log('Loading video', src, isVideo, showAfterLoad); // Create the element
-
-    var $element = isVideo ? cash_dom__WEBPACK_IMPORTED_MODULE_7___default()('<video loop autoplay muted>') : cash_dom__WEBPACK_IMPORTED_MODULE_7___default()('<img>');
-    $element.attr("src", src).addClass(isVideo ? 'preview-video' : 'preview-image').addClass('loading');
-    $element.prependTo($rightColumn); // The element finally loaded, so we will trigger the show
-
-    $element.on('load loadstart', function (e) {
-      console.log('Loaded video', src, e.target, showAfterLoad);
-      $element.removeClass('loading');
-      if (showAfterLoad) show(src);
-    }, {
-      once: true
-    }); // Return the element
-
-    return loadedImages[src] = $element.get(0);
-  } // Setup the tooltips
-
-
-  cash_dom__WEBPACK_IMPORTED_MODULE_7___default()('[title]').each(function (i, elm) {
-    var title = elm.getAttribute('title');
-    elm.setAttribute('data-tippy-content', title);
-    elm.setAttribute('aria', title);
-    elm.removeAttribute('title');
-  });
-  (0,tippy_js__WEBPACK_IMPORTED_MODULE_11__.default)('[data-tippy-content]', {//content: (reference) => reference.getAttribute('title'),
-  });
-});
-})();
-
+/******/ 	
+/******/ 	// startup
+/******/ 	// Load entry module and return exports
+/******/ 	// This entry module is referenced by other modules so it can't be inlined
+/******/ 	var __webpack_exports__ = __webpack_require__("./src/index.js");
+/******/ 	
 /******/ })()
 ;
 //# sourceMappingURL=app.js.map

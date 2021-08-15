@@ -7226,6 +7226,14 @@ readers do not read off random characters that represent icons */
 * {
   padding: 0; }
 
+.fab.fa-nintendo-switch {
+  content: url(fonts/nintendo-switch.svg);
+  width: 1em;
+  height: 1em;
+  display: inline-block;
+  vertical-align: middle;
+  filter: invert(0.5) sepia(1) hue-rotate(313deg) saturate(50); }
+
 .poppins {
   font-family: 'Poppins', sans-serif; }
 
@@ -7234,6 +7242,23 @@ readers do not read off random characters that represent icons */
 
 .knewave {
   font-family: 'Knewave', sans-serif; }
+
+.popout {
+  box-shadow: 0px 0px black;
+  transform: translate(0px, 0px); }
+  .hover-box:hover > .popout {
+    box-shadow: 10px 10px black;
+    transform: translate(-10px, -10px);
+    animation: 0.15s ease;
+    animation-name: u56b1c565; }
+
+@keyframes u56b1c565 {
+  from {
+    box-shadow: 0px 0px black;
+    transform: translate(0px, 0px); }
+  to {
+    box-shadow: 10px 10px black;
+    transform: translate(-10px, -10px); } }
 
 .button {
   display: block;
@@ -7260,26 +7285,260 @@ readers do not read off random characters that represent icons */
   line-height: 26px;
   font-size: 20pt; }
 
-.button.social.social-discord {
-  color: #7289DA; }
+.social-itch,
+.social-itch-io {
+  color: #fa5c5c; }
+  .social-itch.popout,
+  .social-itch-io.popout {
+    box-shadow: 0px 0px #fa5c5c;
+    transform: translate(0px, 0px); }
+    .hover-box:hover > .social-itch.popout, .hover-box:hover >
+    .social-itch-io.popout {
+      box-shadow: 10px 10px #fa5c5c;
+      transform: translate(-10px, -10px);
+      animation: 0.15s ease;
+      animation-name: ufcefe726; }
 
-.button.social.social-itch {
+@keyframes ufcefe726 {
+  from {
+    box-shadow: 0px 0px #fa5c5c;
+    transform: translate(0px, 0px); }
+  to {
+    box-shadow: 10px 10px #fa5c5c;
+    transform: translate(-10px, -10px); } }
+  .social-itch.button,
+  .social-itch-io.button {
+    border-color: #fa5c5c; }
+
+.fa-itch-io {
   color: #fa5c5c; }
 
-.button.social.social-twitch {
-  color: #6441a5; }
+.social-reddit,
+.social-reddit-alien {
+  color: #FF5700; }
+  .social-reddit.popout,
+  .social-reddit-alien.popout {
+    box-shadow: 0px 0px #FF5700;
+    transform: translate(0px, 0px); }
+    .hover-box:hover > .social-reddit.popout, .hover-box:hover >
+    .social-reddit-alien.popout {
+      box-shadow: 10px 10px #FF5700;
+      transform: translate(-10px, -10px);
+      animation: 0.15s ease;
+      animation-name: u55e2ed0a; }
 
-.button.social.social-github {
-  color: black; }
+@keyframes u55e2ed0a {
+  from {
+    box-shadow: 0px 0px #FF5700;
+    transform: translate(0px, 0px); }
+  to {
+    box-shadow: 10px 10px #FF5700;
+    transform: translate(-10px, -10px); } }
+  .social-reddit.button,
+  .social-reddit-alien.button {
+    border-color: #FF5700; }
 
-.button.social.social-twitter {
-  color: #1DA1F2; }
-
-.button.social.social-reddit {
+.fa-reddit-alien {
   color: #FF5700; }
 
-.button.social.social-github {
-  color: steam; }
+.social-nintendo,
+.social-nintendo-switch {
+  color: #E4000F; }
+  .social-nintendo.popout,
+  .social-nintendo-switch.popout {
+    box-shadow: 0px 0px #E4000F;
+    transform: translate(0px, 0px); }
+    .hover-box:hover > .social-nintendo.popout, .hover-box:hover >
+    .social-nintendo-switch.popout {
+      box-shadow: 10px 10px #E4000F;
+      transform: translate(-10px, -10px);
+      animation: 0.15s ease;
+      animation-name: ud8fd23a3; }
+
+@keyframes ud8fd23a3 {
+  from {
+    box-shadow: 0px 0px #E4000F;
+    transform: translate(0px, 0px); }
+  to {
+    box-shadow: 10px 10px #E4000F;
+    transform: translate(-10px, -10px); } }
+  .social-nintendo.button,
+  .social-nintendo-switch.button {
+    border-color: #E4000F; }
+
+.fa-nintendo-switch {
+  color: #E4000F; }
+
+.social-discord,
+.social-discord {
+  color: #7289DA; }
+  .social-discord.popout,
+  .social-discord.popout {
+    box-shadow: 0px 0px #7289DA;
+    transform: translate(0px, 0px); }
+    .hover-box:hover > .social-discord.popout, .hover-box:hover >
+    .social-discord.popout {
+      box-shadow: 10px 10px #7289DA;
+      transform: translate(-10px, -10px);
+      animation: 0.15s ease;
+      animation-name: u6c3da303; }
+
+@keyframes u6c3da303 {
+  from {
+    box-shadow: 0px 0px #7289DA;
+    transform: translate(0px, 0px); }
+  to {
+    box-shadow: 10px 10px #7289DA;
+    transform: translate(-10px, -10px); } }
+  .social-discord.button,
+  .social-discord.button {
+    border-color: #7289DA; }
+
+.fa-discord {
+  color: #7289DA; }
+
+.social-twitch,
+.social-twitch {
+  color: #6441a5; }
+  .social-twitch.popout,
+  .social-twitch.popout {
+    box-shadow: 0px 0px #6441a5;
+    transform: translate(0px, 0px); }
+    .hover-box:hover > .social-twitch.popout, .hover-box:hover >
+    .social-twitch.popout {
+      box-shadow: 10px 10px #6441a5;
+      transform: translate(-10px, -10px);
+      animation: 0.15s ease;
+      animation-name: u8dfa98f5; }
+
+@keyframes u8dfa98f5 {
+  from {
+    box-shadow: 0px 0px #6441a5;
+    transform: translate(0px, 0px); }
+  to {
+    box-shadow: 10px 10px #6441a5;
+    transform: translate(-10px, -10px); } }
+  .social-twitch.button,
+  .social-twitch.button {
+    border-color: #6441a5; }
+
+.fa-twitch {
+  color: #6441a5; }
+
+.social-twitter,
+.social-twitter {
+  color: #1DA1F2; }
+  .social-twitter.popout,
+  .social-twitter.popout {
+    box-shadow: 0px 0px #1DA1F2;
+    transform: translate(0px, 0px); }
+    .hover-box:hover > .social-twitter.popout, .hover-box:hover >
+    .social-twitter.popout {
+      box-shadow: 10px 10px #1DA1F2;
+      transform: translate(-10px, -10px);
+      animation: 0.15s ease;
+      animation-name: u30fc4c4e; }
+
+@keyframes u30fc4c4e {
+  from {
+    box-shadow: 0px 0px #1DA1F2;
+    transform: translate(0px, 0px); }
+  to {
+    box-shadow: 10px 10px #1DA1F2;
+    transform: translate(-10px, -10px); } }
+  .social-twitter.button,
+  .social-twitter.button {
+    border-color: #1DA1F2; }
+
+.fa-twitter {
+  color: #1DA1F2; }
+
+.social-playstation,
+.social-playstation {
+  color: #006FCD; }
+  .social-playstation.popout,
+  .social-playstation.popout {
+    box-shadow: 0px 0px #006FCD;
+    transform: translate(0px, 0px); }
+    .hover-box:hover > .social-playstation.popout, .hover-box:hover >
+    .social-playstation.popout {
+      box-shadow: 10px 10px #006FCD;
+      transform: translate(-10px, -10px);
+      animation: 0.15s ease;
+      animation-name: u7c29401e; }
+
+@keyframes u7c29401e {
+  from {
+    box-shadow: 0px 0px #006FCD;
+    transform: translate(0px, 0px); }
+  to {
+    box-shadow: 10px 10px #006FCD;
+    transform: translate(-10px, -10px); } }
+  .social-playstation.button,
+  .social-playstation.button {
+    border-color: #006FCD; }
+
+.fa-playstation {
+  color: #006FCD; }
+
+.social-github,
+.social-github-alt {
+  color: black; }
+  .social-github.popout,
+  .social-github-alt.popout {
+    box-shadow: 0px 0px black;
+    transform: translate(0px, 0px); }
+    .hover-box:hover > .social-github.popout, .hover-box:hover >
+    .social-github-alt.popout {
+      box-shadow: 10px 10px black;
+      transform: translate(-10px, -10px);
+      animation: 0.15s ease;
+      animation-name: ufda6441d; }
+
+@keyframes ufda6441d {
+  from {
+    box-shadow: 0px 0px black;
+    transform: translate(0px, 0px); }
+  to {
+    box-shadow: 10px 10px black;
+    transform: translate(-10px, -10px); } }
+  .social-github.button,
+  .social-github-alt.button {
+    border-color: black; }
+
+.fa-github-alt {
+  color: black; }
+
+.social-steam,
+.social-steam-symbol {
+  color: black; }
+  .social-steam.popout,
+  .social-steam-symbol.popout {
+    box-shadow: 0px 0px black;
+    transform: translate(0px, 0px); }
+    .hover-box:hover > .social-steam.popout, .hover-box:hover >
+    .social-steam-symbol.popout {
+      box-shadow: 10px 10px black;
+      transform: translate(-10px, -10px);
+      animation: 0.15s ease;
+      animation-name: u31107495; }
+
+@keyframes u31107495 {
+  from {
+    box-shadow: 0px 0px black;
+    transform: translate(0px, 0px); }
+  to {
+    box-shadow: 10px 10px black;
+    transform: translate(-10px, -10px); } }
+  .social-steam.button,
+  .social-steam-symbol.button {
+    border-color: black; }
+
+.fa-steam-symbol {
+  color: black; }
+
+.fab.fa-playstation {
+  left: -0.1em; }
 
 .poppins {
   font-family: 'Poppins', sans-serif; }
@@ -7354,6 +7613,23 @@ readers do not read off random characters that represent icons */
     .flags .flag.lesbian {
       background: linear-gradient(180deg, #A60061 14.285%, #B95393 14.285%, 28.57%, #D260A7 28.57%, 42.855%, #EDEDEB 42.855%, 57.14%, #E5ABD0 57.14%, 71.425%, #C74D52 71.425%, 85.71%, #8C1D00 85.71%); }
 
+.popout {
+  box-shadow: 0px 0px black;
+  transform: translate(0px, 0px); }
+  .hover-box:hover > .popout {
+    box-shadow: 10px 10px black;
+    transform: translate(-10px, -10px);
+    animation: 0.15s ease;
+    animation-name: u51fb3d4d; }
+
+@keyframes u51fb3d4d {
+  from {
+    box-shadow: 0px 0px black;
+    transform: translate(0px, 0px); }
+  to {
+    box-shadow: 10px 10px black;
+    transform: translate(-10px, -10px); } }
+
 template {
   display: none !important; }
 
@@ -7367,6 +7643,11 @@ html, body {
   overflow: none;
   background: #e994bb;
   background: linear-gradient(321deg, #eee9ae 0%, #e994bb 100%); }
+
+ul {
+  padding-left: 2em;
+  padding-right: 2em;
+  line-height: 1.5em; }
 
 /* Clear floats after the columns */
 .row:after {
@@ -7391,7 +7672,7 @@ html, body {
       background-size: cover;
       background-attachment: fixed; }
       .column.column-right:hover .preview-image.visible, .column.column-right.extend .preview-image.visible {
-        opacity: 1; }
+        opacity: .9; }
       .column.column-right:hover .preview-video.visible, .column.column-right.extend .preview-video.visible {
         opacity: .9; }
     .column.column-right .preview-image, .column.column-right .preview-video {
@@ -7421,15 +7702,6 @@ html, body {
   background-size: 60px 60px;
   background-image: linear-gradient(to right, #e2e2e2 2px, transparent 2px), linear-gradient(to bottom, #e2e2e2 2px, transparent 2px); }
 
-.popout {
-  box-shadow: 0px 0px black;
-  transition: box-shadow 0.25s ease-out, transform 0.25s ease-out; }
-  .hover-box:hover:not(.dragging) > .popout {
-    box-shadow: 10px 10px black;
-    transform: translate(-10px, -10px); }
-  .hover-box.dragging:hover > .popout {
-    box-shadow: none; }
-
 /*
 // Content is now just a wrapper
 .main-content {
@@ -7451,7 +7723,7 @@ html, body {
 
 .link-content {
   margin-left: 30%;
-  margin-top: 10vh; }
+  margin-top: 2vh; }
   .link-content .title {
     margin-top: 10pt;
     font-size: 14pt;
@@ -7525,6 +7797,27 @@ html, body {
   bottom: -150;
   right: -250; }
 
+/** Clickering Glow */
+.glow {
+  animation: flicker 10s ease infinite; }
+
+@keyframes flicker {
+  0% {
+    filter: blur(1px) brightness(2); }
+  50% {
+    filter: blur(1px) brightness(4); }
+  100% {
+    filter: blur(1px) brightness(2); } }
+
+/** Roles */
+.roles .role {
+  margin-right: 1em;
+  font-family: 'Syne Mono';
+  font-size: 13pt; }
+  .roles .role:before {
+    content: '-';
+    margin-right: 5px; }
+
 .draggable {
   position: absolute; }
   .draggable .drag-handle {
@@ -7552,9 +7845,15 @@ html, body {
     padding: 10px;
     display: flex;
     flex-flow: wrap; }
+    .window .window-content.window-column {
+      flex-flow: column; }
   .window .window-heading {
     border-bottom: 2px solid black;
     height: 30px; }
+    .window .window-heading .window-title {
+      float: left;
+      margin-left: 7px;
+      padding: 2px; }
     .window .window-heading .window-button {
       width: 30px;
       height: 30px;
