@@ -7250,9 +7250,9 @@ readers do not read off random characters that represent icons */
     box-shadow: 10px 10px black;
     transform: translate(-10px, -10px);
     animation: 0.15s ease;
-    animation-name: u6dd7ebfd; }
+    animation-name: u5d18c861; }
 
-@keyframes u6dd7ebfd {
+@keyframes u5d18c861 {
   from {
     box-shadow: 0px 0px black;
     transform: translate(0px, 0px); }
@@ -7297,9 +7297,9 @@ readers do not read off random characters that represent icons */
       box-shadow: 10px 10px #fa5c5c;
       transform: translate(-10px, -10px);
       animation: 0.15s ease;
-      animation-name: ub73fd080; }
+      animation-name: ue62b0f51; }
 
-@keyframes ub73fd080 {
+@keyframes ue62b0f51 {
   from {
     box-shadow: 0px 0px #fa5c5c;
     transform: translate(0px, 0px); }
@@ -7325,9 +7325,9 @@ readers do not read off random characters that represent icons */
       box-shadow: 10px 10px #FF5700;
       transform: translate(-10px, -10px);
       animation: 0.15s ease;
-      animation-name: u16aa00a6; }
+      animation-name: u7a0e6b9d; }
 
-@keyframes u16aa00a6 {
+@keyframes u7a0e6b9d {
   from {
     box-shadow: 0px 0px #FF5700;
     transform: translate(0px, 0px); }
@@ -7353,9 +7353,9 @@ readers do not read off random characters that represent icons */
       box-shadow: 10px 10px #E4000F;
       transform: translate(-10px, -10px);
       animation: 0.15s ease;
-      animation-name: ud0db3256; }
+      animation-name: u4241634e; }
 
-@keyframes ud0db3256 {
+@keyframes u4241634e {
   from {
     box-shadow: 0px 0px #E4000F;
     transform: translate(0px, 0px); }
@@ -7381,9 +7381,9 @@ readers do not read off random characters that represent icons */
       box-shadow: 10px 10px #7289DA;
       transform: translate(-10px, -10px);
       animation: 0.15s ease;
-      animation-name: uab8a9ab9; }
+      animation-name: u53d1ff83; }
 
-@keyframes uab8a9ab9 {
+@keyframes u53d1ff83 {
   from {
     box-shadow: 0px 0px #7289DA;
     transform: translate(0px, 0px); }
@@ -7409,9 +7409,9 @@ readers do not read off random characters that represent icons */
       box-shadow: 10px 10px #6441a5;
       transform: translate(-10px, -10px);
       animation: 0.15s ease;
-      animation-name: u1df6851e; }
+      animation-name: u23d6b513; }
 
-@keyframes u1df6851e {
+@keyframes u23d6b513 {
   from {
     box-shadow: 0px 0px #6441a5;
     transform: translate(0px, 0px); }
@@ -7437,9 +7437,9 @@ readers do not read off random characters that represent icons */
       box-shadow: 10px 10px #1DA1F2;
       transform: translate(-10px, -10px);
       animation: 0.15s ease;
-      animation-name: uc82a4b13; }
+      animation-name: ubfb748f7; }
 
-@keyframes uc82a4b13 {
+@keyframes ubfb748f7 {
   from {
     box-shadow: 0px 0px #1DA1F2;
     transform: translate(0px, 0px); }
@@ -7465,9 +7465,9 @@ readers do not read off random characters that represent icons */
       box-shadow: 10px 10px #006FCD;
       transform: translate(-10px, -10px);
       animation: 0.15s ease;
-      animation-name: u23dc93c3; }
+      animation-name: udf2e5c07; }
 
-@keyframes u23dc93c3 {
+@keyframes udf2e5c07 {
   from {
     box-shadow: 0px 0px #006FCD;
     transform: translate(0px, 0px); }
@@ -7493,9 +7493,9 @@ readers do not read off random characters that represent icons */
       box-shadow: 10px 10px black;
       transform: translate(-10px, -10px);
       animation: 0.15s ease;
-      animation-name: uab2595c8; }
+      animation-name: ue63b9ac2; }
 
-@keyframes uab2595c8 {
+@keyframes ue63b9ac2 {
   from {
     box-shadow: 0px 0px black;
     transform: translate(0px, 0px); }
@@ -7521,9 +7521,9 @@ readers do not read off random characters that represent icons */
       box-shadow: 10px 10px black;
       transform: translate(-10px, -10px);
       animation: 0.15s ease;
-      animation-name: ufef32e38; }
+      animation-name: u731132da; }
 
-@keyframes ufef32e38 {
+@keyframes u731132da {
   from {
     box-shadow: 0px 0px black;
     transform: translate(0px, 0px); }
@@ -7574,8 +7574,6 @@ readers do not read off random characters that represent icons */
     .flags .flag.system, .flags .flag.skill {
       background: none;
       margin-right: -3rem; }
-    .flags .flag.pride {
-      display: none; }
     .flags .flag.skill {
       display: none; }
     .flags .flag.system {
@@ -7622,9 +7620,9 @@ readers do not read off random characters that represent icons */
     box-shadow: 10px 10px black;
     transform: translate(-10px, -10px);
     animation: 0.15s ease;
-    animation-name: u3b720e40; }
+    animation-name: u2c1a2aac; }
 
-@keyframes u3b720e40 {
+@keyframes u2c1a2aac {
   from {
     box-shadow: 0px 0px black;
     transform: translate(0px, 0px); }
