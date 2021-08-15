@@ -16,7 +16,6 @@ let globalWindowIndex = 0;
 */
 export function createWindow(content, options = { }) {
     console.log('create window: ', content, options);
-    console.trace();
 
     function randomWID() {
         return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
@@ -295,27 +294,11 @@ function endDragging() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('.no-js').forEach((element, key) => element.style.display = 'none');
    
     // Make existing draggables as drag-able
     $('.draggable .drag-handle').on('mousedown', (e) => {
         const element = $(e.target).closest('.draggable').get(0);
         beginDragging(element, [ e.clientX, e.clientY ]);
-    });
-
-    // Make all the windows dragables
-    $('template.window').each((i, e) => {
-        console.log('window', e, e.content, e.id, e.style);
-        createWindow(e.content, {
-            id: e.id,
-            style: e.style,
-            closeable: false,
-            preOpen: true,
-            x: parseInt(e.getAttribute('x'), 10) ?? undefined,
-            y: parseInt(e.getAttribute('y'), 10) ?? undefined,
-            
-        });
-       // makeDraggable(e);
     });
 
     //Update the drag events globally. This way it isn't an issue if the mouse leaves the element,

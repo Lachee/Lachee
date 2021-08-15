@@ -125,10 +125,9 @@ export function openProjectWindowFromName(name) {
     const id = getProjectId(name);
     const project = projects[id] ?? null;
     if (project == null) {
-        console.warn('Failed to open a project window', name, id);
+        //console.warn('Failed to open a project window', name, id);
         return false;
     }
-    console.log('open project window', name, id, project);
     return openProjectWindow(project);
 }
 

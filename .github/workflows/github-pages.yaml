@@ -21,6 +21,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       MODE: production
+      HIDE_PRIDE: true
       HIDE_SKILLS: true
       HIDE_PLATFORMS: true
       

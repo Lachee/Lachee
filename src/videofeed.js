@@ -118,8 +118,7 @@ export function createVideoFeed() {
         if (loadedImages[src] != null) 
             return loadedImages[src];
 
-        console.log('Loading video',  src, isVideo, showAfterLoad);
-        console.trace();
+        //console.log('Loading video',  src, isVideo, showAfterLoad);
 
         // Create the element
         const $element = isVideo ? $('<video loop autoplay muted>') : $('<img>');

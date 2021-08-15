@@ -14,7 +14,7 @@ import './mobile.js';
 // import 'tippy.js/dist/tippy.css'; // optional for styling
 // import 'tippy.js/animations/scale.css';
 
-import './window.js';
+import {createWindow } from './window.js';
 import { createProjectWindows, openProjectWindowFromName } from './projects.js';
 import { createVideoFeed } from './videofeed';
 
@@ -36,6 +36,8 @@ export function createTooltip(selector = '[title][^data-tippy-content]') {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.no-js').forEach((element, key) => element.style.display = 'none');
+
     createProjectWindows();
     createAboutWindows();
     createVideoFeed();
@@ -57,5 +59,19 @@ function navigateHash() {
 }
 
 function createAboutWindows() {
+    // Make all the windows dragables
+    $('template.window').each((i, e) => {
+        console.log('window', e, e.content, e.id, e.style);
+        createWindow(e.content, {
+            id:         e.id,
+            style:      e.style,
+            closeable:  true,
+            preOpen:    true,
+            title:      e.title || undefined,
+            x:          parseInt(e.getAttribute('x'), 10) ?? undefined,
+            y:          parseInt(e.getAttribute('y'), 10) ?? undefined,
+            
+        });
+    });
 
 }
