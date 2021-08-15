@@ -29,6 +29,11 @@ html, body {
     background: $color-to;
     background: linear-gradient(321deg, $color-from 0%, $color-to 100%);
 }
+ul {
+    padding-left: 2em;
+    padding-right: 2em;
+    line-height: 1.5em;
+}
 
 /* Clear floats after the columns */
 .row:after {

@@ -73,7 +73,7 @@ function openWindow(project) {
     [ x, y ] = WINDOW_LAYOUT.images;
     for (const i in project.images) {
         const image = project.images[i];
-        const window = createWindow(`<img src="${image.src}" >`, {
+        const window = createWindow(`<img width="480px" src="${image.src}" >`, {
             id:         `${id}-img-${i}`,
             title:      image.title || '',
             x:          x,
