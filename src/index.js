@@ -15,7 +15,7 @@ import './mobile.js';
 // import 'tippy.js/animations/scale.css';
 
 import './window.js';
-import { createProjectWindows } from './projects.js';
+import { createProjectWindows, openProjectWindowFromName } from './projects.js';
 import { createVideoFeed } from './videofeed';
 
 async function wait(duration) {
@@ -39,8 +39,22 @@ document.addEventListener('DOMContentLoaded', () => {
     createProjectWindows();
     createAboutWindows();
     createVideoFeed();
-    createTooltip('[title]');5
+    createTooltip('[title]');
+    navigateHash();
 }); 
+
+window.addEventListener('hashchange', () => {
+    navigateHash();
+}, false);
+
+function navigateHash() {
+
+    // Find the window that we should open
+    const hash = decodeURI(window.location.hash).replace('#', '');
+    if (!openProjectWindowFromName(hash)) {
+        // TODO: Find about windows
+    }
+}
 
 function createAboutWindows() {
 

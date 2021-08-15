@@ -11,11 +11,17 @@ const files = (ctx => {
 })(require.context('./projects', true, /\.ya?ml$/));
 
 // List of actively opened windows
+let projects = {};
 let openedWindows = [];
 const WINDOW_LAYOUT = {
     main:   [ 136, 10 ],
     images: [ 650, 85 ],
     videos: [ 650, 480 ]
+}
+
+/** Generates an ID from the project name */
+function getProjectId(name) {
+    return name .replaceAll(/[^A-Za-z0-9]/gmi, '-').toLowerCase();
 }
 
 /** Closes all existing windows */
@@ -52,9 +58,7 @@ export function openProjectWindow(project) {
     const latency = 250;
     let [ x, y ] = WINDOW_LAYOUT.main;
 
-    const id = project.name
-                        .replaceAll(/[^A-Za-z]/gmi, '_')
-                        .toLowerCase();
+    const id        = getProjectId(project.name);
     const content   = project.html;
     const links     = project.links.map((e, i) => createLink(e)).join('');
     const roles     = project.roles.map((e, i) => createRole(e)).join('');
@@ -117,6 +121,17 @@ export function openProjectWindow(project) {
     return openedWindows = windows;
 }
 
+export function openProjectWindowFromName(name) {
+    const id = getProjectId(name);
+    const project = projects[id] ?? null;
+    if (project == null) {
+        console.warn('Failed to open a project window', name, id);
+        return false;
+    }
+    console.log('open project window', name, id, project);
+    return openProjectWindow(project);
+}
+
 /** Creates and adds a button to the project panel for the given project */
 function createButton(project) {
     const $hover = $(`<div>`);
@@ -128,15 +143,16 @@ function createButton(project) {
     }
 
     const $a = $('<a>');
-    $a.addClass('button').addClass('popout').text(project.name).attr('href', '#');
+    $a.addClass('button').addClass('popout').text(project.name).attr('href', '#' + getProjectId(project.name));
     $a.prependTo($hover);
-    $a.on('click', () => { 
-        closeProjectWindows();
-        openedWindows = openProjectWindow(project); 
-    });
+    // $a.on('click', () => { 
+    //     closeProjectWindows();
+    //     openedWindows = openProjectWindow(project); 
+    // });
     $hover.appendTo('.link-projects');
     return $hover;
 }
+
 
 export function createProjectWindows() {
     $('#link-projects-stub').remove();
@@ -144,12 +160,15 @@ export function createProjectWindows() {
     // <div class="hover-box" data-image-src="images/partycrashers.gif"><a href="#games" class="button popout">Party Crashers</a></div>
     // <div class="hover-box" data-video-src="https://i.lu.je/2021/RHKmFcrZfI.mp4"><a href="#games" class="button popout">Electronic Super Joy</a></div>
     const items = Object.values(files).sort((a, b) => (a.position === undefined ? 100 : a.position) - (b.position === undefined ? 100 : b.position));
+    projects = {};
     for(let filename in items) {
 
         //Preprocess teh data
-        const item = items[filename];
-        item.html = marked(item.description || ''); 
-        console.log(item.name, item);
+        const item = items[filename];                   // Get the item
+        item.html = marked(item.description || '');     // Run the HTML through the markup
+        projects[getProjectId(item.name)] = item;       // Add to the list of items
+
+        console.log(item.name, item);                   // Log and create the button
         createButton(item);
     }                
 }
