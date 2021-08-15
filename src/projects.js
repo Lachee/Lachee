@@ -19,7 +19,7 @@ const WINDOW_LAYOUT = {
 }
 
 /** Closes all existing windows */
-function closeWindows() {
+export function closeProjectWindows() {
     for(let window of openedWindows) {
         window.close();
     }
@@ -27,7 +27,9 @@ function closeWindows() {
 }
 
 /** Creates the windows for the project because the button was click */
-function openWindow(project) {
+export function openProjectWindow(project) {
+    closeProjectWindows();
+
     function createLink(link) {
         console.log(link);
         const icon = link.icon || 'fab fa-' + link.type;
@@ -112,7 +114,7 @@ function openWindow(project) {
 
     //Return the windows
     createTooltip('[title]');
-    return windows;
+    return openedWindows = windows;
 }
 
 /** Creates and adds a button to the project panel for the given project */
@@ -129,14 +131,14 @@ function createButton(project) {
     $a.addClass('button').addClass('popout').text(project.name).attr('href', '#');
     $a.prependTo($hover);
     $a.on('click', () => { 
-        closeWindows();
-        openedWindows = openWindow(project); 
+        closeProjectWindows();
+        openedWindows = openProjectWindow(project); 
     });
     $hover.appendTo('.link-projects');
     return $hover;
 }
 
-document.addEventListener('DOMContentLoaded', function() {
+export function createProjectWindows() {
     $('#link-projects-stub').remove();
     
     // <div class="hover-box" data-image-src="images/partycrashers.gif"><a href="#games" class="button popout">Party Crashers</a></div>
@@ -150,4 +152,4 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log(item.name, item);
         createButton(item);
     }                
-});
+}
