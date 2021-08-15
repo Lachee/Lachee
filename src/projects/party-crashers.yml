@@ -13,9 +13,23 @@ description: >
   added support for all platforms (Steam, PlayStation 4, Nintendo Switch) which
   involved creating wrappers and implementing different APIs provided by the
   platforms and handling a variety of controller configurations.
+
+  * Lead programmer creating core systems
+
+  * Wrote AI for all the vehicles
+
+  * Wrote the Pickup System
+
+  * Implemented PlayStation and Nintendo API's for saving
+
+  * Created a controller mapping system that distinguishes all controller types
+
+  * Invented a middleware layer to abstract all console functions and handle account management
+
 roles:
   - Lead Programmer
   - Platform Integration
+  - Unity3D
 videos:
   - youtube: syLvUI1jjOg
     title: Party Crashers Trailer

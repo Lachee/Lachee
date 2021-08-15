@@ -1,0 +1,31 @@
+name: Starwatch
+background: images/ilovebacons.jpg
+description: >
+  Starwatch is a Starbound Server manager with player management, crash recovery and a REST and websocket (live) API.
+  It provides stability to the game servers, account management, access control and a lot more!
+  
+
+  Starwatch was a tool i made for a online community i was appart of called iLoveBacons.
+  It provided a method to keep the server running and hook into the logs to do **analytics**, searching for crashes, exploits,
+  and player state changes. 
+
+
+  * Live API to get real time tracking events for players and chat
+
+  * Full REST API to create accounts, manage the server, kick users
+
+  * Tools for protected worlds and backups of game files.
+
+  * VPN detection
+
+
+roles:
+  - Creator
+  - C#
+  - Custom Framework
+videos: 
+images:
+links:
+  - title: GitHub Repository
+    url: https://github.com/Lachee/starwatch
+    type: github

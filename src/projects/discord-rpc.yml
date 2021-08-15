@@ -1,14 +1,25 @@
 name: Discord RPC CSharp
 background: images/matrix.gif
 description: |
-  Fancy bot **TOOL**
+  This is a C# implementation of the Discord RPC library which was originally written in C
+  This avoids having to use the official C++ and instead provides a managed way of using the Rich Presence within the .NET environment*.
 
-  Potato and dragons
+
+  My most popular project on my GitHub, a implementation of Discord's RPC protocol from the grounds up to better support Unity3D.
+  I had to implement a custom solution because of Unity's limitations and trying to avoid native libraries.
+
+  
+  Unfortantly, i was unable to avoid native libraries completely, and had to resort in a fully custom `NamedPipeStream` for Unity3D,
+  as a bug in Mono causes Unity3D to hard freeze when using a pipe as duplex.
 
 roles:
-  - Author
+  - Creator
+  - C#
+  - Unity3D
 videos:
 images:
+  - src: https://i.lu.je/2021/chrome_Uyucc3LDI3.png
+    title: code.exe - much wow
 links:
   - title: GitHub Repository
     url: https://github.com/lachee/discord-rpc-csharp

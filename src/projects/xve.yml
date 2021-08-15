@@ -1,13 +1,33 @@
 name: XVE Bot Editor
 background: images/v_xve.mp4
-position: 20
+position: 50
 description: >
-  Fancy bot **TOOL**
+  Visualise your discord bots with a fully featured node based editor. 
+  XVE is my side project to create a visual editor for Discord bots, and bots in general. 
+
+
+  Currently being refactored, XVE aims to be a plugin solution for hosting providers to allow visual editing of bots.
+  There plans to be extendable and fully modular for future uses such as Twitch Bots.
+
+
+  I wrote the entire project from the grounds up. Implementing the API and renders, creating a custom framework to support it.
+
+
 roles:
-  - Author
+  - Creator
+  - PHP
+  - Custom Framework
 videos: 
 images:
+  - src: https://i.lu.je/2021/chrome_qJscRoiH1O.png
+    title: XVE Graph
 links:
   - title: Demo Version
     url: https://xve.lachee.dev/
     icon: far fa-globe
+  - title: Documentation
+    url: https://lachee.github.io/xve-docs/
+    icon: far fa-book    
+  - title: WIP Renderer
+    url: https://github.com/Lachee/spaghetti
+    type: github

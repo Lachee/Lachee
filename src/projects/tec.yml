@@ -3,11 +3,38 @@ background: images/tec.webp
 background-class: glow
 position: 20
 description: >
-  Fancy bot **TOOL**
+  The Eternal Castle [REMASTERED] is a retro indie game taking inserpation from titles such as Prince of Persia. 
+  Navigate through a story driven platformer with retro "CGA Graphics".
+
+
+  I ported this game from an existing Game Maker Studio 2 project for the PlayStation 4. Having never used GMS2 before,
+  it was a learning curve and a challange I manage to hit and complete. 
+
+
+  I had to rewrite much of the saving and menu logic to work with the PS4 (while keeping everything backwards compatible for other consoles),
+  and deal with long strange loading times that were only specific for the PS4. Such example, after long hours, I discovered screen view shifting below 0 caused
+  the PlayStation to completely black screen and not render anything.
+
+  * Rewrote save to support async
+
+  * Implemented custom loading screen for PS4
+    * PS4 loaded much slower and to get around QA it needed modifications to not freeze.
+
+  * Implemented custom extensions to support some features such as controller colours
+
+  * Provided support for patches and future bug fixes
+
+  * Deep-Delved into AI to improve performance for the PS4
+
 roles:
-  - PS4 Port
-videos: 
+  - PlayStation 4 Port
+  - GameMaker Studio 2
+videos:
+  - youtube: OkWdaz6Ut2s
+    title: The Eternal Castle [REMASTERED] - Official Trailer (2019)
 images:
+  - src: images/tec.webp
+    title: TEC
 links:
   - title: PlayStation Store
     url: https://store.playstation.com/en-us/product/UP3590-CUSA20639_00-0000000000000000/
