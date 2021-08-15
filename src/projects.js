@@ -42,6 +42,10 @@ function openWindow(project) {
 `;
     }
 
+    function createRole(role) {
+        return `<span class="role">${role}</span>`;
+    }
+
     const movement = 100;
     const latency = 250;
     let [ x, y ] = WINDOW_LAYOUT.main;
@@ -51,7 +55,8 @@ function openWindow(project) {
                         .toLowerCase();
     const content   = project.html;
     const links     = project.links.map((e, i) => createLink(e)).join('');
-    const template  = `<div class="content">${content}</div><div class="footer links">${links}</div>`;
+    const roles     = project.roles.map((e, i) => createRole(e)).join('');
+    const template  = `<div class="roles">${roles}</div><div class="content">${content}</div><div class="footer links">${links}</div>`;
     const windows = [
         createWindow(template, {
             id:         id,

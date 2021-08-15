@@ -232,3 +232,14 @@ html, body {
         100% { filter: blur(1px) brightness(2) }
     }
 }
+
+/** Roles */
+.roles {
+    .role {
+        margin-right: 1em;
+        font-family: 'Syne Mono';
+        font-size: 13pt;
+        &:before {content: '-'; margin-right: 5px; }
+    }
+    
+}
