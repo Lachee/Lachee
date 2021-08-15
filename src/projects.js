@@ -13,7 +13,7 @@ const files = (ctx => {
 // List of actively opened windows
 let openedWindows = [];
 const WINDOW_LAYOUT = {
-    main:   [ 136, 85 ],
+    main:   [ 136, 10 ],
     images: [ 650, 85 ],
     videos: [ 650, 480 ]
 }
