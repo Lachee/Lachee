@@ -10338,6 +10338,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+/** list of windows currently opened that are not project windows */
+
+var _aboutWindows = {};
 
 function wait(_x) {
   return _wait.apply(this, arguments);
@@ -10385,35 +10388,90 @@ document.addEventListener('DOMContentLoaded', function () {
   (0,_videofeed__WEBPACK_IMPORTED_MODULE_11__.createVideoFeed)();
   createTooltip('[title]');
   navigateHash();
-});
+}); // When the hash changes, try to find the window and open it
+
 window.addEventListener('hashchange', function () {
-  navigateHash();
-}, false);
+  return navigateHash();
+}); // When a window closes, try to reset the hash
+
+window.addEventListener('window:closed', function (event) {
+  return clearHash(event.target.id);
+});
+window.addEventListener('window:hidden', function (event) {
+  return clearHash(event.target.id);
+});
+/** clears the hash if the id matches */
+
+function clearHash(id) {
+  var hash = decodeURI(window.location.hash).substr(1);
+
+  if (id == hash) {
+    window.location.hash = '';
+  }
+}
+/** navigates to the hash window */
+
 
 function navigateHash() {
   // Find the window that we should open
-  var hash = decodeURI(window.location.hash).replace('#', '');
+  var hash = decodeURI(window.location.hash).substr(1);
 
-  if (!(0,_projects_js__WEBPACK_IMPORTED_MODULE_10__.openProjectWindowFromName)(hash)) {// TODO: Find about windows
+  if (!(0,_projects_js__WEBPACK_IMPORTED_MODULE_10__.openProjectWindowFromName)(hash)) {
+    var _aboutWindows$hash;
+
+    var aboutWindow = (_aboutWindows$hash = _aboutWindows[hash]) !== null && _aboutWindows$hash !== void 0 ? _aboutWindows$hash : null;
+
+    if (aboutWindow != null) {
+      for (var _i = 0, _Object$values = Object.values(_aboutWindows); _i < _Object$values.length; _i++) {
+        var otherWindow = _Object$values[_i];
+        otherWindow.hide();
+      }
+
+      aboutWindow.open();
+    }
   }
 }
 
 function createAboutWindows() {
   // Make all the windows dragables
+  var pendingChildren = [];
   cash_dom__WEBPACK_IMPORTED_MODULE_7___default()('template.window').each(function (i, e) {
     var _parseInt, _parseInt2;
 
+    // Create the window
     console.log('window', e, e.content, e.id, e.style);
-    (0,_window_js__WEBPACK_IMPORTED_MODULE_9__.createWindow)(e.content, {
+    _aboutWindows[e.id] = (0,_window_js__WEBPACK_IMPORTED_MODULE_9__.createWindow)(e.content, {
       id: e.id,
-      style: e.style,
-      closeable: true,
-      preOpen: true,
       title: e.title || undefined,
+      style: e.style,
+      closeable: false,
+      minimizable: true,
+      minimizeClass: 'window-close',
+      preOpen: i == 0,
       x: (_parseInt = parseInt(e.getAttribute('x'), 10)) !== null && _parseInt !== void 0 ? _parseInt : undefined,
       y: (_parseInt2 = parseInt(e.getAttribute('y'), 10)) !== null && _parseInt2 !== void 0 ? _parseInt2 : undefined
-    });
-  });
+    }); // Push this window to the list of windows that need their parents set
+
+    if (e.getAttribute('parent-id') != null) {
+      pendingChildren.push({
+        element: e,
+        window: _aboutWindows[e.id],
+        parentId: e.getAttribute('parent-id')
+      });
+    }
+  }); // Set the parent windows
+
+  for (var _i2 = 0, _pendingChildren = pendingChildren; _i2 < _pendingChildren.length; _i2++) {
+    var pending = _pendingChildren[_i2];
+    var parentWindow = _aboutWindows[pending.parentId];
+
+    if (parentWindow == null) {
+      console.warn('cannot link window because parent is null', pending);
+      continue;
+    }
+
+    pending.window.setParentWindow(parentWindow);
+  }
 }
 
 /***/ }),
@@ -10490,7 +10548,7 @@ var WINDOW_LAYOUT = {
 /** Generates an ID from the project name */
 
 function getProjectId(name) {
-  return name.replaceAll(/[^A-Za-z0-9]/gmi, '-').toLowerCase();
+  return name.replace('#', '').replaceAll(/[^A-Za-z0-9]/gmi, '-').toLowerCase();
 }
 /** Closes all existing windows */
 
@@ -10544,14 +10602,19 @@ function openProjectWindow(project) {
     return createRole(e);
   }).join('');
   var template = "<div class=\"roles\">".concat(roles, "</div><div class=\"content\">").concat(content, "</div><div class=\"footer links\">").concat(links, "</div>");
-  var windows = [(0,_window_js__WEBPACK_IMPORTED_MODULE_3__.createWindow)(template, {
+  var windows = []; // Add the master window
+
+  var masterWindow = (0,_window_js__WEBPACK_IMPORTED_MODULE_3__.createWindow)(template, {
     id: id,
     title: project.name,
     x: x,
     y: y,
     singleton: false,
     contentClass: 'window-column'
-  })]; // Add the images
+  });
+  masterWindow.addEventListener('window:closed', function () {//closeProjectWindows();
+  });
+  windows.push(masterWindow); // Add the images
 
   var _WINDOW_LAYOUT$images = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__.default)(WINDOW_LAYOUT.images, 2);
 
@@ -10565,9 +10628,11 @@ function openProjectWindow(project) {
       title: image.title || '',
       x: x,
       y: y,
-      delay: latency * windows.length,
+      delay: -1,
+      //latency * windows.length,
       singleton: false
     });
+    window.setParentWindow(masterWindow);
     windows.push(window);
     x += movement;
     y += movement;
@@ -10589,9 +10654,11 @@ function openProjectWindow(project) {
       title: video.title || '',
       x: x,
       y: y,
-      delay: latency * windows.length,
+      delay: -1,
+      //latency * windows.length,
       singleton: false
     });
+    window.setParentWindow(masterWindow);
     windows.push(window);
     x += movement;
     y += movement;
@@ -10879,9 +10946,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _scss_window_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./scss/window.scss */ "./src/scss/window.scss");
 
 
+function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+
 
 
 var globalWindowIndex = 0;
+var delayTimer = 100;
 /** Makes a new window 
  * options:
  *  x, y        - position
@@ -10936,10 +11011,15 @@ function createWindow(content) {
 
   var container = document.querySelector('.retro-gradient .main-content');
   var addClass = options.contentClass || '';
-  var closeClass = options.preOpen ? '' : 'closed';
-  var closeBTN = options.closeable || options.closeable === undefined ? '<div class="window-button window-close" onclick="this.parentElement.parentElement.close()"></div>' : '';
+  var isClosedClass = options.preOpen ? '' : 'closed';
+  var closeClass = options.closeClass || 'window-close';
+  var minimizeClass = options.minimizeClass || 'window-minimise';
+  var maximizeClass = options.maximizeClass || 'window-maximise';
+  var closeBTN = options.closeable || options.closeable === undefined ? "<div class=\"window-button ".concat(closeClass, "\" onclick=\"this.parentElement.parentElement.close()\"></div>") : '';
+  var maximizeBTN = options.maximizable ? "<div class=\"window-button ".concat(maximizeClass, "\" onclick=\"this.parentElement.parentElement.open()\"></div>") : '';
+  var hideBTN = options.minimizable || options.minimizable === undefined ? "<div class=\"window-button ".concat(minimizeClass, "\" onclick=\"this.parentElement.parentElement.hide()\"></div>") : '';
   var titleDIV = options.title ? "<div class=\"window-title\">".concat(options.title, "</div>") : '';
-  var template = "\n<div class=\"window ".concat(closeClass, "\" onmousedown=\"this.focus()\">\n    <div class=\"window-heading drag-handle\">\n        ").concat(titleDIV, "\n        ").concat(closeBTN, "\n        <div class=\"window-button window-maximise\" onclick=\"this.parentElement.parentElement.open()\"></div>\n        <div class=\"window-button window-minimise\" onclick=\"this.parentElement.parentElement.hide()\"></div>\n    </div>\n    <div class=\"window-content  ").concat(addClass, "\"></div>\n</div>\n    "); //Create the element
+  var template = "\n<div class=\"window ".concat(isClosedClass, "\" onmousedown=\"this.focus()\">\n    <div class=\"window-heading drag-handle\">\n        ").concat(titleDIV, "\n        ").concat(closeBTN, "\n        ").concat(maximizeBTN, "\n        ").concat(hideBTN, "\n    </div>\n    <div class=\"window-content  ").concat(addClass, "\"></div>\n</div>\n    "); //Create the element
 
   var guid = randomWID();
   var $window = cash_dom__WEBPACK_IMPORTED_MODULE_2___default()(template);
@@ -10956,10 +11036,44 @@ function createWindow(content) {
   //Fix the depth
 
   if (options.z) window.dragRoot.style.zIndex = options.z + globalWindowIndex;
+  window.childrenWindows = [];
+  window.parentWindow = null;
+
+  window.setParentWindow = function (parentWindow) {
+    // Remove from old child list
+    if (window.parentWindow != null) {
+      window.parentWindow.removeChildWindow(window);
+    } // Set new child list
+
+
+    console.log('setting child window', parentWindow, window);
+    parentWindow.addChildWindow(window);
+  };
+
+  window.removeChildWindow = function (child) {
+    if (child == null) return false;
+    window.childrenWindows = window.childrenWindows.filter(function (value) {
+      return value != child;
+    });
+    child.parentWindow = null;
+    return child;
+  };
+
+  window.addChildWindow = function (child) {
+    if (child == null) return false;
+    window.childrenWindows.push(child);
+    child.parentWindow = window;
+    console.log('new child window', window.childrenWindows, child);
+    return child;
+  };
   /** Brings a window to focus */
+
 
   window.focus = function () {
     window.dragRoot.style.zIndex = globalWindowIndex++;
+    window.dispatchEvent(new Event('window:focused', {
+      bubbles: true
+    }));
     return window;
   };
   /** Hides a window and destroys it */
@@ -10967,18 +11081,79 @@ function createWindow(content) {
 
   window.close = function () {
     if (!window.windowHidden) window.hide();
-    if (!window.windowClosed) setTimeout(function () {
-      return window.dragRoot.remove();
-    }, 1000);
-    window.windowClosed = true;
+
+    if (!window.windowClosed) {
+      // Hide the children
+      var childCount = 0;
+
+      var _iterator = _createForOfIteratorHelper(window.childrenWindows),
+          _step;
+
+      try {
+        var _loop = function _loop() {
+          var child = _step.value;
+          setTimeout(function () {
+            return child.close();
+          }, ++childCount * delayTimer);
+        };
+
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          _loop();
+        } // Actually close the window
+
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
+      }
+
+      window.windowClosed = true;
+      setTimeout(function () {
+        return window.dragRoot.remove();
+      }, 1000);
+      window.dispatchEvent(new Event('window:closed', {
+        bubbles: true
+      }));
+    }
+
     return window;
   };
   /** Hides a window */
 
 
   window.hide = function () {
-    window.windowHidden = true;
-    window.classList.add('closed');
+    if (!window.windowHidden) {
+      // Hide the children
+      var childCount = 0;
+
+      var _iterator2 = _createForOfIteratorHelper(window.childrenWindows),
+          _step2;
+
+      try {
+        var _loop2 = function _loop2() {
+          var child = _step2.value;
+          setTimeout(function () {
+            return child.hide();
+          }, ++childCount * delayTimer);
+        };
+
+        for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+          _loop2();
+        } // Actually hide the window
+
+      } catch (err) {
+        _iterator2.e(err);
+      } finally {
+        _iterator2.f();
+      }
+
+      window.windowHidden = true;
+      window.classList.add('closed');
+      window.dispatchEvent(new Event('window:hidden', {
+        bubbles: true
+      }));
+    }
+
     return window;
   };
   /** Opens a window */
@@ -10988,9 +11163,37 @@ function createWindow(content) {
     if (window.windowClosed) {
       console.warn('cannot possibly open a window that is closed');
       return null;
+    } // Open the children
+
+
+    var childCount = 0;
+
+    var _iterator3 = _createForOfIteratorHelper(window.childrenWindows),
+        _step3;
+
+    try {
+      var _loop3 = function _loop3() {
+        var child = _step3.value;
+        setTimeout(function () {
+          return child.open();
+        }, ++childCount * delayTimer);
+      };
+
+      for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+        _loop3();
+      } // Open this window
+
+    } catch (err) {
+      _iterator3.e(err);
+    } finally {
+      _iterator3.f();
     }
 
+    window.windowHidden = false;
     window.classList.remove('closed');
+    window.dispatchEvent(new Event('window:opened', {
+      bubbles: true
+    }));
     return window;
   }; //Add events
   //$(window).on('mousedown', () => window.focus());

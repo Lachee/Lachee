@@ -7250,9 +7250,9 @@ readers do not read off random characters that represent icons */
     box-shadow: 10px 10px black;
     transform: translate(-10px, -10px);
     animation: 0.15s ease;
-    animation-name: u5d18c861; }
+    animation-name: uf7cd05a1; }
 
-@keyframes u5d18c861 {
+@keyframes uf7cd05a1 {
   from {
     box-shadow: 0px 0px black;
     transform: translate(0px, 0px); }
@@ -7297,9 +7297,9 @@ readers do not read off random characters that represent icons */
       box-shadow: 10px 10px #fa5c5c;
       transform: translate(-10px, -10px);
       animation: 0.15s ease;
-      animation-name: ue62b0f51; }
+      animation-name: uf39afb7a; }
 
-@keyframes ue62b0f51 {
+@keyframes uf39afb7a {
   from {
     box-shadow: 0px 0px #fa5c5c;
     transform: translate(0px, 0px); }
@@ -7325,9 +7325,9 @@ readers do not read off random characters that represent icons */
       box-shadow: 10px 10px #FF5700;
       transform: translate(-10px, -10px);
       animation: 0.15s ease;
-      animation-name: u7a0e6b9d; }
+      animation-name: u82870185; }
 
-@keyframes u7a0e6b9d {
+@keyframes u82870185 {
   from {
     box-shadow: 0px 0px #FF5700;
     transform: translate(0px, 0px); }
@@ -7353,9 +7353,9 @@ readers do not read off random characters that represent icons */
       box-shadow: 10px 10px #E4000F;
       transform: translate(-10px, -10px);
       animation: 0.15s ease;
-      animation-name: u4241634e; }
+      animation-name: u0da975e1; }
 
-@keyframes u4241634e {
+@keyframes u0da975e1 {
   from {
     box-shadow: 0px 0px #E4000F;
     transform: translate(0px, 0px); }
@@ -7381,9 +7381,9 @@ readers do not read off random characters that represent icons */
       box-shadow: 10px 10px #7289DA;
       transform: translate(-10px, -10px);
       animation: 0.15s ease;
-      animation-name: u53d1ff83; }
+      animation-name: u8eb85a42; }
 
-@keyframes u53d1ff83 {
+@keyframes u8eb85a42 {
   from {
     box-shadow: 0px 0px #7289DA;
     transform: translate(0px, 0px); }
@@ -7409,9 +7409,9 @@ readers do not read off random characters that represent icons */
       box-shadow: 10px 10px #6441a5;
       transform: translate(-10px, -10px);
       animation: 0.15s ease;
-      animation-name: u23d6b513; }
+      animation-name: u76d6202e; }
 
-@keyframes u23d6b513 {
+@keyframes u76d6202e {
   from {
     box-shadow: 0px 0px #6441a5;
     transform: translate(0px, 0px); }
@@ -7437,9 +7437,9 @@ readers do not read off random characters that represent icons */
       box-shadow: 10px 10px #1DA1F2;
       transform: translate(-10px, -10px);
       animation: 0.15s ease;
-      animation-name: ubfb748f7; }
+      animation-name: u1d39e8d0; }
 
-@keyframes ubfb748f7 {
+@keyframes u1d39e8d0 {
   from {
     box-shadow: 0px 0px #1DA1F2;
     transform: translate(0px, 0px); }
@@ -7465,9 +7465,9 @@ readers do not read off random characters that represent icons */
       box-shadow: 10px 10px #006FCD;
       transform: translate(-10px, -10px);
       animation: 0.15s ease;
-      animation-name: udf2e5c07; }
+      animation-name: ufcba808c; }
 
-@keyframes udf2e5c07 {
+@keyframes ufcba808c {
   from {
     box-shadow: 0px 0px #006FCD;
     transform: translate(0px, 0px); }
@@ -7493,9 +7493,9 @@ readers do not read off random characters that represent icons */
       box-shadow: 10px 10px black;
       transform: translate(-10px, -10px);
       animation: 0.15s ease;
-      animation-name: ue63b9ac2; }
+      animation-name: u253032e6; }
 
-@keyframes ue63b9ac2 {
+@keyframes u253032e6 {
   from {
     box-shadow: 0px 0px black;
     transform: translate(0px, 0px); }
@@ -7521,9 +7521,9 @@ readers do not read off random characters that represent icons */
       box-shadow: 10px 10px black;
       transform: translate(-10px, -10px);
       animation: 0.15s ease;
-      animation-name: u731132da; }
+      animation-name: uef651655; }
 
-@keyframes u731132da {
+@keyframes uef651655 {
   from {
     box-shadow: 0px 0px black;
     transform: translate(0px, 0px); }
@@ -7620,9 +7620,9 @@ readers do not read off random characters that represent icons */
     box-shadow: 10px 10px black;
     transform: translate(-10px, -10px);
     animation: 0.15s ease;
-    animation-name: u2c1a2aac; }
+    animation-name: u4be59497; }
 
-@keyframes u2c1a2aac {
+@keyframes u4be59497 {
   from {
     box-shadow: 0px 0px black;
     transform: translate(0px, 0px); }
@@ -7734,29 +7734,29 @@ ul {
     color: #7b9eff; }
 
 /** Special social media box */
-#win-social .social-navigation {
+.window#about .social-navigation {
   float: left; }
 
-#win-social .social-navigation, #win-social .special-box {
+.window#about .social-navigation, .window#about .special-box {
   display: inline-block; }
 
-#win-social .social-image {
+.window#about .social-image {
   display: flex;
   align-items: center; }
-  #win-social .social-image .special-box {
+  .window#about .social-image .special-box {
     width: 390px;
     height: 340px;
     transform: rotate3d(0, 0, 1, 358deg);
     /** This class displays the profile image instead of the video */ }
-    #win-social .social-image .special-box video {
+    .window#about .social-image .special-box video {
       position: relative;
       top: 10px; }
-    #win-social .social-image .special-box.profile-image {
+    .window#about .social-image .special-box.profile-image {
       background-image: url("https://d.lu.je/avatar/embed/lachee?size=1024");
       background-size: contain;
       background-repeat: no-repeat;
       background-position: center; }
-      #win-social .social-image .special-box.profile-image video {
+      .window#about .social-image .special-box.profile-image video {
         display: none; }
 
 /**
