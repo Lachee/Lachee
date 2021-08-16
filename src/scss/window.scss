@@ -13,6 +13,8 @@
         transform: skewX(0);
         transition: transform 0.25s ease-out; // This sadly causes artifacts
     }
+    
+    &.hidden { display: none; opacity: 0; }
 }
 
 .window {

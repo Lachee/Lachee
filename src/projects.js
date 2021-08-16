@@ -26,6 +26,7 @@ function getProjectId(name) {
 
 /** Closes all existing windows */
 export function closeProjectWindows() {
+    console.log('closing project windows');
     for(let window of openedWindows) {
         window.close();
     }

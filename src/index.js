@@ -15,7 +15,7 @@ import './mobile.js';
 // import 'tippy.js/animations/scale.css';
 
 import {createWindow } from './window.js';
-import { createProjectWindows, openProjectWindowFromName } from './projects.js';
+import { closeProjectWindows, createProjectWindows, openProjectWindowFromName } from './projects.js';
 import { createVideoFeed } from './videofeed';
 
 /** list of windows currently opened that are not project windows */
@@ -67,12 +67,21 @@ function navigateHash() {
     // Find the window that we should open
     const hash = decodeURI(window.location.hash).substr(1);
     if (!openProjectWindowFromName(hash)) {
+
+        // Find the about me window
         const aboutWindow = _aboutWindows[hash] ?? null;
         if (aboutWindow != null) {
-            for(let otherWindow of Object.values(_aboutWindows))
-                otherWindow.hide();
 
+            // Close every other window
+            closeProjectWindows();
+//            for(let otherWindow of Object.values(_aboutWindows)) {
+//                if (otherWindow.id != hash && (otherWindow.parentWindow||0) != hash)
+//                    otherWindow.hide();
+//            }
+
+            // Open the window
             aboutWindow.open();
+            aboutWindow.focus();
         }
     }
 }
@@ -91,7 +100,8 @@ function createAboutWindows() {
             closeable:      false,
             minimizable:    true,
             minimizeClass:  'window-close',
-            preOpen:        i == 0,
+            preOpen:        false,
+            preHide:        true,
             x: parseInt(e.getAttribute('x'), 10) ?? undefined,
             y: parseInt(e.getAttribute('y'), 10) ?? undefined,            
         });
@@ -115,5 +125,8 @@ function createAboutWindows() {
         }
         pending.window.setParentWindow(parentWindow);
     }
+
+    _aboutWindows['about'].open();
+    _aboutWindows['about'].focus();
 
 }

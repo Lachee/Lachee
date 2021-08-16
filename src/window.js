@@ -2,7 +2,7 @@ import { Draggable } from '@shopify/draggable';
 import $ from "cash-dom";
 import './scss/window.scss';
 
-let globalWindowIndex   = 0;
+let globalWindowIndex   = 5;
 let delayTimer          = 100;
 
 /** Makes a new window 
@@ -123,6 +123,13 @@ export function createWindow(content, options = { }) {
     /** Brings a window to focus */
     window.focus = function() {
         window.dragRoot.style.zIndex = globalWindowIndex++;
+
+        // Hide the children
+        let childCount = 0;
+        for(let child of window.childrenWindows) {
+            setTimeout(() => child.focus(), ++childCount * delayTimer);
+        }
+        
         window.dispatchEvent(new Event('window:focused', { bubbles: true }));
         return window;
     }
@@ -162,6 +169,7 @@ export function createWindow(content, options = { }) {
             // Actually hide the window
             window.windowHidden = true;
             window.classList.add('closed');
+            window.dragRoot.classList.add('hidden');
             window.dispatchEvent(new Event('window:hidden', { bubbles: true }));
         }
         return window;
@@ -183,6 +191,7 @@ export function createWindow(content, options = { }) {
         // Open this window
         window.windowHidden = false;
         window.classList.remove('closed');
+        window.dragRoot.classList.remove('hidden');
         window.dispatchEvent(new Event('window:opened', { bubbles: true }));
         return window;
     }
@@ -196,8 +205,11 @@ export function createWindow(content, options = { }) {
     if (options.z === undefined)
         window.focus();
 
+
     if (options.preOpen) {
         window.open();
+    } else  if (options.preHide) {
+        window.hide();
     } else {
         const delay = options.delay ?? 10;
         if (delay >= 0) {

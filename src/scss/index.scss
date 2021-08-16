@@ -10,7 +10,7 @@
 @import './popout.scss';
 
 $profile-image-url: 'https://d.lu.je/avatar/embed/lachee?size=1024' !default;
-
+$email-address: '' !default;
 
 template { display: none !important; }
 html, body {
@@ -247,4 +247,9 @@ ul {
         &:before {content: '-'; margin-right: 5px; }
     }
     
+}
+
+/** Hidden Info */
+p.email::after {
+    content: $email-address;
 }

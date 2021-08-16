@@ -4,6 +4,7 @@ dotenv.config();
 const path = require('path');
 const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 
 module.exports = (env) => {
@@ -85,6 +86,12 @@ module.exports = (env) => {
                   if (HIDE_PLATFORMS)
                     variables['hide-platforms'] = 'true';
 
+                  const EMAIL = env.EMAIL || process.env.EMAIL;
+                  if (EMAIL)
+                    variables['email-address'] = `'${EMAIL}'`;
+
+      
+
                   // Build the new content
                   for (const key in variables)
                     content = `$${key}: ${variables[key]};\n${content}`;
@@ -111,6 +118,12 @@ module.exports = (env) => {
         filename: 'app.css',
         chunkFilename: 'app.[name].css',
       }),
+      // new HtmlWebpackPlugin({
+      //   filename: '../index.html',
+      //   template: 'src/index.html',
+      //   email:    env.EMAIL,
+      //   phone:    env.phone
+      // })
     ],
   };
 };
