@@ -10419,15 +10419,19 @@ function navigateHash() {
   if (!(0,_projects_js__WEBPACK_IMPORTED_MODULE_10__.openProjectWindowFromName)(hash)) {
     var _aboutWindows$hash;
 
+    // Find the about me window
     var aboutWindow = (_aboutWindows$hash = _aboutWindows[hash]) !== null && _aboutWindows$hash !== void 0 ? _aboutWindows$hash : null;
 
     if (aboutWindow != null) {
-      for (var _i = 0, _Object$values = Object.values(_aboutWindows); _i < _Object$values.length; _i++) {
-        var otherWindow = _Object$values[_i];
-        otherWindow.hide();
-      }
+      // Close every other window
+      (0,_projects_js__WEBPACK_IMPORTED_MODULE_10__.closeProjectWindows)(); //            for(let otherWindow of Object.values(_aboutWindows)) {
+      //                if (otherWindow.id != hash && (otherWindow.parentWindow||0) != hash)
+      //                    otherWindow.hide();
+      //            }
+      // Open the window
 
       aboutWindow.open();
+      aboutWindow.focus();
     }
   }
 }
@@ -10447,7 +10451,8 @@ function createAboutWindows() {
       closeable: false,
       minimizable: true,
       minimizeClass: 'window-close',
-      preOpen: i == 0,
+      preOpen: false,
+      preHide: true,
       x: (_parseInt = parseInt(e.getAttribute('x'), 10)) !== null && _parseInt !== void 0 ? _parseInt : undefined,
       y: (_parseInt2 = parseInt(e.getAttribute('y'), 10)) !== null && _parseInt2 !== void 0 ? _parseInt2 : undefined
     }); // Push this window to the list of windows that need their parents set
@@ -10461,8 +10466,8 @@ function createAboutWindows() {
     }
   }); // Set the parent windows
 
-  for (var _i2 = 0, _pendingChildren = pendingChildren; _i2 < _pendingChildren.length; _i2++) {
-    var pending = _pendingChildren[_i2];
+  for (var _i = 0, _pendingChildren = pendingChildren; _i < _pendingChildren.length; _i++) {
+    var pending = _pendingChildren[_i];
     var parentWindow = _aboutWindows[pending.parentId];
 
     if (parentWindow == null) {
@@ -10472,6 +10477,10 @@ function createAboutWindows() {
 
     pending.window.setParentWindow(parentWindow);
   }
+
+  _aboutWindows['about'].open();
+
+  _aboutWindows['about'].focus();
 }
 
 /***/ }),
@@ -10554,6 +10563,8 @@ function getProjectId(name) {
 
 
 function closeProjectWindows() {
+  console.log('closing project windows');
+
   var _iterator = _createForOfIteratorHelper(openedWindows),
       _step;
 
@@ -10955,7 +10966,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
 
 
-var globalWindowIndex = 0;
+var globalWindowIndex = 5;
 var delayTimer = 100;
 /** Makes a new window 
  * options:
@@ -11070,7 +11081,30 @@ function createWindow(content) {
 
 
   window.focus = function () {
-    window.dragRoot.style.zIndex = globalWindowIndex++;
+    window.dragRoot.style.zIndex = globalWindowIndex++; // Hide the children
+
+    var childCount = 0;
+
+    var _iterator = _createForOfIteratorHelper(window.childrenWindows),
+        _step;
+
+    try {
+      var _loop = function _loop() {
+        var child = _step.value;
+        setTimeout(function () {
+          return child.focus();
+        }, ++childCount * delayTimer);
+      };
+
+      for (_iterator.s(); !(_step = _iterator.n()).done;) {
+        _loop();
+      }
+    } catch (err) {
+      _iterator.e(err);
+    } finally {
+      _iterator.f();
+    }
+
     window.dispatchEvent(new Event('window:focused', {
       bubbles: true
     }));
@@ -11086,25 +11120,25 @@ function createWindow(content) {
       // Hide the children
       var childCount = 0;
 
-      var _iterator = _createForOfIteratorHelper(window.childrenWindows),
-          _step;
+      var _iterator2 = _createForOfIteratorHelper(window.childrenWindows),
+          _step2;
 
       try {
-        var _loop = function _loop() {
-          var child = _step.value;
+        var _loop2 = function _loop2() {
+          var child = _step2.value;
           setTimeout(function () {
             return child.close();
           }, ++childCount * delayTimer);
         };
 
-        for (_iterator.s(); !(_step = _iterator.n()).done;) {
-          _loop();
+        for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+          _loop2();
         } // Actually close the window
 
       } catch (err) {
-        _iterator.e(err);
+        _iterator2.e(err);
       } finally {
-        _iterator.f();
+        _iterator2.f();
       }
 
       window.windowClosed = true;
@@ -11126,29 +11160,30 @@ function createWindow(content) {
       // Hide the children
       var childCount = 0;
 
-      var _iterator2 = _createForOfIteratorHelper(window.childrenWindows),
-          _step2;
+      var _iterator3 = _createForOfIteratorHelper(window.childrenWindows),
+          _step3;
 
       try {
-        var _loop2 = function _loop2() {
-          var child = _step2.value;
+        var _loop3 = function _loop3() {
+          var child = _step3.value;
           setTimeout(function () {
             return child.hide();
           }, ++childCount * delayTimer);
         };
 
-        for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
-          _loop2();
+        for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+          _loop3();
         } // Actually hide the window
 
       } catch (err) {
-        _iterator2.e(err);
+        _iterator3.e(err);
       } finally {
-        _iterator2.f();
+        _iterator3.f();
       }
 
       window.windowHidden = true;
       window.classList.add('closed');
+      window.dragRoot.classList.add('hidden');
       window.dispatchEvent(new Event('window:hidden', {
         bubbles: true
       }));
@@ -11168,29 +11203,30 @@ function createWindow(content) {
 
     var childCount = 0;
 
-    var _iterator3 = _createForOfIteratorHelper(window.childrenWindows),
-        _step3;
+    var _iterator4 = _createForOfIteratorHelper(window.childrenWindows),
+        _step4;
 
     try {
-      var _loop3 = function _loop3() {
-        var child = _step3.value;
+      var _loop4 = function _loop4() {
+        var child = _step4.value;
         setTimeout(function () {
           return child.open();
         }, ++childCount * delayTimer);
       };
 
-      for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
-        _loop3();
+      for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
+        _loop4();
       } // Open this window
 
     } catch (err) {
-      _iterator3.e(err);
+      _iterator4.e(err);
     } finally {
-      _iterator3.f();
+      _iterator4.f();
     }
 
     window.windowHidden = false;
     window.classList.remove('closed');
+    window.dragRoot.classList.remove('hidden');
     window.dispatchEvent(new Event('window:opened', {
       bubbles: true
     }));
@@ -11206,6 +11242,8 @@ function createWindow(content) {
 
   if (options.preOpen) {
     window.open();
+  } else if (options.preHide) {
+    window.hide();
   } else {
     var _options$delay;
 

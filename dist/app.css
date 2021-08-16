@@ -7250,9 +7250,9 @@ readers do not read off random characters that represent icons */
     box-shadow: 10px 10px black;
     transform: translate(-10px, -10px);
     animation: 0.15s ease;
-    animation-name: uf7cd05a1; }
+    animation-name: u5cacf5c3; }
 
-@keyframes uf7cd05a1 {
+@keyframes u5cacf5c3 {
   from {
     box-shadow: 0px 0px black;
     transform: translate(0px, 0px); }
@@ -7297,9 +7297,9 @@ readers do not read off random characters that represent icons */
       box-shadow: 10px 10px #fa5c5c;
       transform: translate(-10px, -10px);
       animation: 0.15s ease;
-      animation-name: uf39afb7a; }
+      animation-name: u45a6c7b9; }
 
-@keyframes uf39afb7a {
+@keyframes u45a6c7b9 {
   from {
     box-shadow: 0px 0px #fa5c5c;
     transform: translate(0px, 0px); }
@@ -7325,9 +7325,9 @@ readers do not read off random characters that represent icons */
       box-shadow: 10px 10px #FF5700;
       transform: translate(-10px, -10px);
       animation: 0.15s ease;
-      animation-name: u82870185; }
+      animation-name: u6941e314; }
 
-@keyframes u82870185 {
+@keyframes u6941e314 {
   from {
     box-shadow: 0px 0px #FF5700;
     transform: translate(0px, 0px); }
@@ -7353,9 +7353,9 @@ readers do not read off random characters that represent icons */
       box-shadow: 10px 10px #E4000F;
       transform: translate(-10px, -10px);
       animation: 0.15s ease;
-      animation-name: u0da975e1; }
+      animation-name: u456c67a3; }
 
-@keyframes u0da975e1 {
+@keyframes u456c67a3 {
   from {
     box-shadow: 0px 0px #E4000F;
     transform: translate(0px, 0px); }
@@ -7381,9 +7381,9 @@ readers do not read off random characters that represent icons */
       box-shadow: 10px 10px #7289DA;
       transform: translate(-10px, -10px);
       animation: 0.15s ease;
-      animation-name: u8eb85a42; }
+      animation-name: uca64dcd3; }
 
-@keyframes u8eb85a42 {
+@keyframes uca64dcd3 {
   from {
     box-shadow: 0px 0px #7289DA;
     transform: translate(0px, 0px); }
@@ -7409,9 +7409,9 @@ readers do not read off random characters that represent icons */
       box-shadow: 10px 10px #6441a5;
       transform: translate(-10px, -10px);
       animation: 0.15s ease;
-      animation-name: u76d6202e; }
+      animation-name: uf3e882e5; }
 
-@keyframes u76d6202e {
+@keyframes uf3e882e5 {
   from {
     box-shadow: 0px 0px #6441a5;
     transform: translate(0px, 0px); }
@@ -7437,9 +7437,9 @@ readers do not read off random characters that represent icons */
       box-shadow: 10px 10px #1DA1F2;
       transform: translate(-10px, -10px);
       animation: 0.15s ease;
-      animation-name: u1d39e8d0; }
+      animation-name: ue65507bf; }
 
-@keyframes u1d39e8d0 {
+@keyframes ue65507bf {
   from {
     box-shadow: 0px 0px #1DA1F2;
     transform: translate(0px, 0px); }
@@ -7465,9 +7465,9 @@ readers do not read off random characters that represent icons */
       box-shadow: 10px 10px #006FCD;
       transform: translate(-10px, -10px);
       animation: 0.15s ease;
-      animation-name: ufcba808c; }
+      animation-name: u1b297489; }
 
-@keyframes ufcba808c {
+@keyframes u1b297489 {
   from {
     box-shadow: 0px 0px #006FCD;
     transform: translate(0px, 0px); }
@@ -7493,9 +7493,9 @@ readers do not read off random characters that represent icons */
       box-shadow: 10px 10px black;
       transform: translate(-10px, -10px);
       animation: 0.15s ease;
-      animation-name: u253032e6; }
+      animation-name: u3f75e724; }
 
-@keyframes u253032e6 {
+@keyframes u3f75e724 {
   from {
     box-shadow: 0px 0px black;
     transform: translate(0px, 0px); }
@@ -7521,9 +7521,9 @@ readers do not read off random characters that represent icons */
       box-shadow: 10px 10px black;
       transform: translate(-10px, -10px);
       animation: 0.15s ease;
-      animation-name: uef651655; }
+      animation-name: ua16d249c; }
 
-@keyframes uef651655 {
+@keyframes ua16d249c {
   from {
     box-shadow: 0px 0px black;
     transform: translate(0px, 0px); }
@@ -7620,9 +7620,9 @@ readers do not read off random characters that represent icons */
     box-shadow: 10px 10px black;
     transform: translate(-10px, -10px);
     animation: 0.15s ease;
-    animation-name: u4be59497; }
+    animation-name: u44d1449e; }
 
-@keyframes u4be59497 {
+@keyframes u44d1449e {
   from {
     box-shadow: 0px 0px black;
     transform: translate(0px, 0px); }
@@ -7818,6 +7818,10 @@ ul {
     content: '-';
     margin-right: 5px; }
 
+/** Hidden Info */
+p.email::after {
+  content: ""; }
+
 .draggable {
   position: absolute; }
   .draggable .drag-handle {
@@ -7827,6 +7831,9 @@ ul {
   .draggable .skewable {
     transform: skewX(0);
     transition: transform 0.25s ease-out; }
+  .draggable.hidden {
+    display: none;
+    opacity: 0; }
 
 .window {
   position: relative;
