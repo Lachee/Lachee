@@ -21,7 +21,7 @@ const WINDOW_LAYOUT = {
 
 /** Generates an ID from the project name */
 function getProjectId(name) {
-    return name .replaceAll(/[^A-Za-z0-9]/gmi, '-').toLowerCase();
+    return name.replace('#', '').replaceAll(/[^A-Za-z0-9]/gmi, '-').toLowerCase();
 }
 
 /** Closes all existing windows */
@@ -63,17 +63,21 @@ export function openProjectWindow(project) {
     const links     = project.links.map((e, i) => createLink(e)).join('');
     const roles     = project.roles.map((e, i) => createRole(e)).join('');
     const template  = `<div class="roles">${roles}</div><div class="content">${content}</div><div class="footer links">${links}</div>`;
-    const windows = [
-        createWindow(template, {
-            id:         id,
-            title:      project.name,
-            x:          x,
-            y:          y,
-            singleton:  false,
-            contentClass: 'window-column'
-        })
-    ];
+    const windows = [ ];
 
+    // Add the master window
+    const masterWindow = createWindow(template, {
+        id:         id,
+        title:      project.name,
+        x:          x,
+        y:          y,
+        singleton:  false,
+        contentClass: 'window-column'
+    });
+    masterWindow.addEventListener('window:closed', () => {
+        //closeProjectWindows();
+    })
+    windows.push(masterWindow);
     
     // Add the images
     [ x, y ] = WINDOW_LAYOUT.images;
@@ -84,9 +88,10 @@ export function openProjectWindow(project) {
             title:      image.title || '',
             x:          x,
             y:          y,
-            delay:      latency * windows.length,
+            delay:      -1, //latency * windows.length,
             singleton:  false,  
         });
+        window.setParentWindow(masterWindow);
         windows.push(window);
         x += movement; y += movement;
     }
@@ -104,9 +109,10 @@ export function openProjectWindow(project) {
             title:      video.title || '',
             x:          x,
             y:          y,
-            delay:      latency * windows.length,
+            delay:      -1, //latency * windows.length,
             singleton:  false,
         });
+        window.setParentWindow(masterWindow);
         windows.push(window);
         x += movement; y += movement;
     }

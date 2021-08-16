@@ -18,6 +18,9 @@ import {createWindow } from './window.js';
 import { createProjectWindows, openProjectWindowFromName } from './projects.js';
 import { createVideoFeed } from './videofeed';
 
+/** list of windows currently opened that are not project windows */
+const _aboutWindows = {};
+
 async function wait(duration) {
     return new Promise((resolve, reject) => {
         setTimeout(() => resolve(), duration);
@@ -45,33 +48,72 @@ document.addEventListener('DOMContentLoaded', () => {
     navigateHash();
 }); 
 
-window.addEventListener('hashchange', () => {
-    navigateHash();
-}, false);
+// When the hash changes, try to find the window and open it
+window.addEventListener('hashchange', () => navigateHash());
+// When a window closes, try to reset the hash
+window.addEventListener('window:closed', (event) => clearHash(event.target.id));
+window.addEventListener('window:hidden', (event) => clearHash(event.target.id));
 
+/** clears the hash if the id matches */
+function clearHash(id) {
+    const hash = decodeURI(window.location.hash).substr(1);
+    if (id == hash) {
+        window.location.hash = '';
+    }
+}
+
+/** navigates to the hash window */
 function navigateHash() {
-
     // Find the window that we should open
-    const hash = decodeURI(window.location.hash).replace('#', '');
+    const hash = decodeURI(window.location.hash).substr(1);
     if (!openProjectWindowFromName(hash)) {
-        // TODO: Find about windows
+        const aboutWindow = _aboutWindows[hash] ?? null;
+        if (aboutWindow != null) {
+            for(let otherWindow of Object.values(_aboutWindows))
+                otherWindow.hide();
+
+            aboutWindow.open();
+        }
     }
 }
 
 function createAboutWindows() {
     // Make all the windows dragables
+    const pendingChildren = [];
     $('template.window').each((i, e) => {
+
+        // Create the window
         console.log('window', e, e.content, e.id, e.style);
-        createWindow(e.content, {
-            id:         e.id,
-            style:      e.style,
-            closeable:  true,
-            preOpen:    true,
-            title:      e.title || undefined,
-            x:          parseInt(e.getAttribute('x'), 10) ?? undefined,
-            y:          parseInt(e.getAttribute('y'), 10) ?? undefined,
-            
+        _aboutWindows[e.id] = createWindow(e.content, {
+            id:             e.id,
+            title:          e.title || undefined,
+            style:          e.style,
+            closeable:      false,
+            minimizable:    true,
+            minimizeClass:  'window-close',
+            preOpen:        i == 0,
+            x: parseInt(e.getAttribute('x'), 10) ?? undefined,
+            y: parseInt(e.getAttribute('y'), 10) ?? undefined,            
         });
+
+        // Push this window to the list of windows that need their parents set
+        if (e.getAttribute('parent-id') != null) {
+            pendingChildren.push({ 
+                element: e, 
+                window: _aboutWindows[e.id],
+                parentId: e.getAttribute('parent-id') 
+            });
+        }
     });
+
+    // Set the parent windows
+    for(let pending of pendingChildren) {
+        const parentWindow = _aboutWindows[pending.parentId];
+        if (parentWindow == null) {
+            console.warn('cannot link window because parent is null', pending);
+            continue;
+        }
+        pending.window.setParentWindow(parentWindow);
+    }
 
 }

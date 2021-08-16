@@ -2,8 +2,8 @@ import { Draggable } from '@shopify/draggable';
 import $ from "cash-dom";
 import './scss/window.scss';
 
-let globalWindowIndex = 0;
-
+let globalWindowIndex   = 0;
+let delayTimer          = 100;
 
 /** Makes a new window 
  * options:
@@ -48,22 +48,31 @@ export function createWindow(content, options = { }) {
     //prepare the container
     const container     = document.querySelector('.retro-gradient .main-content');
     const addClass      = options.contentClass || '';
-    const closeClass   = options.preOpen ? '' : 'closed'; 
-    const closeBTN     = options.closeable || options.closeable === undefined ? 
-                            '<div class="window-button window-close" onclick="this.parentElement.parentElement.close()"></div>' : 
-                            '';
+    const isClosedClass = options.preOpen ? '' : 'closed'; 
+    const closeClass    = options.closeClass || 'window-close';
+    const minimizeClass = options.minimizeClass || 'window-minimise';
+    const maximizeClass = options.maximizeClass || 'window-maximise';
 
+    const closeBTN     = options.closeable || options.closeable === undefined ? 
+                            `<div class="window-button ${closeClass}" onclick="this.parentElement.parentElement.close()"></div>` : 
+                            '';
+    const maximizeBTN   = options.maximizable ?
+                            `<div class="window-button ${maximizeClass}" onclick="this.parentElement.parentElement.open()"></div>` : 
+                            '';
+    const hideBTN       = options.minimizable || options.minimizable === undefined ?
+                            `<div class="window-button ${minimizeClass}" onclick="this.parentElement.parentElement.hide()"></div>` : 
+                            '';
     const titleDIV      = options.title ? 
                             `<div class="window-title">${options.title}</div>` :
                             '';
 
     const template  = `
-<div class="window ${closeClass}" onmousedown="this.focus()">
+<div class="window ${isClosedClass}" onmousedown="this.focus()">
     <div class="window-heading drag-handle">
         ${titleDIV}
         ${closeBTN}
-        <div class="window-button window-maximise" onclick="this.parentElement.parentElement.open()"></div>
-        <div class="window-button window-minimise" onclick="this.parentElement.parentElement.hide()"></div>
+        ${maximizeBTN}
+        ${hideBTN}
     </div>
     <div class="window-content  ${addClass}"></div>
 </div>
@@ -84,9 +93,37 @@ export function createWindow(content, options = { }) {
     //Fix the depth
     if (options.z) window.dragRoot.style.zIndex = options.z + globalWindowIndex;
     
+    window.childrenWindows  = [];
+    window.parentWindow     = null; 
+    window.setParentWindow = function(parentWindow) {
+        // Remove from old child list
+        if (window.parentWindow != null) {
+            window.parentWindow.removeChildWindow(window);
+        }
+
+        // Set new child list
+        console.log('setting child window', parentWindow, window);
+        parentWindow.addChildWindow(window);
+    }
+
+    window.removeChildWindow = function(child) {
+        if (child == null) return false;
+        window.childrenWindows = window.childrenWindows.filter(function(value) { return value != child; });
+        child.parentWindow = null;
+        return child;
+    }
+    window.addChildWindow = function(child) {
+        if (child == null) return false;
+        window.childrenWindows.push(child);
+        child.parentWindow = window;
+        console.log('new child window', window.childrenWindows, child);
+        return child;
+    }
+
     /** Brings a window to focus */
     window.focus = function() {
         window.dragRoot.style.zIndex = globalWindowIndex++;
+        window.dispatchEvent(new Event('window:focused', { bubbles: true }));
         return window;
     }
 
@@ -95,17 +132,38 @@ export function createWindow(content, options = { }) {
         if (!window.windowHidden)
             window.hide();
         
-        if (!window.windowClosed)
-            setTimeout(() => window.dragRoot.remove(), 1000);
+        if (!window.windowClosed) {        
 
-        window.windowClosed = true;
+            // Hide the children
+            let childCount = 0;
+            for(let child of window.childrenWindows) {
+                setTimeout(() => child.close(), ++childCount * delayTimer);
+            }
+            
+            // Actually close the window
+            window.windowClosed = true;
+            setTimeout(() => window.dragRoot.remove(), 1000);
+            window.dispatchEvent(new Event('window:closed', { bubbles: true }));
+        }
+
         return window;
     }
 
     /** Hides a window */
     window.hide = function() {
-        window.windowHidden = true;
-        window.classList.add('closed');
+        if (!window.windowHidden) {
+                      
+            // Hide the children
+            let childCount = 0;
+            for(let child of window.childrenWindows) {
+                setTimeout(() => child.hide(), ++childCount * delayTimer);
+            }
+            
+            // Actually hide the window
+            window.windowHidden = true;
+            window.classList.add('closed');
+            window.dispatchEvent(new Event('window:hidden', { bubbles: true }));
+        }
         return window;
     }
 
@@ -116,7 +174,16 @@ export function createWindow(content, options = { }) {
             return null;
         }
         
+        // Open the children
+        let childCount = 0;
+        for(let child of window.childrenWindows) {
+            setTimeout(() => child.open(), ++childCount * delayTimer);
+        }
+
+        // Open this window
+        window.windowHidden = false;
         window.classList.remove('closed');
+        window.dispatchEvent(new Event('window:opened', { bubbles: true }));
         return window;
     }
 
