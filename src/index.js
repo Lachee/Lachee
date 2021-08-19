@@ -18,6 +18,9 @@ import {createWindow } from './window.js';
 import { closeProjectWindows, createProjectWindows, openProjectWindowFromName } from './projects.js';
 import { createVideoFeed } from './videofeed';
 
+// Prepare a list of enviroment variables
+const ENVIROMENT_VARIABLES = process.env || {};
+
 /** list of windows currently opened that are not project windows */
 const _aboutWindows = {};
 
@@ -40,12 +43,12 @@ export function createTooltip(selector = '[title][^data-tippy-content]') {
 
 document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.no-js').forEach((element, key) => element.style.display = 'none');
-
     createProjectWindows();
     createAboutWindows();
     createVideoFeed();
     createTooltip('[title]');
     navigateHash();
+    loadEnviros();
 }); 
 
 // When the hash changes, try to find the window and open it
@@ -53,6 +56,25 @@ window.addEventListener('hashchange', () => navigateHash());
 // When a window closes, try to reset the hash
 window.addEventListener('window:closed', (event) => clearHash(event.target.id));
 window.addEventListener('window:hidden', (event) => clearHash(event.target.id));
+window.addEventListener('window:opened', (event) => loadEnviros());
+
+function loadEnviros() {
+    $('[data-enviro]').each((i, elm) => {
+        const variable = elm.getAttribute('data-enviro');
+        if (!variable) return;
+
+        const value = ENVIROMENT_VARIABLES[variable];
+        if (!value) return;
+        
+        console.log('ENVIRO', elm, variable, value);
+        elm.style.display = 'inherit';
+
+        const attribute = elm.getAttribute('data-enviro-attr');
+        if (!attribute) return;
+        
+        elm.setAttribute(attribute, value);
+    });
+}
 
 /** clears the hash if the id matches */
 function clearHash(id) {

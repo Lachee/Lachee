@@ -1,11 +1,16 @@
-const dotenv = require('dotenv');
-dotenv.config();
+const dotenv       = require('dotenv');
+const dotenvResult = dotenv.config();
 
 const path = require('path');
 const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
+// Map the variables to keys
+const defineVariables = { 'process.env': JSON.stringify(dotenvResult.parsed) };
+for(let key in dotenvResult.parsed) {
+  defineVariables[`process.env.${key}`] = JSON.stringify(dotenvResult.parsed[key]);
+}
 
 module.exports = (env) => {
   return {
@@ -114,6 +119,7 @@ module.exports = (env) => {
     },
     plugins: [
       new webpack.WatchIgnorePlugin({ paths: [/node_modules/, /images/] }),
+      new webpack.DefinePlugin(defineVariables),
       new MiniCssExtractPlugin({
         filename: 'app.css',
         chunkFilename: 'app.[name].css',

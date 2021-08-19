@@ -253,3 +253,8 @@ ul {
 p.email::after {
     content: $email-address;
 }
+
+/** Hide Enviros */
+*[data-enviro] {
+    display: none;
+}
