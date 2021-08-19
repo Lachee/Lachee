@@ -59,20 +59,36 @@ window.addEventListener('window:hidden', (event) => clearHash(event.target.id));
 window.addEventListener('window:opened', (event) => loadEnviros());
 
 function loadEnviros() {
-    $('[data-enviro]').each((i, elm) => {
-        const variable = elm.getAttribute('data-enviro');
+    // Enable things if we have enviro
+    $('[\\@env]').each((i, elm) => {
+        const variable = elm.getAttribute('@env');
         if (!variable) return;
 
         const value = ENVIROMENT_VARIABLES[variable];
         if (!value) return;
         
-        console.log('ENVIRO', elm, variable, value);
+        //console.log('ENVIRO', elm, variable, value);
         elm.style.display = 'inherit';
 
-        const attribute = elm.getAttribute('data-enviro-attr');
+        const attribute = elm.getAttribute('@attr');
         if (!attribute) return;
         
-        elm.setAttribute(attribute, value);
+        if (attribute == '@') {
+            elm.innerText = value;
+        } else {
+            elm.setAttribute(attribute, value);
+        }
+    });
+
+    // Hide things if we have enviro
+    $('[\\@\\!env]').each((i, elm) => {
+        const variable = elm.getAttribute('@!env');
+        if (!variable) return;
+
+        const value = ENVIROMENT_VARIABLES[variable];
+        if (!value) return;
+        
+        elm.style.display = 'none';
     });
 }
 
@@ -114,7 +130,7 @@ function createAboutWindows() {
     $('template.window').each((i, e) => {
 
         // Create the window
-        console.log('window', e, e.content, e.id, e.style);
+        console.log('window', e, e.content, e.id, e.style, e.getAttribute('window-class'));
         _aboutWindows[e.id] = createWindow(e.content, {
             id:             e.id,
             title:          e.title || undefined,
@@ -124,6 +140,7 @@ function createAboutWindows() {
             minimizeClass:  'window-close',
             preOpen:        false,
             preHide:        true,
+            contentClass:   e.getAttribute('window-class'),
             x: parseInt(e.getAttribute('x'), 10) ?? undefined,
             y: parseInt(e.getAttribute('y'), 10) ?? undefined,            
         });

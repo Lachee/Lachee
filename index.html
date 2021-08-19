@@ -76,7 +76,7 @@
                                 class="button popout social social-reddit"><i class="fab fa-reddit-alien"></i></a></div>
                         <div class="hover-box"><a title="Twitch" href="https://twitch.tv/lachee" target="_blank"
                                 class="button popout social social-twitch"><i class="fab fa-twitch"></i></a></div>
-                        <div class="hover-box"><a data-enviro="LINKEDIN_URL" data-enviro-attr="href" title="LinkedIn" href="#" target="_blank"
+                        <div class="hover-box"><a @env="LINKEDIN_URL" @attr="href" title="LinkedIn" href="#" target="_blank"
                                 class="button popout social social-linkedin"><i class="fab fa-linkedin-in"></i></a></div>
                     </div>
                     <div class="graph-paper social-image">
@@ -153,9 +153,30 @@
                 </template>
                 
                 <!-- Contact -->
-                <template class="window" id="contact" title="Contact" x="543px" y="380px">
-                    <p>You can contact me directly on Discord, or Twitter.</p>
-                    <p class="email"></p>
+                <template class="window" window-class="window-column"  id="contact" title="Contact" x="543px" y="380px">
+                    <div @env="EMAIL">
+                        <p>
+                            Please send all business enquiries to my email address at 
+                            <span @env="EMAIL" @attr="@">admin@lachee.dev</span>
+
+                        </p>
+                        <p>If you prefer live chat, I am generally always available on my Discord</p>
+                        <div class="hover-box">
+                            <a class="button popout social-discord" href="https://discord.com/users/130973321683533824" target="_blank" title="View Discord Profile">
+                                <i class="fab fa-discord"></i> @Lachee</a>
+                        </div>
+                    </div>
+                    <div @!env="EMAIL">
+                        <p>You can contact me on any of my social medias, but i prefer Twitter or Discord</p>
+                        <div class="hover-box">
+                            <a class="button popout social-discord" href="https://discord.com/users/130973321683533824" target="_blank" title="View Discord Profile">
+                                <i class="fab fa-discord"></i> @Lachee</a>
+                        </div>
+                        <div class="hover-box">
+                            <a class="button popout social-twitter" href="https://twitter.com/Lachee_" target="_blank" title="View Twitter">
+                                <i class="fab fa-twitter"></i> @Lachee_</a>
+                        </div>
+                    </div>
                 </template>
 
                 <!-- No JS window is left alone -->

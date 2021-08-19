@@ -255,6 +255,6 @@ p.email::after {
 }
 
 /** Hide Enviros */
-*[data-enviro] {
+*[\@env] {
     display: none;
 }

@@ -42,7 +42,7 @@
         padding: 10px;
         display: flex;
         flex-flow: wrap;
-        &.window-column {
+        &.window-column, &.window-column > div {
             flex-flow:column;
         }
     }
