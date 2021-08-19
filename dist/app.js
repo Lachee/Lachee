@@ -10337,7 +10337,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+ // Prepare a list of enviroment variables
 
+var ENVIROMENT_VARIABLES = undefined || {};
 /** list of windows currently opened that are not project windows */
 
 var _aboutWindows = {};
@@ -10388,6 +10390,7 @@ document.addEventListener('DOMContentLoaded', function () {
   (0,_videofeed__WEBPACK_IMPORTED_MODULE_11__.createVideoFeed)();
   createTooltip('[title]');
   navigateHash();
+  loadEnviros();
 }); // When the hash changes, try to find the window and open it
 
 window.addEventListener('hashchange', function () {
@@ -10400,7 +10403,39 @@ window.addEventListener('window:closed', function (event) {
 window.addEventListener('window:hidden', function (event) {
   return clearHash(event.target.id);
 });
+window.addEventListener('window:opened', function (event) {
+  return loadEnviros();
+});
+
+function loadEnviros() {
+  // Enable things if we have enviro
+  cash_dom__WEBPACK_IMPORTED_MODULE_7___default()('[\\@env]').each(function (i, elm) {
+    var variable = elm.getAttribute('@env');
+    if (!variable) return;
+    var value = ENVIROMENT_VARIABLES[variable];
+    if (!value) return; //console.log('ENVIRO', elm, variable, value);
+
+    elm.style.display = 'inherit';
+    var attribute = elm.getAttribute('@attr');
+    if (!attribute) return;
+
+    if (attribute == '@') {
+      elm.innerText = value;
+    } else {
+      elm.setAttribute(attribute, value);
+    }
+  }); // Hide things if we have enviro
+
+  cash_dom__WEBPACK_IMPORTED_MODULE_7___default()('[\\@\\!env]').each(function (i, elm) {
+    var variable = elm.getAttribute('@!env');
+    if (!variable) return;
+    var value = ENVIROMENT_VARIABLES[variable];
+    if (!value) return;
+    elm.style.display = 'none';
+  });
+}
 /** clears the hash if the id matches */
+
 
 function clearHash(id) {
   var hash = decodeURI(window.location.hash).substr(1);
@@ -10443,7 +10478,7 @@ function createAboutWindows() {
     var _parseInt, _parseInt2;
 
     // Create the window
-    console.log('window', e, e.content, e.id, e.style);
+    console.log('window', e, e.content, e.id, e.style, e.getAttribute('window-class'));
     _aboutWindows[e.id] = (0,_window_js__WEBPACK_IMPORTED_MODULE_9__.createWindow)(e.content, {
       id: e.id,
       title: e.title || undefined,
@@ -10453,6 +10488,7 @@ function createAboutWindows() {
       minimizeClass: 'window-close',
       preOpen: false,
       preHide: true,
+      contentClass: e.getAttribute('window-class'),
       x: (_parseInt = parseInt(e.getAttribute('x'), 10)) !== null && _parseInt !== void 0 ? _parseInt : undefined,
       y: (_parseInt2 = parseInt(e.getAttribute('y'), 10)) !== null && _parseInt2 !== void 0 ? _parseInt2 : undefined
     }); // Push this window to the list of windows that need their parents set
