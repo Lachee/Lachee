@@ -6,6 +6,8 @@
  💬 My name is pronounced la-ch-ee, but I dont mind how you say it
  
  🏠 I am from Tasmania, Australia! Hello from down under
+ 
+ 💕 Pronouns are They / Them
   
  ☕ Caffine is pretty neat. You can support my projects with [Coffee](https://ko-fi.com/lachee)
   
@@ -14,6 +16,12 @@
  🐅 My favourite marsupial is the Thylacine.
  
  🗣 My discord profile is [Lachee#9999](https://discord.com/users/130973321683533824)
+ 
+ 🎨 Profile Picture was made by [Mag Ho](https://twitter.com/Mag_ho/status/1459488568385015808)
+ 
+ 🐤 Follow me on [Twitter](https://twitter.com/Lachee_)
+ 
+
  
 <!-- Moomin Sip by [WiittyUsername](https://www.youtube.com/watch?v=tozUcjXGe0w) -->
 <!-- avatar by [Mag Ho](https://twitter.com/Mag_ho/status/1356543668912496641) -->
