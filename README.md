@@ -1,4 +1,5 @@
-<img align="left" src="https://d.lu.je/avatar/lachee?size=2048" width=300>
+<!-- <img alt="current discord avatar" align="left" src="https://d.lu.je/avatar/lachee?size=2048" width=300> -->
+<img alt="current discord avatar" align="left" src="https://raw.githubusercontent.com/Lachee/Lachee/website/images/211113-PNG-Banner.png" width=300>
 
 # Heya, Im Lachee!
  
