@@ -5,6 +5,7 @@ const path = require('path');
 const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 // Map the variables to keys
 const defineVariables = { 'process.env': JSON.stringify(dotenvResult.parsed) };
@@ -12,12 +13,14 @@ for(let key in dotenvResult.parsed) {
   defineVariables[`process.env.${key}`] = JSON.stringify(dotenvResult.parsed[key]);
 }
 
+const DIST_DIR = dotenvResult.parsed['OUTPUT_DIR'] ?? 'build';
+
 module.exports = (env) => {
   return {
     entry: './src/index.js',
     output: {
       filename: 'app.js',
-      path: path.resolve(__dirname, 'dist'),
+      path: path.resolve(__dirname, `${DIST_DIR}/dist`),
     },
     resolve: {
       alias: {
@@ -124,6 +127,12 @@ module.exports = (env) => {
         filename: 'app.css',
         chunkFilename: 'app.[name].css',
       }),
+      new CopyWebpackPlugin({
+        patterns: [
+          { from: 'images', to: `../images` },
+          { from: 'index.html', to: `../index.html`}
+        ]
+      })
       // new HtmlWebpackPlugin({
       //   filename: '../index.html',
       //   template: 'src/index.html',
