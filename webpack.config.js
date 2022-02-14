@@ -14,7 +14,7 @@ for(let key in dotenvResult.parsed) {
 }
 
 let DIST_DIR = 'dist';
-if (dotenvResult && dotenvResult.parsed['OUTPUT_DIR']) 
+if (dotenvResult && dotenvResult.parsed &&  dotenvResult.parsed['OUTPUT_DIR']) 
   DIST_DIR = dotenvResult.parsed['OUTPUT_DIR'];
 
 module.exports = (env) => {
