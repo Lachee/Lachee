@@ -40,26 +40,19 @@ jobs:
         
       # Build
       - name: Build
-        run: ./build.sh
+        run: ./build.sh -p
 
       # Package
-      - name: Pre-Package
-        run: |
-          mkdir build
-          mv images build/images
-          mv dist build/dist
-          mv index.html build/index.html
-              
       - name: Upload Site
         uses: actions/upload-artifact@v2.2.4
         with:
           name: lachee.dev
-          path: ./build/
+          path: ./public/
 
   # Deploy the website as a page
   deploy:
       runs-on: ubuntu-latest
-      needs: build
+      needs: public
       steps:
         - name: Download Artifact
           uses: actions/download-artifact@v2
