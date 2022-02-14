@@ -49,6 +49,11 @@ document.addEventListener('DOMContentLoaded', () => {
     createTooltip('[title]');
     navigateHash();
     loadEnviros();
+    
+    updateCurrentTime();
+    setInterval(() => { 
+        updateCurrentTime();
+    }, 1000);
 }); 
 
 // When the hash changes, try to find the window and open it
@@ -167,5 +172,13 @@ function createAboutWindows() {
 
     _aboutWindows['about'].open();
     _aboutWindows['about'].focus();
-
 }
+
+// Timer Animation
+export function updateCurrentTime() {
+    const time = "my time: " + (new Date().toLocaleString('en-AU', { timeZone: 'Australia/Hobart' }));
+    $('.timer').each((i, elm) => {
+        elm.innerText = time;
+    });
+}
+

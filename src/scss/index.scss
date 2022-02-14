@@ -184,6 +184,13 @@ ul {
             }
         }
     }
+
+    .timer {
+        position: absolute;
+        top: 3em;
+        right: 2em;
+        @include font-syne();
+    }
 }
 
 /**
