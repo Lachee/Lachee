@@ -47,7 +47,7 @@ jobs:
         uses: actions/upload-artifact@v2.2.4
         with:
           name: lachee.dev
-          path: ./public/
+          path: ./build/
 
   # Deploy the website as a page
   deploy:
