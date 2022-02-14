@@ -13,7 +13,9 @@ for(let key in dotenvResult.parsed) {
   defineVariables[`process.env.${key}`] = JSON.stringify(dotenvResult.parsed[key]);
 }
 
-const DIST_DIR = dotenvResult && dotenvResult.parsed['OUTPUT_DIR'] ? dotenvResult.parsed['OUTPUT_DIR'] : 'build';
+let DIST_DIR = 'dist';
+if (dotenvResult && dotenvResult.parsed['OUTPUT_DIR']) 
+  DIST_DIR = dotenvResult.parsed['OUTPUT_DIR'];
 
 module.exports = (env) => {
   return {
