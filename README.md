@@ -7,7 +7,7 @@
  
  🏠 I am from Tasmania, Australia! Hello from down under
  
- 💕 Pronouns are They / Them
+ 💕 Pronouns are They / Her
   
  ☕ Caffine is pretty neat. You can support my projects with [Coffee](https://ko-fi.com/lachee)
   
