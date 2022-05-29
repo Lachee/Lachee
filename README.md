@@ -22,7 +22,7 @@
  🐤 Follow me on [Twitter](https://twitter.com/Lachee_)
  
 
- ![](https://github-profile-trophy.vercel.app/?username=lachee&no-frame=true&theme=dracula)
+ ![](https://github-profile-trophy.vercel.app/?username=lachee&no-frame=true&theme=dracula&column=3&margin-w=15&margin-h=15)
 <!-- Moomin Sip by [WiittyUsername](https://www.youtube.com/watch?v=tozUcjXGe0w) -->
 <!-- avatar by [Mag Ho](https://twitter.com/Mag_ho/status/1356543668912496641) -->
 
