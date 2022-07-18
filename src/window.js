@@ -66,7 +66,7 @@ export function createWindow(content, options = { }) {
                             '';
 
     const template  = `
-<div class="window ${isClosedClass}" onmousedown="this.focus()">
+<div class="window ${isClosedClass}" onmousedown="this.focus()" onmousestart="this.focus()">
     <div class="window-heading drag-handle">
         ${titleDIV}
         ${closeBTN}
