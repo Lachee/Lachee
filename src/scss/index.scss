@@ -8,6 +8,7 @@
 @import './button.scss';
 @import './flags.scss';
 @import './popout.scss';
+@import './prefix.scss';
 
 $profile-image-url: 'https://d.lu.je/avatar/lachee?size=2048' !default;
 $email-address: '' !default;
@@ -230,7 +231,8 @@ ul {
     position: absolute;
     border-radius: 100%;
     background: repeating-linear-gradient(320deg, transparent, transparent 12px, #f5ff0091 10px, #f5ff0091 20px );
-    -webkit-mask-image: -webkit-linear-gradient(bottom left, #ff000000 17%, black 75%);
+    
+    @include prefix((mask-image: linear-gradient(bottom left, #ff000000 17%, black 75%)), webkit);
     bottom: -150;
     right: -250;
 }
@@ -265,4 +267,15 @@ p.email::after {
 /** Hide Enviros */
 *[\@env] {
     display: none;
+}
+
+/** Smexy */
+#smexy {
+    background: url(images/static_small.gif);
+    @include prefix((
+        mask-image: url(images/smexy.png),
+        mask-size: 105%,
+        mask-repeat: no-repeat,
+        mask-position: center,
+    ), webkit);
 }
