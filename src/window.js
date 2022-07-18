@@ -390,5 +390,5 @@ document.addEventListener('DOMContentLoaded', () => {
     // the window will still catch the events.
     $(window).on('mouseup touchend', (e) => { endDragging(); });
     $(window).on('mousemove', (e) => { onDragging(e); });
-    $(window).on('touchmove', (e) => {  onDraggingTouch(e); });
+    //$(window).on('touchmove', (e) => {  onDraggingTouch(e); });
 });

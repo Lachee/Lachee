@@ -1,0 +1,30 @@
+@media (max-width: 600px){
+    body {
+        & {
+            overflow-y: scroll;
+        }
+        .column-right { display: none;}
+        .column {
+            width: 100%;
+        }
+
+        .main-content {
+            width: 100%;
+        }
+
+        .draggable {
+            position: inherit;    
+            .skewable {
+                transform: none;
+            }
+        }
+
+        .statue {
+            display: none;
+        }
+
+        .window {
+            width: calc(100% - 4px);
+        }
+    }
+}
