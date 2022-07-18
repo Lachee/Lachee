@@ -23,7 +23,8 @@
     "cash-dom": "^8.1.0",
     "copy-webpack-plugin": "^9.0.1",
     "marked": "^2.0.1",
-    "tippy.js": "^6.3.1"
+    "tippy.js": "^6.3.1",
+    "util": "^0.12.4"
   },
   "devDependencies": {
     "@babel/core": "^7.13.13",

@@ -1,4 +1,3 @@
-import { Draggable } from '@shopify/draggable';
 import $ from "cash-dom";
 import './scss/window.scss';
 
@@ -239,7 +238,12 @@ export function makeDraggable(element, options = {}) {
         $drag.css('top', options.initialY);
     
     $drag.find('.drag-handle').on('mousedown', (e) => {
+        console.log('mousedown', e);
         beginDragging(element.dragRoot, [ e.clientX, e.clientY ]);
+    });
+    $drag.find('.drag-handle').on('touchstart', (e) => {
+        console.log('touchstart', e);
+        beginDragging(element.dragRoot, [ e.touches[0].clientX, e.touches[0].clientY ]);
     });
 
     return element.dragRoot = $drag.get(0);
@@ -320,9 +324,18 @@ function onDragging(e) {
     de.client = [ e.clientX, e.clientY ];
 };
 
+function onDraggingTouch(touchEvent) {
+    if (draggedElement == null) return;
+    
+    const touch = touchEvent.touches[0];
+    const de = draggedElement.dragging;
+    de.client = [ touch.clientX, touch.clientY ];
+}
+
 /** Begins dragging the element. Position is the initial mouse position. */
 function beginDragging(element, position) {
     draggedElement = element;
+    console.log('begin Drag', element);
     //if (!$(element).find('.skewable').get(0)) {
     //    const $skewable = $('<div>').addClass('skewable');
     //    $skewable.append($(element).children());
@@ -331,7 +344,6 @@ function beginDragging(element, position) {
 
     // Set initial object that stores the data
     if (draggedElement.dragging == null){ 
-        console.log('settin');
         draggedElement.dragging = {
             position:       [ 0, 0 ],
             clientStart:    position,
@@ -374,14 +386,9 @@ function endDragging() {
 
 document.addEventListener('DOMContentLoaded', () => {
    
-    // Make existing draggables as drag-able
-    $('.draggable .drag-handle').on('mousedown', (e) => {
-        const element = $(e.target).closest('.draggable').get(0);
-        beginDragging(element, [ e.clientX, e.clientY ]);
-    });
-
     //Update the drag events globally. This way it isn't an issue if the mouse leaves the element,
     // the window will still catch the events.
-    $(window).on('mouseup', (e) => { endDragging(); });
+    $(window).on('mouseup touchend', (e) => { endDragging(); });
     $(window).on('mousemove', (e) => { onDragging(e); });
+    $(window).on('touchmove', (e) => {  onDraggingTouch(e); });
 });
