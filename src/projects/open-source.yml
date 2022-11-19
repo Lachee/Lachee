@@ -1,0 +1,21 @@
+name: Open Source
+background: images/github2.mp4
+position: 99999
+description: >
+  I contribute actively to my open source projects; running numerous for various utilities, libraries and tools.
+  
+  
+  I have also contributed to many other projects other than my own too, such as Yii2, Cockatrice, DSharpPlus etc.
+  
+  
+  Visit my GitHub profile for more information about my work with the community.
+roles:
+  - Contributor
+videos: 
+images:
+  - src: https://i.lu.je/2022/firefox_lSW99FXP0S.png
+    title: Popular Projects
+links:
+  - title: Github
+    url: https://github.com/Lachee
+    type: github
