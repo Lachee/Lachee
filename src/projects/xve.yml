@@ -22,9 +22,6 @@ images:
   - src: https://i.lu.je/2021/chrome_qJscRoiH1O.png
     title: XVE Graph
 links:
-  - title: Demo Version
-    url: https://xve.lachee.dev/
-    icon: far fa-globe
   - title: Documentation
     url: https://lachee.github.io/xve-docs/
     icon: far fa-book    
