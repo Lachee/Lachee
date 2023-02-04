@@ -279,3 +279,25 @@ p.email::after {
         mask-position: center,
     ), webkit);
 }
+
+
+/** Hot changes for 2/2023 */
+.window .window-heading .window-button.window-close {
+  color: white;
+  background: rgb(255,63,63);
+  background: radial-gradient(circle, rgba(255,63,63,1) 0%, rgba(253,29,29,1) 100%);
+}
+
+.window {
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 8px 8px #000000FF; 
+}
+
+.button {
+  border-radius: 10px;
+}
+
+.flags .flag {
+  box-shadow: 4px 4px;
+}
