@@ -7,17 +7,18 @@
         box-shadow: $distance $distance $color; 
         transform: translate(-$distance, -$distance); 
 
+        /* Disabled because we use transition now.
         @if $duration > 0 {
             animation: $duration ease;
             animation-name: $transition-name;
         }
+        */
     }
     
     @if $duration > 0 {
-        //animation: $duration ease;
-        //animation-name: $transition-name;
-        //animation-direction: alternate;
-
+        transition: box-shadow $duration, transform $duration;
+        
+        /* Disabled because we use transition now.
         @keyframes #{$transition-name} {
             from { 
                 box-shadow: 0px 0px $color; 
@@ -28,6 +29,7 @@
                 transform: translate(-$distance, -$distance); 
             }
         }
+        */
     }
 }
 
