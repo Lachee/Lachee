@@ -1,0 +1,31 @@
+name: DUSK
+background: images/v_dusk.mp4
+position: 10
+description: >
+  Battle through an onslaught of mystical backwater cultists, possessed militants & even darker forces as you attempt to discover just what lurks beneath the Earth in this retro FPS inspired by the '90s legends. 
+
+  I was in charge of the porting, having to rewrite much of the saving logic to work with the PS4 and convert it to asynchronous. A lot of the input code had to be updated to support the DualSense controllers. There were also lots of very specific bugs that required use of remote profiling to debug and resolve.
+
+  * Rewrote save to support async saving
+
+  * Implemented custom loading screen for PS4
+
+  * Implemented Gyro support for DualSense
+
+  * Created trophies and hooked into existing system provided by game
+
+  * Profiled and optimised the game to get it running smoothly
+
+roles:
+  - PlayStation 4 Port
+  - Unity3D
+videos:
+  - youtube: tsu9uDMlIMM
+    title: Welcome to DUSK
+images:
+  - src: images/dusk.jpg
+    title: DUSK
+links:
+  - title: PlayStation Store
+    url: https://store.playstation.com/en-au/product/EP3447-CUSA32306_00-8201485965970825
+    type: playstation
