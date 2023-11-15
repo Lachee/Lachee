@@ -238,12 +238,12 @@ export function makeDraggable(element, options = {}) {
         $drag.css('top', options.initialY);
     
     $drag.find('.drag-handle').on('mousedown', (e) => {
-        console.log('mousedown', e);
         beginDragging(element.dragRoot, [ e.clientX, e.clientY ]);
+        e.preventDefault();
     });
     $drag.find('.drag-handle').on('touchstart', (e) => {
-        console.log('touchstart', e);
         beginDragging(element.dragRoot, [ e.touches[0].clientX, e.touches[0].clientY ]);
+        e.preventDefault();
     });
 
     return element.dragRoot = $drag.get(0);
