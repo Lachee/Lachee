@@ -175,6 +175,8 @@ export function createProjectWindows() {
         projects[getProjectId(item.name)] = item;       // Add to the list of items
 
         console.log(item.name, item);                   // Log and create the button
-        createButton(item);
+        if (item.hidden != true)
+            createButton(item);
+        
     }                
 }

@@ -1,5 +1,6 @@
 name: Starwatch
 background: images/ilovebacons.jpg
+hidden: true
 description: >
   Starwatch is a Starbound Server manager with player management, crash recovery and a REST and websocket (live) API.
   It provides stability to the game servers, account management, access control and a lot more!
