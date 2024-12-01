@@ -16,7 +16,7 @@
     }
     
     @if $duration > 0 {
-        transition: box-shadow $duration, transform $duration;
+        transition: box-shadow $duration, transform $duration, --color $duration;
         
         /* Disabled because we use transition now.
         @keyframes #{$transition-name} {

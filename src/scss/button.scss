@@ -1,9 +1,8 @@
-
-@import './popout.scss';
+@import "./popout.scss";
 
 .button {
     display: block;
-    font-family: 'Syne Mono', monospace;
+    font-family: "Syne Mono", monospace;
     padding: 10px;
     background: white;
     border: 2px solid black;
@@ -29,19 +28,20 @@
     font-size: 20pt;
 }
 
-$brand-colors: ( 
+$brand-colors: (
     "itch": #fa5c5c,
-    "reddit": #FF5700,
-    "nintendo": #E4000F,
-    "discord": #7289DA,
+    "reddit": #ff5700,
+    "nintendo": #e4000f,
+    "discord": #7289da,
     "twitch": #6441a5,
     "linkedin": #0072b1,
-    "twitter": #1DA1F2,
+    "x-twitter": black,
+    "twitter": #1da1f2,
     "bluesky": #3985fd,
-    "mastodon": #6364FF,
-    "playstation": #006FCD,
+    "mastodon": #6364ff,
+    "playstation": #006fcd,
     "github": black,
-    "steam": black,
+    "steam": black
 );
 
 $brand-icons: (
@@ -52,11 +52,12 @@ $brand-icons: (
     "twitch": "twitch",
     "linkedin": "linkedin-in",
     "twitter": "twitter",
+    "x-twitter": "x-twitter",
     "mastodon": "mastodon",
     "bluesky": "bluesky",
     "playstation": "playstation",
     "github": "github-alt",
-    "steam": "steam-symbol",
+    "steam": "steam-symbol"
 );
 
 @each $name, $class in $brand-icons {
@@ -65,26 +66,42 @@ $brand-icons: (
     // Setup the color for the social buttons
     .social-#{$name},
     .social-#{$class} {
-        color: $color;
+        --color: #{$color};
+        color: var(--color);
 
         // Override the box-shadow
         &.popout {
-           @include popout(#{$color});
+            @include popout(var(--color));
         }
 
         // Override the border
         &.button {
-            border-color: $color;
+            border-color: var(--color);
         }
     }
 
     // Setup the color for the icons themselves
-    .fa-#{$class}
-    {
-        color: $color;
+    .fa-#{$class} {
+        color: var(--color);
     }
 }
 
 .fab.fa-playstation {
     left: -0.1em;
+}
+
+.hover-box:hover .social-x-twitter {
+    &,
+    * {
+        $c: map-get($brand-colors, "twitter");
+        --color: #{$c};
+    }
+
+    .fa-x-twitter {
+        mask-image: none;
+        background: none;
+        &:before {
+            content: "\f099" !important;
+        }
+    }
 }
