@@ -13,14 +13,15 @@
     <meta property="og:locale" content="en_AU" />
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins&family=Syne+Mono&family=Knewave&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&family=Syne+Mono&family=Knewave&display=swap"
+        rel="stylesheet">
 
     <script src="dist/app.js"></script>
     <link href="dist/app.css" rel="stylesheet">
     <link rel="prefetch" href="images/static_small.gif" as="image">
     <link rel="prefetch" href="images/partycrashers.gif" as="image">
     <link rel="prefetch" href="https://d.lu.je/avatar/embed/lachee?size=1024" as="image">
-    <link rel="preload" as="font" type="font/woff2" crossorigin href="/dist/fonts/fa-brands-400.woff2"/>
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="/dist/fonts/fa-brands-400.woff2" />
 
 </head>
 
@@ -41,12 +42,13 @@
                 <div class="title">About Me</div>
                 <div class="hover-box" data-image-src=''><a href="#about" class="button popout">social media</a></div>
                 <div class="hover-box" data-image-src=''><a href="#games" class="button popout">game ports</a></div>
-                <div class="hover-box" data-image-src=''><a href="#software" class="button popout">software engineering</a>
+                <div class="hover-box" data-image-src=''><a href="#software" class="button popout">software
+                        engineering</a>
                 </div>
                 <div class="hover-box" data-image-src=''><a href="#web" class="button popout">web design</a></div>
                 <div class="hover-box" data-image-src=''><a href="#contact" class="button popout">contact me</a></div>
             </div>
-    
+
             <div class="link-content link-projects">
                 <div class="title">Some of What I've done</div>
                 <span id="link-projects-stub">
@@ -65,30 +67,49 @@
 
                 <template class="window" id="about" title="Social Media" x="190" y="110">
                     <div class="social-navigation">
+                        <div class="hover-box"><a @env="LINKEDIN_URL" @attr="href" title="LinkedIn" href="#"
+                                target="_blank" class="button popout social social-linkedin"><i
+                                    class="fab fa-linkedin-in"></i></a></div>
+
                         <div class="hover-box"><a title="Github" href="https://github.com/lachee" target="_blank"
                                 class="button popout social social-github"><i class="fab fa-github-alt"></i></a></div>
+
                         <div class="hover-box"><a title="Itch.io" href="https://lachee.itch.io/" target="_blank"
                                 class="button popout social social-itch"><i class="fab fa-itch-io"></i></a></div>
-                        <div class="hover-box"><a title="Twitter" href="https://twitter.com/Lachee_" target="_blank"
-                            class="button popout social social-twitter"><i class="fab fa-twitter"></i></a></div>
-                            <div class="hover-box"><a rel="me" title="Mastodon" href="https://mastodon.gamedev.place/@Lachee" target="_blank"
-                                class="button popout social social-mastodon"><i class="fab fa-mastodon"></i></a></div>                        
-                        <div class="hover-box"><a title="Discord" href="https://discord.com/users/130973321683533824" target="_blank"
-                                class="button popout social social-discord"><i class="fab fa-discord"></i></a></div>
-                        <div class="hover-box"><a title="Steam" href="https://steamcommunity.com/id/lachee/" target="_blank"
-                                class="button popout social social-steam"><i class="fab fa-steam-symbol"></i></a></div>
-                        <div class="hover-box"><a title="Reddit" href="https://www.reddit.com/user/lachee" target="_blank"
-                                class="button popout social social-reddit"><i class="fab fa-reddit-alien"></i></a></div>
+
+                        <div class="hover-box"><a title="Bluesky" href="https://bsky.app/profile/lachee.dev"
+                                target="_blank" class="button popout social social-bluesky"><i
+                                    class="fab fa-bluesky"></i></a></div>
+
+                        <div class="hover-box"><a rel="me" title="Mastodon"
+                                href="https://mastodon.gamedev.place/@Lachee" target="_blank"
+                                class="button popout social social-mastodon"><i class="fab fa-mastodon"></i></a></div>
+
+                        <div class="hover-box"><a title="The site formally known as Twitter"
+                                href="https://twitter.com/Lachee_" target="_blank"
+                                class="button popout social social-x-twitter"><i class="fab fa-x-twitter"></i></a></div>
+
+                        <div class="hover-box"><a title="Discord" href="https://discord.com/users/130973321683533824"
+                                target="_blank" class="button popout social social-discord"><i
+                                    class="fab fa-discord"></i></a></div>
+
+                        <div class="hover-box"><a title="Steam" href="https://steamcommunity.com/id/lachee/"
+                                target="_blank" class="button popout social social-steam"><i
+                                    class="fab fa-steam-symbol"></i></a></div>
+
+                        <div class="hover-box"><a title="Reddit" href="https://www.reddit.com/user/lachee"
+                                target="_blank" class="button popout social social-reddit"><i
+                                    class="fab fa-reddit-alien"></i></a></div>
+
                         <div class="hover-box"><a title="Twitch" href="https://twitch.tv/lachee" target="_blank"
                                 class="button popout social social-twitch"><i class="fab fa-twitch"></i></a></div>
-                        <div class="hover-box"><a @env="LINKEDIN_URL" @attr="href" title="LinkedIn" href="#" target="_blank"
-                                class="button popout social social-linkedin"><i class="fab fa-linkedin-in"></i></a></div>
                     </div>
                     <div class="graph-paper social-image">
                         <div class="timer"></div>
                         <!--sse-->
                         <div class="special-box profile-image">
-                            <video preload="none"  style="background: gray;" src="images/v_blurb.mp4" autoplay loop muted width="390px" height="340px"></video>
+                            <video preload="none" style="background: gray;" src="images/v_blurb.mp4" autoplay loop muted
+                                width="390px" height="340px"></video>
                             <div class="flags">
                                 <div class="flag pride transgender" title="She / Her">&nbsp;</div>
                                 <div class="flag pride nonbinary" title="Non-Binary">&nbsp;</div>
@@ -115,77 +136,92 @@
                 <!-- Game Porting -->
                 <template class="window" id="games" title="Game Porting" x="400px" y="100px">
                     <p>
-                        I have ported several titles from different developers for <a href="https://giantmargarita.com/" target="_blank">Giant Margarita</a>. 
-                        Working extensively with PlayStation 4 and Nintendo Switch, I have gained indispensable experience with the platforms QA and the processes involved.
+                        I have ported several titles from different developers for <a href="https://giantmargarita.com/"
+                            target="_blank">Giant Margarita</a>.
+                        Working extensively with PlayStation 4 and Nintendo Switch, I have gained indispensable
+                        experience with the platforms QA and the processes involved.
                     </p>
                     <p>
-                        Porting is normally straight forward, only requiring minor changes to common issues such as saving. However, I have also developed my own tools and libraries
-                        over the years to better streamline this process, from a Unity3D platform wrapper to more advance tools for patching and creating DLC.
+                        Porting is normally straight forward, only requiring minor changes to common issues such as
+                        saving. However, I have also developed my own tools and libraries
+                        over the years to better streamline this process, from a Unity3D platform wrapper to more
+                        advance tools for patching and creating DLC.
                     </p>
                     <p>
-                        While I am most comfortable with Unity3D, I am always willing to try new engines and learn their tooling to get the job done. 
+                        While I am most comfortable with Unity3D, I am always willing to try new engines and learn their
+                        tooling to get the job done.
                         There is always something new to learn as a Programmer.
                     </p>
                     <div class="hover-box">
-                        <a class="button popout social-documentation" href="https://www.giantmargarita.com/ports" target="_blank" data-tippy-content="Visit Giant Margarita" aria="Visit Giant Margarita">
+                        <a class="button popout social-documentation" href="https://www.giantmargarita.com/ports"
+                            target="_blank" data-tippy-content="Visit Giant Margarita" aria="Visit Giant Margarita">
                             <i class="far fa-globe"></i> more details
                         </a>
                     </div>
                 </template>
-                
+
                 <!-- Software Engineer -->
                 <template class="window" id="software" title="Software Engineering" x="543px" y="380px">
                     <p>While games are my passion, software pays the bills.</p>
                     <p>
-                        I have experience developing a suit of tools for vehicle insurances at <a href="https://iqcontrols.com.au/" target="_blank">IQControls</a>, 
-                        being the lead Programmer and ensuring everything flows nicely. I really enjoy creating systems and developing modular code,
-                        and software engineering often follows these paradigms heavily. 
+                        I have experience developing a suit of tools for vehicle insurances at <a
+                            href="https://iqcontrols.com.au/" target="_blank">IQControls</a>,
+                        being the lead Programmer and ensuring everything flows nicely. I really enjoy creating systems
+                        and developing modular code,
+                        and software engineering often follows these paradigms heavily.
                     </p>
                     <p>
-                        Outside of IQ, there has been numerous software only projects, such as <a href="#starwatch">Starwatch</a> 
-                        (a backend game server management service) and <a href="#discord-rpc-csharp">Discord RPC </a> to name a few.
+                        Outside of IQ, there has been numerous software only projects, such as <a
+                            href="#starwatch">Starwatch</a>
+                        (a backend game server management service) and <a href="#discord-rpc-csharp">Discord RPC </a> to
+                        name a few.
                     </p>
                 </template>
 
                 <!-- Web -->
                 <template class="window" id="web" title="Web Dev" x="543px" y="380px">
                     <p style="margin-left: -30px;" class="syne">CSS is my passion</p>
-                    <p>I have experience in web design and full stack development. While its not something actively seek, I am more than capable of holding my own and create somewhat decent websites</p>
-                    <p>Using often a mix of PHP and Webpack, I create sites using modern JS and provide the interaction in a variety of PHP frameworks.</p>
+                    <p>I have experience in web design and full stack development. While its not something actively
+                        seek, I am more than capable of holding my own and create somewhat decent websites</p>
+                    <p>Using often a mix of PHP and Webpack, I create sites using modern JS and provide the interaction
+                        in a variety of PHP frameworks.</p>
                     <p>
                         Check out my work:
-                        <ul>
-                            <li><a target="_blank" href="https://github.com/lachee/lachee/tree/website">Lachee.dev</a></li>
-                            <li><a target="_blank" href="https://xve.lachee.dev">XVE</a></li>
-                            <li><a target="_blank" href="https://chickatrice.net">Chickatrice.net</a></li>
-                            <li><a target="_blank" href="http://partycrashersgame.com/">PartyCrashersGame.com</a></li>
-                            <li><a target="_blank" href="https://iqcontrols.com.au/iq-controls">IQ Controls App</a></li>
-                        </ul>
+                    <ul>
+                        <li><a target="_blank" href="https://github.com/lachee/lachee/tree/website">Lachee.dev</a></li>
+                        <li><a target="_blank" href="https://xve.lachee.dev">XVE</a></li>
+                        <li><a target="_blank" href="https://chickatrice.net">Chickatrice.net</a></li>
+                        <li><a target="_blank" href="http://partycrashersgame.com/">PartyCrashersGame.com</a></li>
+                        <li><a target="_blank" href="https://iqcontrols.com.au/iq-controls">IQ Controls App</a></li>
+                    </ul>
                     </p>
                 </template>
-                
+
                 <!-- Contact -->
-                <template class="window" window-class="window-column"  id="contact" title="Contact" x="543px" y="380px">
+                <template class="window" window-class="window-column" id="contact" title="Contact" x="543px" y="380px">
                     <div @env="EMAIL">
                         <p>
-                            Please send all business enquiries to my email address at 
+                            Please send all business enquiries to my email address at
                             <span @env="EMAIL" @attr="@">admin@lachee.dev</span>
 
                         </p>
                         <p>If you prefer live chat, I am generally always available on my Discord</p>
                         <div class="hover-box">
-                            <a class="button popout social-discord" href="https://discord.com/users/130973321683533824" target="_blank" title="View Discord Profile">
+                            <a class="button popout social-discord" href="https://discord.com/users/130973321683533824"
+                                target="_blank" title="View Discord Profile">
                                 <i class="fab fa-discord"></i> @Lachee</a>
                         </div>
                     </div>
                     <div @!env="EMAIL">
                         <p>You can contact me on any of my social medias, but i prefer Twitter or Discord</p>
                         <div class="hover-box">
-                            <a class="button popout social-discord" href="https://discord.com/users/130973321683533824" target="_blank" title="View Discord Profile">
+                            <a class="button popout social-discord" href="https://discord.com/users/130973321683533824"
+                                target="_blank" title="View Discord Profile">
                                 <i class="fab fa-discord"></i> @Lachee</a>
                         </div>
                         <div class="hover-box">
-                            <a class="button popout social-twitter" href="https://twitter.com/Lachee_" target="_blank" title="View Twitter">
+                            <a class="button popout social-twitter" href="https://twitter.com/Lachee_" target="_blank"
+                                title="View Twitter">
                                 <i class="fab fa-twitter"></i> @Lachee_</a>
                         </div>
                     </div>
