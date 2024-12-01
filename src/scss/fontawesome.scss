@@ -1,10 +1,15 @@
-
-.fab.fa-nintendo-switch {
-    content:  url('../font-awesome/nintendo-switch.svg');
-    width: 1em;
-    height: 1em;
-    display: inline-block;
-    vertical-align: middle;
-
-    filter: invert(0.5) sepia(1) hue-rotate(313deg) saturate(50);
+@mixin fa-icon($icon) {
+    .fab.fa-#{$icon} {
+        background: currentColor;
+        mask-image: url("../font-awesome/#{$icon}.svg");
+        mask-position: center;
+        mask-repeat: no-repeat;
+        width: 1em;
+        height: 1em;
+        display: inline-block;
+        vertical-align: middle;
+    }
 }
+
+@include fa-icon("nintendo-switch");
+@include fa-icon("bluesky");
