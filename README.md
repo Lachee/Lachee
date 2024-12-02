@@ -1,7 +1,10 @@
 <!-- <img alt="current discord avatar" align="left" src="https://d.lu.je/avatar/lachee?size=2048" width=300> -->
 <img alt="current discord avatar" align="left" src="https://raw.githubusercontent.com/Lachee/Lachee/website/images/211113-PNG-Banner.png" width=300>
 
-# Heya, Im Lachee!
+
+### Heya, Im Lachee!
+ 
+ ![status](https://api.statusbadges.me/badge/status/130973321683533824?simple=true)
  
  💬 My name is pronounced la-ch-ee, but I dont mind how you say it
  
@@ -15,11 +18,13 @@
  
  🐅 My favourite marsupial is the Thylacine.
  
- 🗣 My discord profile is [Lachee#9999](https://discord.com/users/130973321683533824)
+ 🗣 My discord profile is [@lachee](https://discord.com/users/130973321683533824) 
  
  🎨 Profile Picture was made by [Mag Ho](https://twitter.com/Mag_ho/status/1459488568385015808)
  
- 🐤 Follow me on [Twitter](https://twitter.com/Lachee_)
+ 🐤 Follow me on [Bluesky](https://bsky.app/profile/lachee.dev)
+
+ 🐱‍💻 More social media at [lachee.dev](https://lachee.dev)
  
 
  <!-- ![](https://github-profile-trophy.vercel.app/?username=lachee&no-frame=true&theme=dracula&column=3&margin-w=15&margin-h=15) Trophise are lame -->
